@@ -1,6 +1,6 @@
 <script>
   //stores
-  import { pageState, screenWidth, screenHeight, gazerReady, modalState } from './stores/pageState';
+  import { pageState, screenWidth, screenHeight, screenModality, gazerReady, modalState } from './stores/pageState';
   import screenSize from './utils/screenSize';
 
   //svelte
@@ -20,8 +20,14 @@
   import * as localforage from 'localforage';
 
   function updateScreenSize() {
-    screenWidth.set(screenSize().windowW);
+    let screenW = screenSize().windowW
+    screenWidth.set(screenW);
     screenHeight.set(screenSize().windowH);
+    if (screenW < 800) {
+      screenModality.set('mobile')
+    } else {
+      screenModality.set('desktop')
+    }
   }
 
   const [send, receive] = crossfade({
@@ -122,7 +128,7 @@
     --bg-contrast-darkest: #c3cbcc;
     --content-width-pct: 90%;
     --content-width-max: 1300px;
-    --font-size-md: 22px;
+    --font-size-md: 18px;
     --font-size-lg: 26px;
     --header-ht: 50px;
     --color-pos: #02bf86;
@@ -152,6 +158,11 @@
   :global(.clickable:hover) {
     opacity: 0.85;
   }
+
+ 
+
+  
+
   :global(h1) {
     font-size: 40px;
     font-weight: 400;
@@ -161,16 +172,14 @@
   }
   :global(h2){
     font-weight: 500;
-    font-size: 18px;
+    font-size: var(--font-size-md);
   }
   :global(h3) {
     font-weight: 600;
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
   }
-  :global(.font-lg) {
-    font-size: 18px;
-  }
+
   :global(.btn) {
     cursor: pointer;
     font-weight: 500;
@@ -189,8 +198,26 @@
     margin-bottom: 70px;
     border-radius: 10px;
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  @media screen and (max-width: 700px) {
+    :global(:root) { 
+      --font-size-filter: 12px;
+      --font-size-md: 16px;
+    }
+    :global(body){
+      font-size: 13px;
+    }
+    :global(.card-outer){
+      padding: 20px;
+    }
+    .container {
+      width: 97%;
+    }
    
   }
+
+
   
   :global(.disabled-part) {
     opacity: 0.2;
@@ -237,4 +264,6 @@
     margin: auto;
     position: relative;
   }
+
+ 
 </style>

@@ -16,3 +16,24 @@ export function updateTooltip(xInput, yInput, text) {
     }
   }
 }
+
+export function updateHelperTextPos(
+  index,
+  clientRect,
+  cardRect,
+  helperTextPositions
+) {
+  let x, y;
+
+  x = Math.min(
+    clientRect.x + clientRect.width / 4 - cardRect.x,
+    cardRect.width - 450
+  );
+
+  if (index == 0) {
+    y = clientRect.y - cardRect.y - 150;
+  } else {
+    y = clientRect.y - cardRect.y + 50;
+  }
+  helperTextPositions[index] = [x, y];
+}

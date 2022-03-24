@@ -118,6 +118,7 @@
     height: var(--header-ht);
     font-weight: 500;
     z-index: 1;
+    width: 100vw;
   }
   .header-wrapper {
     backdrop-filter: blur(5px);

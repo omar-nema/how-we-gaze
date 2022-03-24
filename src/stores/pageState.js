@@ -27,6 +27,7 @@ export let sessionID = writable(null);
 //to get the right size of images
 export let screenWidth = writable(null);
 export let screenHeight = writable(null);
+export let screenModality = writable('desktop');
 
 //for scrolling and naviating between cards
 export let cardInView = writable(null);

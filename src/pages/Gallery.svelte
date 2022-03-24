@@ -17,7 +17,7 @@
   async function getAllWorks() {
     let worksObject = await dbGet('works');
     if (worksObject) {
-      worksArray = Object.values(worksObject);
+      worksArray = Object.values(worksObject).slice(0, 2);
       worksKeys = Object.keys(worksObject);
       loadedWorksKeys.set(worksKeys);
       loadedWorksArray.set(worksArray);
