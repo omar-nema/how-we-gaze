@@ -85,7 +85,9 @@
     <h1>How We Gaze</h1>
   </section>
   <section class="scroll">
-    <p>Imagine a piece of art that you love. How do you look at it?</p>
+    <p>
+      Imagine a piece of art that you love.<br /><br />How do you look at it?
+    </p>
   </section>
   <section class="scroll" data-effect="animate">
     <p>Do you study the work bit-by-bit?</p>
@@ -101,9 +103,9 @@
   </section>
   <section class="scroll">
     <p>
-      How We Gaze is a <strong>meta-gallery</strong> that shows how individuals gaze
-      at pieces of artwork. Crowdsourced eye-tracking sessions are used to study
-      and visualize individuals' gazes.
+      How We Gaze is a <strong>meta-gallery</strong> that shows how individuals
+      gaze at pieces of artwork. <br /><br />Crowdsourced eye-tracking sessions
+      are used to study and visualize individuals' gazes.
     </p>
   </section>
   <section class="scroll">
@@ -492,7 +494,7 @@
     background: white;
     color: var(--color-accent);
     transition: all 0.15s ease-in-out;
-    border: 1px solid #2196f352;
+    /* border: 1px solid #2196f352; */
   }
   .btn:hover {
     filter: brightness(0.99);
@@ -622,5 +624,27 @@
   }
   #smallshape {
     display: none;
+  }
+
+  @media screen and (max-width: 900px) {
+    h1 {
+      background: none;
+      -webkit-text-fill-color: inherit;
+      font-size: 70px;
+      text-align: center;
+      color: var(--color-accent);
+    }
+    section {
+      width: 80%;
+    }
+    p {
+      font-size: 28px;
+    }
+    .btn {
+      width: 100%;
+      font-size: 30px;
+      padding: 30px 20px;
+      border-radius: 8px;
+    }
   }
 </style>
