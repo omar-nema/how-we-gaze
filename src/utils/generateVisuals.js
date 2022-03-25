@@ -85,19 +85,4 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
             `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
         );
     });
-
-  // svg
-  //   .selectAll('.clipPathGroup')
-  //   // .data(contours)
-  //   .append('image')
-  //   .attr('clip-path', (d, i) => `url(#path-${i})`)
-  //   .attr('width', '100%')
-  //   .attr('height', '100%')
-  //   .attr('xlink:href', url)
-  //   //.style('filter', (d) => `opacity(${opacityScale(d.value)}`);
-  //   .style(
-  //     'filter',
-  //     (d) => `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
-  //   );
-  //.style('filter', (d) => `blur(${blurScale(d.value)}px`);
 }

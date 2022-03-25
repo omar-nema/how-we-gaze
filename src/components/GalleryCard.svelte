@@ -37,6 +37,7 @@
   let visCurrFrame = 0;
   let infoTipIndex = -1;
   let clips = [];
+  let imgFrame;
 
   onMount(async () => {
     await getSessionData(sessionKey);
@@ -53,6 +54,7 @@
 
   //VIEW MODE REACTIVITY
   $: {
+    ///running too many times
     if (mount && visViewMode == 'aggregate') {
       contourMapBlur(
         sessionData,
@@ -200,8 +202,14 @@
       {sessionData}
     />
 
-    <div class="center">
-      <GalleryCardImage bind:clipHolder {data} {visViewMode} {clips} />
+    <div class="center" bind:this={imgFrame}>
+      <GalleryCardImage
+        bind:clipHolder
+        {data}
+        {visViewMode}
+        {clips}
+        {imgFrame}
+      />
       <GalleryCardPerson
         bind:imgNav
         bind:sessionKey

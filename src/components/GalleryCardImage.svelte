@@ -3,6 +3,7 @@
   export let data;
   export let visViewMode;
   export let clips, clipHolder;
+  export let imgFrame;
 
   //CUSTOM WIDTH AND HEIGHT CALC
   let dimWidthToHt = data.width / data.height;
@@ -13,12 +14,17 @@
     ht = 'auto',
     styleSubstring = '';
 
-  if (dimWidthToHt < 1) {
-    ht = Math.min(maxH, (data.height / data.width) * maxW) + 'px';
-    styleSubstring = 'height: 100%';
-  } else {
-    width = Math.min(maxW, maxH * (data.width / data.height)) + 'px';
-    styleSubstring = 'width: 100%';
+  $: {
+    if (imgFrame) {
+      maxW = Math.min(maxW, imgFrame.getBoundingClientRect().width);
+      if (dimWidthToHt < 1) {
+        ht = Math.min(maxH, (data.height / data.width) * maxW) + 'px';
+        styleSubstring = 'height: 100%';
+      } else {
+        width = Math.min(maxW, maxH * (data.width / data.height)) + 'px';
+        styleSubstring = 'width: 100%';
+      }
+    }
   }
 </script>
 
