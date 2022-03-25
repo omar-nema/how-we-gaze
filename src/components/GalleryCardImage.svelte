@@ -5,20 +5,21 @@
   export let clips, clipHolder;
 
   //CUSTOM WIDTH AND HEIGHT CALC
-  let maxW = Math.min($screenWidth - 600, 800),
-    maxH = $screenHeight - 190;
+  let dimWidthToHt = data.width / data.height;
+  //cardwidth should be factoer
+  let maxW = Math.min($screenWidth, 800),
+    maxH = $screenHeight - 200;
   let width = 'auto',
     ht = 'auto',
     styleSubstring = '';
-  let dimWidthToHt = data.width / data.height;
+
   if (dimWidthToHt < 1) {
-    ht = maxH + 'px';
+    ht = Math.min(maxH, (data.height / data.width) * maxW) + 'px';
     styleSubstring = 'height: 100%';
   } else {
-    width = maxW + 'px';
+    width = Math.min(maxW, maxH * (data.width / data.height)) + 'px';
     styleSubstring = 'width: 100%';
   }
-  console.log(width, ht);
 </script>
 
 <div

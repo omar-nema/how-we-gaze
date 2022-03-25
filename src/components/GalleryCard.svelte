@@ -150,11 +150,13 @@
     {/if}
     <div class="card-header">
       <h2 style="display: flex; align-items: center;">
-        <div
-          style="font-weight: 400; color: rgb(126 123 123);margin-right: 15px;"
-        >
-          Gaze Collection
-        </div>
+        {#if $screenWidth >= 900}
+          <div
+            style="font-weight: 400; color: rgb(126 123 123);margin-right: 15px;"
+          >
+            Gaze Collection
+          </div>
+        {/if}
         <a
           class="clickable"
           style="display: flex; align-items: center;"
@@ -172,7 +174,7 @@
           </span>
         </a>
       </h2>
-      {#if $screenWidth > 800}
+      {#if $screenWidth >= 900}
         <div
           class="clickable"
           on:click={() => {
@@ -263,5 +265,11 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+  }
+
+  @media screen and (max-width: 900px) {
+    .card-outer {
+      opacity: 1 !important;
+    }
   }
 </style>

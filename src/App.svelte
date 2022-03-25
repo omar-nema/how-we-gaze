@@ -206,7 +206,7 @@
       --font-size-md: 16px;
     }
     :global(body){
-      font-size: 13px;
+      font-size: 14px;
     }
     :global(.card-outer){
       padding: 20px;

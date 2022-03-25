@@ -86,15 +86,11 @@
       </div>
     </div>
   </div>
-  <div
-    class="viewer-filter  filter-group"
-    class:info-highlight={infoTipIndex == 2}
-  >
-    <!-- <div class="label compact">
-    <span class="material-icons-round md-14">people</span>
-    <span>Viewer</span>
-  </div> -->
-    {#if $screenWidth > 950}
+  {#if $screenWidth > 950}
+    <div
+      class="viewer-filter  filter-group"
+      class:info-highlight={infoTipIndex == 2}
+    >
       <div class="filter-options">
         <!-- <div class="label compact">
       <span class="material-icons-round md-14">add</span>
@@ -111,8 +107,8 @@
           <span> Add Your Gaze</span>
         </div>
       </div>
-    {/if}
-  </div>
+    </div>
+  {/if}
 </div>
 
 <style>

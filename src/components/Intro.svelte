@@ -646,5 +646,11 @@
       padding: 30px 20px;
       border-radius: 8px;
     }
+    .btn-close {
+      font-size: 14px;
+    }
+    svg {
+      max-width: 75%;
+    }
   }
 </style>
