@@ -22600,7 +22600,7 @@ var app = (function () {
       return scale;
     }
 
-    async function contourMapBlur$1(data, containerAll, containerSvg, url) {
+    async function contourMapBlur(data, containerAll, containerSvg, url) {
       let bbox = select(containerAll).node().getBoundingClientRect();
       let width = bbox.width;
       let height = 0.705 * width;
@@ -22655,31 +22655,44 @@ var app = (function () {
       svg
         .selectAll('.clipPathGroup')
         .data(contours, (d) => d.coordinates[0])
-        .join('g')
-        .attr('class', 'clipPathGroup');
+        .join((enter) => {
+          let clipPath = enter.append('g').attr('class', 'clipPathGroup');
 
-      svg
-        .selectAll('.clipPathGroup')
-        .append('clipPath')
-        .attr('id', (d, i) => 'path-' + i)
-        .append('path')
-        .attr('stroke-linejoin', 'round')
-        // .attr('fill', (d) => fillScale(d.value))
-        .attr('d', index());
+          clipPath
+            .append('clipPath')
+            .attr('id', (d, i) => 'path-' + i)
+            .append('path')
+            .attr('stroke-linejoin', 'round')
+            // .attr('fill', (d) => fillScale(d.value))
+            .attr('d', index());
 
-      svg
-        .selectAll('.clipPathGroup')
-        // .data(contours)
-        .append('image')
-        .attr('clip-path', (d, i) => `url(#path-${i})`)
-        .attr('width', '100%')
-        .attr('height', '100%')
-        .attr('xlink:href', url)
-        //.style('filter', (d) => `opacity(${opacityScale(d.value)}`);
-        .style(
-          'filter',
-          (d) => `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
-        );
+          clipPath
+            .append('image')
+            .attr('clip-path', (d, i) => `url(#path-${i})`)
+            .attr('width', '100%')
+            .attr('height', '100%')
+            .attr('xlink:href', url)
+            //.style('filter', (d) => `opacity(${opacityScale(d.value)}`);
+            .style(
+              'filter',
+              (d) =>
+                `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
+            );
+        });
+
+      // svg
+      //   .selectAll('.clipPathGroup')
+      //   // .data(contours)
+      //   .append('image')
+      //   .attr('clip-path', (d, i) => `url(#path-${i})`)
+      //   .attr('width', '100%')
+      //   .attr('height', '100%')
+      //   .attr('xlink:href', url)
+      //   //.style('filter', (d) => `opacity(${opacityScale(d.value)}`);
+      //   .style(
+      //     'filter',
+      //     (d) => `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
+      //   );
       //.style('filter', (d) => `blur(${blurScale(d.value)}px`);
     }
 
@@ -26615,7 +26628,7 @@ var app = (function () {
     	return block;
     }
 
-    // (89:2) {#if $screenWidth > 950}
+    // (83:2) {#if $screenWidth > 950}
     function create_if_block$7(ctx) {
     	let div2;
     	let div1;
@@ -26631,14 +26644,14 @@ var app = (function () {
     			div0 = element("div");
     			span = element("span");
     			span.textContent = "Add Your Gaze";
-    			add_location(span, file$f, 106, 10, 3026);
+    			add_location(span, file$f, 100, 10, 2859);
     			attr_dev(div0, "class", "filter clickable add svelte-a805kh");
-    			add_location(div0, file$f, 98, 8, 2809);
+    			add_location(div0, file$f, 92, 8, 2642);
     			attr_dev(div1, "class", "filter-options svelte-a805kh");
-    			add_location(div1, file$f, 93, 6, 2652);
+    			add_location(div1, file$f, 87, 6, 2485);
     			attr_dev(div2, "class", "viewer-filter filter-group svelte-a805kh");
     			toggle_class(div2, "info-highlight", /*infoTipIndex*/ ctx[7] == 2);
-    			add_location(div2, file$f, 89, 4, 2542);
+    			add_location(div2, file$f, 83, 4, 2375);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -26669,7 +26682,7 @@ var app = (function () {
     		block,
     		id: create_if_block$7.name,
     		type: "if",
-    		source: "(89:2) {#if $screenWidth > 950}",
+    		source: "(83:2) {#if $screenWidth > 950}",
     		ctx
     	});
 
@@ -26737,14 +26750,14 @@ var app = (function () {
     			attr_dev(div0, "class", "filter time clickable svelte-a805kh");
     			toggle_class(div0, "selected", /*visViewMode*/ ctx[4] == 'slice');
     			add_location(div0, file$f, 15, 6, 434);
-    			add_location(span1, file$f, 74, 8, 2148);
+    			add_location(span1, file$f, 68, 8, 1981);
     			attr_dev(div1, "class", "filter clickable svelte-a805kh");
     			toggle_class(div1, "selected", /*visViewMode*/ ctx[4] == 'aggregate');
     			add_location(div1, file$f, 59, 6, 1686);
-    			add_location(span2, file$f, 84, 8, 2451);
+    			add_location(span2, file$f, 78, 8, 2284);
     			attr_dev(div2, "class", "filter clickable svelte-a805kh");
     			toggle_class(div2, "selected", /*visViewMode*/ ctx[4] == 'original');
-    			add_location(div2, file$f, 76, 6, 2192);
+    			add_location(div2, file$f, 70, 6, 2025);
     			attr_dev(div3, "class", "filter-options svelte-a805kh");
     			add_location(div3, file$f, 14, 4, 398);
     			attr_dev(div4, "class", "visual-filter filter-group svelte-a805kh");
@@ -26916,7 +26929,6 @@ var app = (function () {
     	const click_handler_2 = () => {
     		$$invalidate(3, visPlayStatus = 'pause');
     		$$invalidate(4, visViewMode = 'aggregate');
-    		contourMapBlur(sessionData, `#${data.key} .img-holder`, `#${data.key}-contour`, data.url);
     	};
 
     	const click_handler_3 = () => {
@@ -28726,7 +28738,7 @@ var app = (function () {
     		tooltipShow,
     		dbGet,
     		onMount,
-    		contourMapBlur: contourMapBlur$1,
+    		contourMapBlur,
     		Tooltip,
     		GalleryCardImage,
     		GalleryCardTip,
@@ -28808,7 +28820,7 @@ var app = (function () {
     			//VIEW MODE REACTIVITY
     			{
     				if (mount && visViewMode == 'aggregate') {
-    					contourMapBlur$1(sessionData, `#${data.key} .img-holder`, `#${data.key}-contour`, data.url);
+    					contourMapBlur(sessionData, `#${data.key} .img-holder`, `#${data.key}-contour`, data.url);
     				}
     			}
     		}

@@ -61,30 +61,43 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
   let clipPathG = svg
     .selectAll('.clipPathGroup')
     .data(contours, (d) => d.coordinates[0])
-    .join('g')
-    .attr('class', 'clipPathGroup');
+    .join((enter) => {
+      let clipPath = enter.append('g').attr('class', 'clipPathGroup');
 
-  svg
-    .selectAll('.clipPathGroup')
-    .append('clipPath')
-    .attr('id', (d, i) => 'path-' + i)
-    .append('path')
-    .attr('stroke-linejoin', 'round')
-    // .attr('fill', (d) => fillScale(d.value))
-    .attr('d', d3.geoPath());
+      clipPath
+        .append('clipPath')
+        .attr('id', (d, i) => 'path-' + i)
+        .append('path')
+        .attr('stroke-linejoin', 'round')
+        // .attr('fill', (d) => fillScale(d.value))
+        .attr('d', d3.geoPath());
 
-  svg
-    .selectAll('.clipPathGroup')
-    // .data(contours)
-    .append('image')
-    .attr('clip-path', (d, i) => `url(#path-${i})`)
-    .attr('width', '100%')
-    .attr('height', '100%')
-    .attr('xlink:href', url)
-    //.style('filter', (d) => `opacity(${opacityScale(d.value)}`);
-    .style(
-      'filter',
-      (d) => `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
-    );
+      clipPath
+        .append('image')
+        .attr('clip-path', (d, i) => `url(#path-${i})`)
+        .attr('width', '100%')
+        .attr('height', '100%')
+        .attr('xlink:href', url)
+        //.style('filter', (d) => `opacity(${opacityScale(d.value)}`);
+        .style(
+          'filter',
+          (d) =>
+            `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
+        );
+    });
+
+  // svg
+  //   .selectAll('.clipPathGroup')
+  //   // .data(contours)
+  //   .append('image')
+  //   .attr('clip-path', (d, i) => `url(#path-${i})`)
+  //   .attr('width', '100%')
+  //   .attr('height', '100%')
+  //   .attr('xlink:href', url)
+  //   //.style('filter', (d) => `opacity(${opacityScale(d.value)}`);
+  //   .style(
+  //     'filter',
+  //     (d) => `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
+  //   );
   //.style('filter', (d) => `blur(${blurScale(d.value)}px`);
 }

@@ -63,12 +63,6 @@
         on:click={() => {
           visPlayStatus = 'pause';
           visViewMode = 'aggregate';
-          contourMapBlur(
-            sessionData,
-            `#${data.key} .img-holder`,
-            `#${data.key}-contour`,
-            data.url
-          );
         }}
       >
         <!-- <span class="material-icons-round md-14">image</span> -->
