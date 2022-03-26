@@ -192,17 +192,6 @@
     </div>
 
     <div class="card-filters">
-      <GalleryCardFilter
-        bind:visFilter
-        bind:gazeBtn
-        bind:sessionSliderMax
-        bind:visCurrFrame
-        bind:visPlayStatus
-        bind:visViewMode
-        {infoTipIndex}
-        {sessionData}
-      />
-
       {#if $screenWidth <= 800}
         <GalleryCardPerson
           bind:imgNav
@@ -214,6 +203,16 @@
           {infoTipIndex}
         />
       {/if}
+      <GalleryCardFilter
+        bind:visFilter
+        bind:gazeBtn
+        bind:sessionSliderMax
+        bind:visCurrFrame
+        bind:visPlayStatus
+        bind:visViewMode
+        {infoTipIndex}
+        {sessionData}
+      />
     </div>
 
     <div class="center" bind:this={imgFrame}>

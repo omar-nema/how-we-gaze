@@ -122,8 +122,13 @@
       padding: 0;
     }
     .arrow-nav {
-      background: #cceaf1;
       height: 100%;
+    }
+    .arrow-nav:first-child {
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .arrow-nav:last-child {
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
     }
     .filter-group {
       display: flex;

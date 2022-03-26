@@ -26633,7 +26633,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			span.textContent = "Pause";
-    			attr_dev(span, "class", "play-toggle svelte-15xlg51");
+    			attr_dev(span, "class", "play-toggle svelte-7u6mah");
     			add_location(span, file$f, 44, 8, 1306);
     		},
     		m: function mount(target, anchor) {
@@ -26670,7 +26670,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			span.textContent = "Animate";
-    			attr_dev(span, "class", "play-toggle svelte-15xlg51");
+    			attr_dev(span, "class", "play-toggle svelte-7u6mah");
     			add_location(span, file$f, 42, 8, 1241);
     		},
     		m: function mount(target, anchor) {
@@ -26709,11 +26709,11 @@ var app = (function () {
     			span = element("span");
     			span.textContent = "Add Your Gaze";
     			add_location(span, file$f, 108, 8, 2916);
-    			attr_dev(div0, "class", "filter clickable add svelte-15xlg51");
+    			attr_dev(div0, "class", "filter clickable add svelte-7u6mah");
     			add_location(div0, file$f, 100, 6, 2715);
-    			attr_dev(div1, "class", "filter-options svelte-15xlg51");
+    			attr_dev(div1, "class", "filter-options svelte-7u6mah");
     			add_location(div1, file$f, 95, 4, 2562);
-    			attr_dev(div2, "class", "viewer-filter filter-group svelte-15xlg51");
+    			attr_dev(div2, "class", "viewer-filter filter-group svelte-7u6mah");
     			toggle_class(div2, "info-highlight", /*infoTipIndex*/ ctx[7] == 2);
     			add_location(div2, file$f, 91, 2, 2460);
     		},
@@ -26810,25 +26810,25 @@ var app = (function () {
     			attr_dev(input, "min", "0");
     			attr_dev(input, "max", /*sessionSliderMax*/ ctx[5]);
     			attr_dev(input, "step", "1");
-    			attr_dev(input, "class", "svelte-15xlg51");
+    			attr_dev(input, "class", "svelte-7u6mah");
     			add_location(input, file$f, 53, 8, 1507);
     			attr_dev(span0, "id", "slider-holder");
-    			attr_dev(span0, "class", "svelte-15xlg51");
+    			attr_dev(span0, "class", "svelte-7u6mah");
     			add_location(span0, file$f, 52, 6, 1472);
-    			attr_dev(div0, "class", "filter time clickable svelte-15xlg51");
+    			attr_dev(div0, "class", "filter time clickable svelte-7u6mah");
     			toggle_class(div0, "selected", /*visViewMode*/ ctx[4] == 'slice');
     			add_location(div0, file$f, 23, 4, 653);
     			add_location(span1, file$f, 76, 6, 2096);
-    			attr_dev(div1, "class", "filter clickable svelte-15xlg51");
+    			attr_dev(div1, "class", "filter clickable svelte-7u6mah");
     			toggle_class(div1, "selected", /*visViewMode*/ ctx[4] == 'aggregate');
     			add_location(div1, file$f, 67, 4, 1819);
     			add_location(span2, file$f, 86, 6, 2379);
-    			attr_dev(div2, "class", "filter clickable svelte-15xlg51");
+    			attr_dev(div2, "class", "filter clickable svelte-7u6mah");
     			toggle_class(div2, "selected", /*visViewMode*/ ctx[4] == 'original');
     			add_location(div2, file$f, 78, 4, 2136);
-    			attr_dev(div3, "class", "filter-options svelte-15xlg51");
+    			attr_dev(div3, "class", "filter-options svelte-7u6mah");
     			add_location(div3, file$f, 22, 2, 619);
-    			attr_dev(div4, "class", "visual-filter filter-group svelte-15xlg51");
+    			attr_dev(div4, "class", "visual-filter filter-group svelte-7u6mah");
     			toggle_class(div4, "info-highlight", /*infoTipIndex*/ ctx[7] == 1);
     			add_location(div4, file$f, 8, 0, 240);
     		},
@@ -27456,23 +27456,23 @@ var app = (function () {
     			attr_dev(span0, "class", "material-icons-round md-18 nav");
     			set_style(span0, "font-size", "26px");
     			add_location(span0, file$e, 38, 6, 837);
-    			attr_dev(div0, "class", "arrow-nav clickable svelte-12apq7b");
+    			attr_dev(div0, "class", "arrow-nav clickable svelte-18fv8kr");
     			toggle_class(div0, "disabled", /*sessionIndex*/ ctx[1] == 0);
     			add_location(div0, file$e, 31, 4, 681);
-    			attr_dev(select, "class", "clickable svelte-12apq7b");
+    			attr_dev(select, "class", "clickable svelte-18fv8kr");
     			if (/*sessionKey*/ ctx[0] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[10].call(select));
     			add_location(select, file$e, 46, 4, 1022);
     			attr_dev(span1, "class", "material-icons-round md-18 nav");
     			set_style(span1, "font-size", "26px");
     			add_location(span1, file$e, 68, 6, 1730);
-    			attr_dev(div1, "class", "clickable arrow-nav svelte-12apq7b");
+    			attr_dev(div1, "class", "clickable arrow-nav svelte-18fv8kr");
     			toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*cardSessionsArr*/ ctx[3].length - 1);
     			add_location(div1, file$e, 58, 4, 1488);
-    			attr_dev(div2, "class", "filter person svelte-12apq7b");
+    			attr_dev(div2, "class", "filter person svelte-18fv8kr");
     			toggle_class(div2, "info-highlight", /*infoTipIndex*/ ctx[6] == 0);
     			toggle_class(div2, "info-hide", /*visViewMode*/ ctx[5] == 'original');
     			add_location(div2, file$e, 26, 2, 544);
-    			attr_dev(div3, "class", "filter-group svelte-12apq7b");
+    			attr_dev(div3, "class", "filter-group svelte-18fv8kr");
     			add_location(div3, file$e, 16, 0, 341);
     		},
     		l: function claim(nodes) {
@@ -28127,6 +28127,7 @@ var app = (function () {
     	let t8;
     	let t9;
     	let div1;
+    	let t10;
     	let gallerycardfilter;
     	let updating_visFilter;
     	let updating_gazeBtn;
@@ -28134,7 +28135,6 @@ var app = (function () {
     	let updating_visCurrFrame;
     	let updating_visPlayStatus;
     	let updating_visViewMode;
-    	let t10;
     	let t11;
     	let div2;
     	let gallerycardimage;
@@ -28146,29 +28146,30 @@ var app = (function () {
     	let if_block1 = /*infoTipIndex*/ ctx[14] >= 0 && create_if_block_5$1(ctx);
     	let if_block2 = /*$screenWidth*/ ctx[19] >= 900 && create_if_block_4$1(ctx);
     	let if_block3 = /*$screenWidth*/ ctx[19] >= 900 && create_if_block_3$3(ctx);
+    	let if_block4 = /*$screenWidth*/ ctx[19] <= 800 && create_if_block_2$5(ctx);
 
     	function gallerycardfilter_visFilter_binding(value) {
-    		/*gallerycardfilter_visFilter_binding*/ ctx[27](value);
+    		/*gallerycardfilter_visFilter_binding*/ ctx[30](value);
     	}
 
     	function gallerycardfilter_gazeBtn_binding(value) {
-    		/*gallerycardfilter_gazeBtn_binding*/ ctx[28](value);
+    		/*gallerycardfilter_gazeBtn_binding*/ ctx[31](value);
     	}
 
     	function gallerycardfilter_sessionSliderMax_binding(value) {
-    		/*gallerycardfilter_sessionSliderMax_binding*/ ctx[29](value);
+    		/*gallerycardfilter_sessionSliderMax_binding*/ ctx[32](value);
     	}
 
     	function gallerycardfilter_visCurrFrame_binding(value) {
-    		/*gallerycardfilter_visCurrFrame_binding*/ ctx[30](value);
+    		/*gallerycardfilter_visCurrFrame_binding*/ ctx[33](value);
     	}
 
     	function gallerycardfilter_visPlayStatus_binding(value) {
-    		/*gallerycardfilter_visPlayStatus_binding*/ ctx[31](value);
+    		/*gallerycardfilter_visPlayStatus_binding*/ ctx[34](value);
     	}
 
     	function gallerycardfilter_visViewMode_binding(value) {
-    		/*gallerycardfilter_visViewMode_binding*/ ctx[32](value);
+    		/*gallerycardfilter_visViewMode_binding*/ ctx[35](value);
     	}
 
     	let gallerycardfilter_props = {
@@ -28211,7 +28212,6 @@ var app = (function () {
     	binding_callbacks.push(() => bind(gallerycardfilter, 'visCurrFrame', gallerycardfilter_visCurrFrame_binding));
     	binding_callbacks.push(() => bind(gallerycardfilter, 'visPlayStatus', gallerycardfilter_visPlayStatus_binding));
     	binding_callbacks.push(() => bind(gallerycardfilter, 'visViewMode', gallerycardfilter_visViewMode_binding));
-    	let if_block4 = /*$screenWidth*/ ctx[19] <= 800 && create_if_block_2$5(ctx);
 
     	function gallerycardimage_clipHolder_binding(value) {
     		/*gallerycardimage_clipHolder_binding*/ ctx[36](value);
@@ -28260,9 +28260,9 @@ var app = (function () {
     			if (if_block3) if_block3.c();
     			t9 = space();
     			div1 = element("div");
-    			create_component(gallerycardfilter.$$.fragment);
-    			t10 = space();
     			if (if_block4) if_block4.c();
+    			t10 = space();
+    			create_component(gallerycardfilter.$$.fragment);
     			t11 = space();
     			div2 = element("div");
     			create_component(gallerycardimage.$$.fragment);
@@ -28290,7 +28290,7 @@ var app = (function () {
     			attr_dev(div1, "class", "card-filters");
     			add_location(div1, file$d, 193, 4, 5003);
     			attr_dev(div2, "class", "center svelte-1jyudv8");
-    			add_location(div2, file$d, 218, 4, 5566);
+    			add_location(div2, file$d, 217, 4, 5564);
     			attr_dev(div3, "class", "card-outer svelte-1jyudv8");
     			attr_dev(div3, "id", div3_id_value = /*data*/ ctx[0].key);
     			toggle_class(div3, "active", /*data*/ ctx[0].key == /*$cardInView*/ ctx[18]);
@@ -28318,9 +28318,9 @@ var app = (function () {
     			if (if_block3) if_block3.m(div0, null);
     			append_dev(div3, t9);
     			append_dev(div3, div1);
-    			mount_component(gallerycardfilter, div1, null);
-    			append_dev(div1, t10);
     			if (if_block4) if_block4.m(div1, null);
+    			append_dev(div1, t10);
+    			mount_component(gallerycardfilter, div1, null);
     			append_dev(div3, t11);
     			append_dev(div3, div2);
     			mount_component(gallerycardimage, div2, null);
@@ -28406,6 +28406,29 @@ var app = (function () {
     				if_block3 = null;
     			}
 
+    			if (/*$screenWidth*/ ctx[19] <= 800) {
+    				if (if_block4) {
+    					if_block4.p(ctx, dirty);
+
+    					if (dirty[0] & /*$screenWidth*/ 524288) {
+    						transition_in(if_block4, 1);
+    					}
+    				} else {
+    					if_block4 = create_if_block_2$5(ctx);
+    					if_block4.c();
+    					transition_in(if_block4, 1);
+    					if_block4.m(div1, t10);
+    				}
+    			} else if (if_block4) {
+    				group_outros();
+
+    				transition_out(if_block4, 1, 1, () => {
+    					if_block4 = null;
+    				});
+
+    				check_outros();
+    			}
+
     			const gallerycardfilter_changes = {};
     			if (dirty[0] & /*infoTipIndex*/ 16384) gallerycardfilter_changes.infoTipIndex = /*infoTipIndex*/ ctx[14];
     			if (dirty[0] & /*sessionData*/ 16) gallerycardfilter_changes.sessionData = /*sessionData*/ ctx[4];
@@ -28447,30 +28470,6 @@ var app = (function () {
     			}
 
     			gallerycardfilter.$set(gallerycardfilter_changes);
-
-    			if (/*$screenWidth*/ ctx[19] <= 800) {
-    				if (if_block4) {
-    					if_block4.p(ctx, dirty);
-
-    					if (dirty[0] & /*$screenWidth*/ 524288) {
-    						transition_in(if_block4, 1);
-    					}
-    				} else {
-    					if_block4 = create_if_block_2$5(ctx);
-    					if_block4.c();
-    					transition_in(if_block4, 1);
-    					if_block4.m(div1, null);
-    				}
-    			} else if (if_block4) {
-    				group_outros();
-
-    				transition_out(if_block4, 1, 1, () => {
-    					if_block4 = null;
-    				});
-
-    				check_outros();
-    			}
-
     			const gallerycardimage_changes = {};
     			if (dirty[0] & /*data*/ 1) gallerycardimage_changes.data = /*data*/ ctx[0];
     			if (dirty[0] & /*visViewMode*/ 32) gallerycardimage_changes.visViewMode = /*visViewMode*/ ctx[5];
@@ -28520,8 +28519,8 @@ var app = (function () {
     			if (current) return;
     			transition_in(if_block0);
     			transition_in(if_block1);
-    			transition_in(gallerycardfilter.$$.fragment, local);
     			transition_in(if_block4);
+    			transition_in(gallerycardfilter.$$.fragment, local);
     			transition_in(gallerycardimage.$$.fragment, local);
     			transition_in(if_block5);
     			current = true;
@@ -28529,8 +28528,8 @@ var app = (function () {
     		o: function outro(local) {
     			transition_out(if_block0);
     			transition_out(if_block1);
-    			transition_out(gallerycardfilter.$$.fragment, local);
     			transition_out(if_block4);
+    			transition_out(gallerycardfilter.$$.fragment, local);
     			transition_out(gallerycardimage.$$.fragment, local);
     			transition_out(if_block5);
     			current = false;
@@ -28542,8 +28541,8 @@ var app = (function () {
     			if (if_block1) if_block1.d();
     			if (if_block2) if_block2.d();
     			if (if_block3) if_block3.d();
-    			destroy_component(gallerycardfilter);
     			if (if_block4) if_block4.d();
+    			destroy_component(gallerycardfilter);
     			destroy_component(gallerycardimage);
     			if (if_block5) if_block5.d();
     			/*div2_binding*/ ctx[40](null);
@@ -28763,7 +28762,7 @@ var app = (function () {
     	return block;
     }
 
-    // (206:6) {#if $screenWidth <= 800}
+    // (195:6) {#if $screenWidth <= 800}
     function create_if_block_2$5(ctx) {
     	let gallerycardperson;
     	let updating_imgNav;
@@ -28772,15 +28771,15 @@ var app = (function () {
     	let current;
 
     	function gallerycardperson_imgNav_binding(value) {
-    		/*gallerycardperson_imgNav_binding*/ ctx[33](value);
+    		/*gallerycardperson_imgNav_binding*/ ctx[27](value);
     	}
 
     	function gallerycardperson_sessionKey_binding(value) {
-    		/*gallerycardperson_sessionKey_binding*/ ctx[34](value);
+    		/*gallerycardperson_sessionKey_binding*/ ctx[28](value);
     	}
 
     	function gallerycardperson_sessionIndex_binding(value) {
-    		/*gallerycardperson_sessionIndex_binding*/ ctx[35](value);
+    		/*gallerycardperson_sessionIndex_binding*/ ctx[29](value);
     	}
 
     	let gallerycardperson_props = {
@@ -28862,14 +28861,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2$5.name,
     		type: "if",
-    		source: "(206:6) {#if $screenWidth <= 800}",
+    		source: "(195:6) {#if $screenWidth <= 800}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (227:6) {#if $screenWidth > 800}
+    // (226:6) {#if $screenWidth > 800}
     function create_if_block_1$5(ctx) {
     	let gallerycardperson;
     	let updating_imgNav;
@@ -28968,7 +28967,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1$5.name,
     		type: "if",
-    		source: "(227:6) {#if $screenWidth > 800}",
+    		source: "(226:6) {#if $screenWidth > 800}",
     		ctx
     	});
 
@@ -29116,6 +29115,21 @@ var app = (function () {
     		$$invalidate(14, infoTipIndex = 0);
     	};
 
+    	function gallerycardperson_imgNav_binding(value) {
+    		imgNav = value;
+    		$$invalidate(8, imgNav);
+    	}
+
+    	function gallerycardperson_sessionKey_binding(value) {
+    		sessionKey = value;
+    		((($$invalidate(3, sessionKey), $$invalidate(1, mount)), $$invalidate(21, cardSessionsArr)), $$invalidate(2, sessionIndex));
+    	}
+
+    	function gallerycardperson_sessionIndex_binding(value) {
+    		sessionIndex = value;
+    		$$invalidate(2, sessionIndex);
+    	}
+
     	function gallerycardfilter_visFilter_binding(value) {
     		visFilter = value;
     		$$invalidate(9, visFilter);
@@ -29144,21 +29158,6 @@ var app = (function () {
     	function gallerycardfilter_visViewMode_binding(value) {
     		visViewMode = value;
     		$$invalidate(5, visViewMode);
-    	}
-
-    	function gallerycardperson_imgNav_binding(value) {
-    		imgNav = value;
-    		$$invalidate(8, imgNav);
-    	}
-
-    	function gallerycardperson_sessionKey_binding(value) {
-    		sessionKey = value;
-    		((($$invalidate(3, sessionKey), $$invalidate(1, mount)), $$invalidate(21, cardSessionsArr)), $$invalidate(2, sessionIndex));
-    	}
-
-    	function gallerycardperson_sessionIndex_binding(value) {
-    		sessionIndex = value;
-    		$$invalidate(2, sessionIndex);
     	}
 
     	function gallerycardimage_clipHolder_binding(value) {
@@ -29380,15 +29379,15 @@ var app = (function () {
     		domClips,
     		gallerycardtip_infoTipIndex_binding,
     		click_handler,
+    		gallerycardperson_imgNav_binding,
+    		gallerycardperson_sessionKey_binding,
+    		gallerycardperson_sessionIndex_binding,
     		gallerycardfilter_visFilter_binding,
     		gallerycardfilter_gazeBtn_binding,
     		gallerycardfilter_sessionSliderMax_binding,
     		gallerycardfilter_visCurrFrame_binding,
     		gallerycardfilter_visPlayStatus_binding,
     		gallerycardfilter_visViewMode_binding,
-    		gallerycardperson_imgNav_binding,
-    		gallerycardperson_sessionKey_binding,
-    		gallerycardperson_sessionIndex_binding,
     		gallerycardimage_clipHolder_binding,
     		gallerycardperson_imgNav_binding_1,
     		gallerycardperson_sessionKey_binding_1,

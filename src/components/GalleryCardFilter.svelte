@@ -274,8 +274,8 @@
     .filter-group {
       border-radius: 3px;
     }
-    .card-filters {
-      margin-bottom: 10px;
+    .filter-options {
+      flex-grow: 1;
     }
 
     #slider-holder {
