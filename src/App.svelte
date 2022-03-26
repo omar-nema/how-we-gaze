@@ -200,15 +200,15 @@
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     :global(:root) { 
       --font-size-filter: 12px;
       --font-size-md: 16px;
     }
     :global(body){
       font-size: 14px;
+      background: #edf5f7;
     }
- 
     .container {
       width: 97%;
     }
