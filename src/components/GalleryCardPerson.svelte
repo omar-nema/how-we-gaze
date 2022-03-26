@@ -80,8 +80,19 @@
     padding: 5px 20px;
     display: flex;
   }
+  .name {
+    padding: 0 10px;
+    min-width: 100px;
+    text-align: center;
+  }
 
   .filter:last-child {
     border-right: none;
+  }
+
+  @media screen and (max-width: 800px) {
+    .filter.person {
+      padding: 8px 20px;
+    }
   }
 </style>

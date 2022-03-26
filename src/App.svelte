@@ -208,9 +208,7 @@
     :global(body){
       font-size: 14px;
     }
-    :global(.card-outer){
-      padding: 20px;
-    }
+ 
     .container {
       width: 97%;
     }

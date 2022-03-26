@@ -275,9 +275,23 @@
     flex-direction: column;
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 800px) {
     .card-outer {
       opacity: 1 !important;
+    }
+    .card-outer {
+      padding: 15px 0;
+      padding-bottom: 0px;
+    }
+    :global(.card-header, .card-filters, .filter.person) {
+      padding: 0 20px;
+    }
+    h2 {
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    :global(.filter) {
+      font-size: 12px;
     }
   }
 </style>

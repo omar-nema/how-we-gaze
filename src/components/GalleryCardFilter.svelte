@@ -178,12 +178,7 @@
   .filter:last-child {
     border-right: none;
   }
-  .filter.person {
-    background: none;
-    width: 100%;
-    margin: auto;
-    padding: 5px 20px;
-  }
+
   .filter.selected {
     background: var(--bg-gradient-dark);
     /* border: 0.5px solid #0000004f; */
@@ -200,11 +195,6 @@
     padding-right: 0;
   }
 
-  .name {
-    padding: 0 10px;
-    min-width: 100px;
-    text-align: center;
-  }
   .viewer-filter {
     margin-right: 15px;
   }
@@ -279,7 +269,7 @@
     width: 50px;
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 800px) {
     .filter {
       padding: 6px 13px;
     }
@@ -287,7 +277,7 @@
       border-radius: 3px;
     }
     .card-filters {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     #slider-holder {
