@@ -6,113 +6,111 @@
   import { screenWidth } from '../stores/pageState';
 </script>
 
-<div class="card-filters">
-  <div
-    class="visual-filter filter-group"
-    bind:this={visFilter}
-    class:info-highlight={infoTipIndex == 1}
-  >
-    {#if $screenWidth < 900}
-      <span style=" color: gray; margin-right: 10px">View</span>
-      <!-- <span
-        class="material-icons-round"
-        style="font-size: 12px; color: gray;  margin-right: 10px"
-      >
-        visibility
-      </span> -->
-    {/if}
-    <div class="filter-options">
-      <div
-        class="filter time clickable"
-        class:selected={visViewMode == 'slice'}
-        on:click={() => {
-          if (visPlayStatus == 'pause') {
-            visViewMode = 'slice';
-            if (
-              visCurrFrame == sessionData.length ||
-              visCurrFrame == sessionData.length - 1
-            ) {
-              visCurrFrame = 0;
-            }
-            visPlayStatus = 'play';
-          } else if (visViewMode == 'slice' && visPlayStatus !== 'pause') {
-            visPlayStatus = 'pause';
+<div
+  class="visual-filter filter-group"
+  bind:this={visFilter}
+  class:info-highlight={infoTipIndex == 1}
+>
+  {#if $screenWidth <= 800}
+    <!-- <span style=" color: gray; margin-right: 10px">View</span> -->
+    <span
+      class="material-icons-round"
+      style="font-size: 12px; color: gray;  margin-right: 10px"
+    >
+      filter_alt
+    </span>
+  {/if}
+  <div class="filter-options">
+    <div
+      class="filter time clickable"
+      class:selected={visViewMode == 'slice'}
+      on:click={() => {
+        if (visPlayStatus == 'pause') {
+          visViewMode = 'slice';
+          if (
+            visCurrFrame == sessionData.length ||
+            visCurrFrame == sessionData.length - 1
+          ) {
+            visCurrFrame = 0;
           }
-        }}
-      >
-        {#if visPlayStatus == 'pause'}
-          <span class="play-toggle">Animate</span>
-        {:else}
-          <span
-            on:click={() => {
-              // visPlayStatus = 'pause';
-            }}
-            class="play-toggle">Pause</span
-          >
-        {/if}
-
-        <span id="slider-holder">
-          <input
-            type="range"
-            id="slider"
-            name="slider"
-            min="0"
-            max={sessionSliderMax}
-            step="1"
-            on:input={() => {
-              visViewMode = 'slice';
-            }}
-            bind:value={visCurrFrame}
-          />
-        </span>
-      </div>
-      <div
-        class="filter clickable"
-        class:selected={visViewMode == 'aggregate'}
-        on:click={() => {
+          visPlayStatus = 'play';
+        } else if (visViewMode == 'slice' && visPlayStatus !== 'pause') {
           visPlayStatus = 'pause';
-          visViewMode = 'aggregate';
-        }}
-      >
-        <!-- <span class="material-icons-round md-14">image</span> -->
-        <span>Aggregate</span>
-      </div>
-      <div
-        class="filter clickable"
-        class:selected={visViewMode == 'original'}
-        on:click={() => {
-          visViewMode = 'original';
-        }}
-      >
-        <!-- <span class="material-icons-round md-14">compare</span> -->
-        <span>Original</span>
-      </div>
+        }
+      }}
+    >
+      {#if visPlayStatus == 'pause'}
+        <span class="play-toggle">Animate</span>
+      {:else}
+        <span
+          on:click={() => {
+            // visPlayStatus = 'pause';
+          }}
+          class="play-toggle">Pause</span
+        >
+      {/if}
+
+      <span id="slider-holder">
+        <input
+          type="range"
+          id="slider"
+          name="slider"
+          min="0"
+          max={sessionSliderMax}
+          step="1"
+          on:input={() => {
+            visViewMode = 'slice';
+          }}
+          bind:value={visCurrFrame}
+        />
+      </span>
+    </div>
+    <div
+      class="filter clickable"
+      class:selected={visViewMode == 'aggregate'}
+      on:click={() => {
+        visPlayStatus = 'pause';
+        visViewMode = 'aggregate';
+      }}
+    >
+      <!-- <span class="material-icons-round md-14">image</span> -->
+      <span>Aggregate</span>
+    </div>
+    <div
+      class="filter clickable"
+      class:selected={visViewMode == 'original'}
+      on:click={() => {
+        visViewMode = 'original';
+      }}
+    >
+      <!-- <span class="material-icons-round md-14">compare</span> -->
+      <span>Original</span>
     </div>
   </div>
-  {#if $screenWidth > 950}
-    <div
-      class="viewer-filter  filter-group"
-      class:info-highlight={infoTipIndex == 2}
-    >
-      <div class="filter-options">
-        <!-- <div class="label compact">
+</div>
+{#if $screenWidth > 950}
+  <div
+    class="viewer-filter  filter-group"
+    class:info-highlight={infoTipIndex == 2}
+  >
+    <div class="filter-options">
+      <!-- <div class="label compact">
       <span class="material-icons-round md-14">add</span>
 
     </div> -->
-        <div
-          bind:this={gazeBtn}
-          class="filter clickable add"
-          on:click={() => {
-            selectedImage.set(data);
-            pageState.set('record');
-          }}
-        >
-          <span> Add Your Gaze</span>
-        </div>
+      <div
+        bind:this={gazeBtn}
+        class="filter clickable add"
+        on:click={() => {
+          selectedImage.set(data);
+          pageState.set('record');
+        }}
+      >
+        <span> Add Your Gaze</span>
       </div>
     </div>
-  {/if}
-</div>
+  </div>
+{/if}
 
 <style>
   .card-filters {

@@ -191,16 +191,30 @@
       {/if}
     </div>
 
-    <GalleryCardFilter
-      bind:visFilter
-      bind:gazeBtn
-      bind:sessionSliderMax
-      bind:visCurrFrame
-      bind:visPlayStatus
-      bind:visViewMode
-      {infoTipIndex}
-      {sessionData}
-    />
+    <div class="card-filters">
+      <GalleryCardFilter
+        bind:visFilter
+        bind:gazeBtn
+        bind:sessionSliderMax
+        bind:visCurrFrame
+        bind:visPlayStatus
+        bind:visViewMode
+        {infoTipIndex}
+        {sessionData}
+      />
+
+      {#if $screenWidth <= 800}
+        <GalleryCardPerson
+          bind:imgNav
+          bind:sessionKey
+          bind:sessionIndex
+          {cardSessionsArr}
+          {cardSessionsObj}
+          {visViewMode}
+          {infoTipIndex}
+        />
+      {/if}
+    </div>
 
     <div class="center" bind:this={imgFrame}>
       <GalleryCardImage
@@ -210,15 +224,17 @@
         {clips}
         {imgFrame}
       />
-      <GalleryCardPerson
-        bind:imgNav
-        bind:sessionKey
-        bind:sessionIndex
-        {cardSessionsArr}
-        {cardSessionsObj}
-        {visViewMode}
-        {infoTipIndex}
-      />
+      {#if $screenWidth > 800}
+        <GalleryCardPerson
+          bind:imgNav
+          bind:sessionKey
+          bind:sessionIndex
+          {cardSessionsArr}
+          {cardSessionsObj}
+          {visViewMode}
+          {infoTipIndex}
+        />
+      {/if}
     </div>
   </div>
 {/if}
@@ -278,20 +294,32 @@
   @media screen and (max-width: 800px) {
     .card-outer {
       opacity: 1 !important;
+      overflow: hidden;
     }
     .card-outer {
       padding: 15px 0;
       padding-bottom: 0px;
     }
-    :global(.card-header, .card-filters, .filter.person) {
+    :global(.card-header) {
       padding: 0 20px;
+    }
+
+    :global(.card-filters) {
+      padding: 10px 20px;
+    }
+    :global(.filter-group) {
+      height: 30px;
+      margin-bottom: 10px;
+    }
+    :global(.filter-options) {
+      margin: 5px 0;
     }
     h2 {
       font-weight: 600;
-      margin-bottom: 20px;
     }
     :global(.filter) {
       font-size: 12px;
+      flex-grow: 1;
     }
   }
 </style>
