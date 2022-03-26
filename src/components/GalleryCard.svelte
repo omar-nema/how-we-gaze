@@ -315,6 +315,8 @@
     }
     h2 {
       font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 18px;
     }
     :global(.filter) {
       font-size: 12px;
