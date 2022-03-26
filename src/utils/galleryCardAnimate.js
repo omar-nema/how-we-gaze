@@ -26,6 +26,7 @@ export async function createClips(url, sessionData) {
 }
 
 export function moveClips(domClips, centerx, centery) {
+  console.log('i like 2 move it move it');
   domClips.forEach((d) => {
     let currClipPath = d.style['clip-path'];
     let split = currClipPath.split('at ');

@@ -84,22 +84,6 @@
     }
   }
 
-  //ANIMATION REACTIVITY
-  $: {
-    if (mount) {
-      if (visPlayStatus == 'play' && visCurrFrame < sessionData.length - 1) {
-        setTimeout(() => {
-          visCurrFrame++;
-        }, 50);
-      } else if (
-        visPlayStatus == 'play' &&
-        visCurrFrame == sessionData.length - 1
-      ) {
-        visPlayStatus = 'pause';
-      }
-    }
-  }
-
   async function getSessionData(key) {
     sessionData = await dbGet('sessionData/' + key);
     if (sessionData) {
@@ -116,7 +100,23 @@
   let clipHolder, domClips;
   $: {
     if (clipHolder) {
+      console.log('hello dominito');
       domClips = clipHolder.childNodes;
+    }
+  }
+  //ANIMATION REACTIVITY
+  $: {
+    if (mount) {
+      if (visPlayStatus == 'play' && visCurrFrame < sessionData.length - 1) {
+        setTimeout(() => {
+          visCurrFrame++;
+        }, 50);
+      } else if (
+        visPlayStatus == 'play' &&
+        visCurrFrame == sessionData.length - 1
+      ) {
+        visPlayStatus = 'pause';
+      }
     }
   }
   $: {

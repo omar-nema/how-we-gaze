@@ -5,6 +5,14 @@
   export let clips, clipHolder;
   export let imgFrame;
 
+  const swipeConfig = {
+    autoplay: false,
+    delay: 0,
+    showIndicators: true,
+    transitionDuration: 1000,
+    defaultIndex: 0,
+  };
+
   //CUSTOM WIDTH AND HEIGHT CALC
   let dimWidthToHt = data.width / data.height;
   //cardwidth should be factoer
@@ -29,7 +37,7 @@
 </script>
 
 <div
-  class="img-holder"
+  class="img-holder swipe-holder"
   style="width: {width}; height: {ht}; max-width: {data.width}px; max-height: {data.height}px"
 >
   <img

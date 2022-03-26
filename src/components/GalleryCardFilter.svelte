@@ -12,6 +12,15 @@
     bind:this={visFilter}
     class:info-highlight={infoTipIndex == 1}
   >
+    {#if $screenWidth < 900}
+      <span style=" color: gray; margin-right: 10px">View</span>
+      <!-- <span
+        class="material-icons-round"
+        style="font-size: 12px; color: gray;  margin-right: 10px"
+      >
+        visibility
+      </span> -->
+    {/if}
     <div class="filter-options">
       <div
         class="filter time clickable"
@@ -119,7 +128,7 @@
   .filter-group {
     /* min-width: 350px; */
     font-size: var(--font-size-filter);
-    height: 34px;
+    align-items: center;
   }
 
   .filter-group,
@@ -131,6 +140,7 @@
     overflow: hidden;
     flex-grow: 0.7;
     border-radius: 5px;
+    height: 100%;
   }
   .arrow-nav {
     display: flex;
@@ -156,7 +166,7 @@
 
   .filter {
     background: var(--bg-contrast-darker);
-    padding: 0 10px;
+
     height: 100%;
     border: 0.5px dashed transparent;
     transition: all 0.15s linear;
@@ -183,7 +193,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    padding: 8px 20px;
   }
   .label.compact {
     padding-left: 0;
@@ -267,5 +277,36 @@
   }
   .play-toggle {
     width: 50px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .filter {
+      padding: 6px 13px;
+    }
+    .filter-group {
+      border-radius: 3px;
+    }
+    .card-filters {
+      margin-bottom: 15px;
+    }
+
+    #slider-holder {
+      width: 30px;
+    }
+    input[type='range'] {
+      height: 5px;
+    }
+    input[type='range']::-webkit-slider-thumb {
+      height: 10px;
+      width: 10px;
+    }
+
+    input[type='range']::-moz-range-thumb {
+      height: 10px;
+      width: 10px;
+    }
+    #slider-holder {
+      margin-left: 10px;
+    }
   }
 </style>
