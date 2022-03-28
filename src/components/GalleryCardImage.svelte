@@ -17,7 +17,7 @@
   let dimWidthToHt = data.width / data.height;
   //cardwidth should be factoer
   let maxW = Math.min($screenWidth, 800),
-    maxH = $screenHeight - 200;
+    maxH = $screenHeight - 180;
   let width = 'auto',
     ht = 'auto',
     styleSubstring = '';
@@ -25,6 +25,7 @@
   $: {
     if (imgFrame) {
       maxW = Math.min(maxW, imgFrame.getBoundingClientRect().width);
+      console.log(imgFrame.getBoundingClientRect().width);
       if (dimWidthToHt < 1) {
         ht = Math.min(maxH, (data.height / data.width) * maxW) + 'px';
         styleSubstring = 'height: 100%';
