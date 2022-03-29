@@ -143,7 +143,7 @@
     margin: 0;
     padding: 0;
     color: black;
-    font-weight: 400;
+    font-weight: 500;
     height: auto;
     background: var(--bg-gradient);
     background-repeat: no-repeat;
@@ -207,10 +207,15 @@
     }
     :global(body){
       font-size: 14px;
+   
       background: #edf5f7;
     }
     .container {
       width: 97%;
+    }
+    :global(h1){
+      font-size: 28px;
+      font-weight: 500;
     }
    
   }

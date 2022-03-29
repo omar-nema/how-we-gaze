@@ -15,7 +15,7 @@
     <!-- <span style=" color: gray; margin-right: 10px">View</span> -->
     <span
       class="material-icons-round"
-      style="font-size: 12px; color: gray;  margin-right: 10px"
+      style="font-size: 14px; color: gray;  margin-right: 10px"
     >
       filter_alt
     </span>

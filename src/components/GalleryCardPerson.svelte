@@ -18,7 +18,7 @@
   {#if mobile}
     <span
       class="material-icons-round"
-      style="font-size: 12px; color: gray;  margin-right: 10px"
+      style="font-size: 14px; color: gray;  margin-right: 10px"
     >
       person
     </span>
@@ -85,7 +85,8 @@
     padding: 0;
     margin: 0;
     width: 100%;
-    text-align: center;
+    text-align: center !important;
+    color: black !important;
     text-transform: capitalize;
     text-overflow: ellipsis;
     overflow-wrap: break-word;

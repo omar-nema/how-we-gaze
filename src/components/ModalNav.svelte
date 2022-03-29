@@ -90,7 +90,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
   }
   .btn {
     /* background: #ffffff75; */
@@ -120,7 +119,6 @@
     margin: 50px;
   }
   .img-holder {
-    width: 315px;
     height: 315px;
     display: flex;
     align-items: center;
@@ -128,8 +126,7 @@
   }
 
   img {
-    max-width: 100%;
-    max-height: 100%;
+    height: 100%;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: var(--box-shadow-light);
@@ -140,5 +137,15 @@
   p {
     text-align: center;
     margin: 3px 0;
+  }
+
+  @media screen and (max-width: 800px) {
+    .artwork-holder {
+      margin: 20px;
+      margin-bottom: 40px;
+    }
+    .img-holder {
+      height: 150px;
+    }
   }
 </style>

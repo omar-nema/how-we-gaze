@@ -32,7 +32,8 @@
   let sessionKey = cardSessionsArr[sessionIndex.length - 1];
   let sessionData = null;
   let sessionSliderMax = 100;
-  let visViewMode = 'slice';
+  let visViewMode = 'original';
+  //slice
   let visPlayStatus = 'pause';
   let visCurrFrame = 0;
   let infoTipIndex = -1;
@@ -122,7 +123,7 @@
   $: {
     visCurrFrame;
     if (mount && sessionLoaded) {
-      if (visCurrFrame < sessionData.length - 1) {
+      if (visCurrFrame < sessionData.length - 1 && visViewMode == 'slice') {
         moveClips(
           domClips,
           sessionData[visCurrFrame].xPct,
@@ -305,13 +306,13 @@
     .card-outer {
       opacity: 1 !important;
       overflow: hidden;
-    }
-    .card-outer {
       padding: 15px 0;
       padding-bottom: 0px;
     }
+
     :global(.card-header) {
       padding: 0 20px;
+      margin-bottom: 5px;
     }
     .center {
       padding: 5px;

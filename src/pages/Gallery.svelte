@@ -65,7 +65,7 @@
 </script>
 
 <div class="card-holder">
-  <div class="card-outer">
+  <div class="card-outer intro">
     <p>
       Welcome to the Gallery! Each collection below visualizes how individuals
       gazed at a particular piece of artwork. Study the existing gazes in this
@@ -114,5 +114,11 @@
   }
   h2 {
     margin-top: 0;
+  }
+
+  @media screen and (max-width: 800px) {
+    .intro.card-outer {
+      padding: 20px 25px;
+    }
   }
 </style>
