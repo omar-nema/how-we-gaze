@@ -79,6 +79,7 @@
     margin: auto;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
+
   img.agg {
     filter: blur(5px);
   }
@@ -118,5 +119,13 @@
   }
   .contour.active {
     opacity: 1;
+  }
+
+  @media screen and (max-width: 800px) {
+    .img-holder {
+      border-radius: 5px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
   }
 </style>

@@ -289,8 +289,19 @@
     justify-content: center;
     flex-direction: column;
   }
+  .card-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
 
   @media screen and (max-width: 800px) {
+    .card-filters {
+      flex-direction: column;
+      padding: 5px 20px;
+      margin-bottom: 0px;
+    }
+
     .card-outer {
       opacity: 1 !important;
       overflow: hidden;
@@ -302,10 +313,11 @@
     :global(.card-header) {
       padding: 0 20px;
     }
-
-    :global(.card-filters) {
-      padding: 10px 20px;
+    .center {
+      padding: 5px;
+      padding-top: 0;
     }
+
     :global(.filter-group) {
       height: 30px;
       margin-bottom: 10px;
