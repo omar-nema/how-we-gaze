@@ -1,6 +1,6 @@
 export async function createClips(url, sessionData) {
   let clips = [];
-  let numClips = 10;
+  let numClips = 18;
   let clipMaxSize = 33;
   let clipMinR = 19;
   let clipInc = (clipMaxSize - clipMinR) / numClips;

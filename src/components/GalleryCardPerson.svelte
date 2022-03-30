@@ -90,6 +90,10 @@
     text-overflow: '';
     font-weight: 500;
   }
+  select option {
+    text-align: center;
+    width: 100%;
+  }
 
   .filter.person {
     background: none;
@@ -97,6 +101,7 @@
     margin: auto;
     padding: 5px 20px;
     display: flex;
+    position: relative;
   }
   .name {
     padding: 0 10px;
@@ -111,10 +116,13 @@
   @media screen and (max-width: 800px) {
     .filter.person {
       align-items: center;
-      background: var(--bg-gradient-dark);
+      background: #e0f6fc;
       border-radius: 3px;
       overflow: hidden;
       padding: 0;
+    }
+    .filter.selected {
+      background: #e0f6fc;
     }
     .arrow-nav {
       height: 100%;
