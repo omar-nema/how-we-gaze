@@ -23,7 +23,7 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
 
   let bandwidth, thresholds;
   if (get(screenWidth) <= 800) {
-    bandwidth = 70;
+    bandwidth = 30;
     thresholds = 15;
   } else {
     bandwidth = 70;
