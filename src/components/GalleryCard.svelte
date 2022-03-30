@@ -149,67 +149,69 @@
     {#if infoTipIndex >= 0}
       <GalleryCardTip {helperTextPositions} bind:infoTipIndex />
     {/if}
-    <div class="card-header">
-      <h2 style="display: flex; align-items: center;">
-        {#if $screenWidth >= 900}
-          <div style="color: rgb(126 123 123);margin-right: 15px;">
-            Gaze Collection
+    <div class="card-top">
+      <div class="card-header">
+        <h2 style="display: flex; align-items: center;">
+          {#if $screenWidth >= 900}
+            <div style="color: rgb(126 123 123);margin-right: 15px;">
+              Gaze Collection
+            </div>
+          {/if}
+          <a
+            class="clickable"
+            style="display: flex; align-items: center;"
+            href={data.origLink}
+            target="_blank"
+          >
+            <span>
+              {data.artist}, <i>{data.title}</i>
+            </span>
+            <span
+              class="material-icons-round"
+              style="font-size: 12px; margin-left: 6px"
+            >
+              open_in_new
+            </span>
+          </a>
+        </h2>
+        {#if $screenWidth >= 800}
+          <div
+            class="clickable"
+            on:click={() => {
+              jump(data.key);
+              infoTipIndex = 0;
+            }}
+          >
+            <span class="material-icons-round md-14" style="color: #bfb9b9"
+              >info</span
+            >
           </div>
         {/if}
-        <a
-          class="clickable"
-          style="display: flex; align-items: center;"
-          href={data.origLink}
-          target="_blank"
-        >
-          <span>
-            {data.artist}, <i>{data.title}</i>
-          </span>
-          <span
-            class="material-icons-round"
-            style="font-size: 12px; margin-left: 6px"
-          >
-            open_in_new
-          </span>
-        </a>
-      </h2>
-      {#if $screenWidth >= 800}
-        <div
-          class="clickable"
-          on:click={() => {
-            jump(data.key);
-            infoTipIndex = 0;
-          }}
-        >
-          <span class="material-icons-round md-14" style="color: #bfb9b9"
-            >info</span
-          >
-        </div>
-      {/if}
-    </div>
+      </div>
 
-    <div class="card-filters">
-      {#if $screenWidth <= 800}
-        <GalleryCardPerson
-          bind:imgNav
-          bind:sessionKey
-          bind:sessionIndex
-          {cardSessionsArr}
-          {cardSessionsObj}
-          {visViewMode}
+      <div class="card-filters">
+        {#if $screenWidth <= 800}
+          <GalleryCardPerson
+            bind:imgNav
+            bind:sessionKey
+            bind:sessionIndex
+            {cardSessionsArr}
+            {cardSessionsObj}
+            {visViewMode}
+            {infoTipIndex}
+          />
+        {/if}
+        <GalleryCardFilter
+          bind:visFilter
+          bind:gazeBtn
+          bind:sessionSliderMax
+          bind:visCurrFrame
+          bind:visPlayStatus
+          bind:visViewMode
           {infoTipIndex}
+          {sessionData}
         />
-      {/if}
-      <GalleryCardFilter
-        bind:visFilter
-        bind:gazeBtn
-        bind:sessionSliderMax
-        bind:visCurrFrame
-        bind:visPlayStatus
-        bind:visViewMode
-        {infoTipIndex}
-        {sessionData}
-      />
+      </div>
     </div>
 
     <div class="center" bind:this={imgFrame}>
@@ -239,6 +241,8 @@
 
 <style>
   .card-outer {
+    padding: 0px;
+    padding-bottom: 15px;
     opacity: 0.2;
     position: relative;
     transition: opacity 0.3s ease-in-out;
@@ -248,6 +252,12 @@
   }
   .card-header {
     display: flex;
+  }
+  .card-top {
+    padding: 0 40px;
+    padding-top: 20px;
+    box-shadow: 0 1px 2px 0px rgb(0 0 0 / 5%);
+    margin-bottom: 10px;
   }
   #contour-overlay {
     background: black;
@@ -292,12 +302,13 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
+    padding-bottom: 15px;
   }
 
   @media screen and (max-width: 800px) {
     .card-filters {
       flex-direction: column;
-      padding: 5px 20px;
+      padding: 5px 0px;
       margin-bottom: 0px;
     }
 
@@ -309,8 +320,12 @@
     }
 
     :global(.card-header) {
-      padding: 0 20px;
       margin-bottom: 5px;
+    }
+    .card-top {
+      padding: 0 20px;
+      box-shadow: none;
+      margin-bottom: 0;
     }
     .center {
       padding: 5px;

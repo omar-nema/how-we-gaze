@@ -178,6 +178,7 @@
       border-radius: 5px;
       border-top-left-radius: 0px;
       border-top-right-radius: 0px;
+      border: none;
     }
   }
 </style>

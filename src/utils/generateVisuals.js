@@ -1,10 +1,14 @@
 import * as d3 from 'd3';
 
+import { get } from 'svelte/store';
+import { screenWidth } from '../stores/pageState';
+
 export async function contourMapBlur(data, containerAll, containerSvg, url) {
   let bbox = d3.select(containerAll).node().getBoundingClientRect();
   let width = bbox.width;
   let height = 0.705 * width;
 
+  console.log(get(screenWidth));
   let svg = d3.select(containerSvg);
   let margin = 30;
 
@@ -17,13 +21,24 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
     .domain([0, 100])
     .range([margin, height - margin]);
 
+  let bandwidth, thresholds;
+  if (get(screenWidth) <= 800) {
+    bandwidth = 70;
+    thresholds = 15;
+  } else {
+    bandwidth = 70;
+    thresholds = 30;
+  }
+
   let contours = d3
     .contourDensity()
     .x((d) => xPos(d.xPct))
     .y((d) => yPos(d.yPct))
     .size([width, height])
-    .bandwidth(70)
-    .thresholds(30)(data);
+    .bandwidth(bandwidth)
+    .thresholds(thresholds)(data);
+
+  console.log('conts ', contours.length);
 
   let minCoords = d3.min(contours, (d) => d.value);
   let maxCoords = d3.max(contours, (d) => d.value);
