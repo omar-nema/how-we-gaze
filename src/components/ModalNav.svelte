@@ -112,6 +112,7 @@
     padding-bottom: 150px;
     height: calc(100vh - 230px);
     overflow: auto;
+    padding-top: 30px;
   }
   .artwork-holder {
     display: flex;

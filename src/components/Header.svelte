@@ -8,6 +8,7 @@
     screenWidth,
     scrollThresh,
   } from '../stores/pageState';
+
   import { loadedWorksKeys } from '../stores/artworkMetadata';
   import { hideGazerForLater } from '../utils/gazerUtils';
   import { slide, fade } from 'svelte/transition';
@@ -53,26 +54,28 @@
       <div class="header-right">
         {#if $pageState == 'gallery'}
           <nav>
-            <div>
-              <span
-                class="material-icons-round"
-                on:click={() => {
-                  jumpSection(-1);
-                }}
-              >
-                keyboard_arrow_up
-              </span>
-            </div>
-            <div>
-              <span
-                class="material-icons-round"
-                on:click={() => {
-                  jumpSection(1);
-                }}
-              >
-                keyboard_arrow_down
-              </span>
-            </div>
+            {#if $screenWidth >= 800}
+              <div>
+                <span
+                  class="material-icons-round"
+                  on:click={() => {
+                    jumpSection(-1);
+                  }}
+                >
+                  keyboard_arrow_up
+                </span>
+              </div>
+              <div>
+                <span
+                  class="material-icons-round"
+                  on:click={() => {
+                    jumpSection(1);
+                  }}
+                >
+                  keyboard_arrow_down
+                </span>
+              </div>
+            {/if}
             <div
               on:click={() => {
                 modalState.set('nav');

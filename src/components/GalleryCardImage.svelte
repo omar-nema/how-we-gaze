@@ -25,7 +25,6 @@
   $: {
     if (imgFrame) {
       maxW = Math.min(maxW, imgFrame.getBoundingClientRect().width);
-      console.log(imgFrame.getBoundingClientRect().width);
       if (dimWidthToHt < 1) {
         ht = Math.min(maxH, (data.height / data.width) * maxW) + 'px';
         styleSubstring = 'height: 100%';

@@ -1,6 +1,6 @@
 <script>
   import GalleryCard from '../components/GalleryCard.svelte';
-  import { dbGet, dbWrite } from '../utils/firebaseUtils.js';
+  import { dbGet, dbWrite, getOfflineData } from '../utils/firebaseUtils.js';
   import { slide, fade } from 'svelte/transition';
   import {
     artworkMetadata,
@@ -9,7 +9,12 @@
   } from '../stores/artworkMetadata';
   import { initScroll } from '../utils/scrollListener';
   import { onMount, afterUpdate } from 'svelte';
-  import { cardInView, jumpCard } from '../stores/pageState';
+  import {
+    cardInView,
+    jumpCard,
+    offlineMode,
+    offlineData,
+  } from '../stores/pageState';
   import jump from '../utils/jumpSection';
 
   let worksArray = [],
@@ -17,24 +22,12 @@
   async function getAllWorks() {
     let worksObject = await dbGet('works');
     if (worksObject) {
-      worksArray = Object.values(worksObject).slice(1, 3);
+      worksArray = Object.values(worksObject);
       worksKeys = Object.keys(worksObject);
-      loadedWorksKeys.set(worksKeys);
-      loadedWorksArray.set(worksArray);
-      cardInView.set(worksKeys[0]);
     }
-    document.querySelector('body').className = '';
-    //write any new artwork that is not yet in DB to DB
-    //issue is that this could remove sessionData if initial read was unsuccessful
-    //function addNewArtwork(){
-    // for (let key in $artworkMetadata) {
-    //   if (!worksKeys.includes(key)) {
-    //     let objToAdd = $artworkMetadata[key];
-    //     console.log(key, objToAdd);
-    //     dbWrite('works/' + key, objToAdd);
-    //   }
-    // }
-    // }
+    loadedWorksKeys.set(worksKeys);
+    loadedWorksArray.set(worksArray);
+    cardInView.set(worksKeys[0]);
   }
 
   //after recording sesh, scroll to the card that was last viewed
@@ -58,6 +51,9 @@
   });
 
   async function init() {
+    if ($offlineMode) {
+      await getOfflineData();
+    }
     await getAllWorks();
     initScroll();
   }

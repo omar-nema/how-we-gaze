@@ -32,7 +32,7 @@
   let sessionKey = cardSessionsArr[sessionIndex.length - 1];
   let sessionData = null;
   let sessionSliderMax = 100;
-  let visViewMode = 'original';
+  let visViewMode = 'slice';
   //slice
   let visPlayStatus = 'pause';
   let visCurrFrame = 0;
@@ -90,7 +90,6 @@
     if (sessionData) {
       sessionSliderMax = sessionData.length;
       sessionLoaded = true;
-
       clips = await createClips(data.url, sessionData);
       visCurrFrame = 0;
     }
@@ -101,7 +100,6 @@
   let clipHolder, domClips;
   $: {
     if (clipHolder) {
-      console.log('hello dominito');
       domClips = clipHolder.childNodes;
     }
   }
@@ -177,7 +175,7 @@
           </span>
         </a>
       </h2>
-      {#if $screenWidth >= 900}
+      {#if $screenWidth >= 800}
         <div
           class="clickable"
           on:click={() => {

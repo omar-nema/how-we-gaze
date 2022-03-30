@@ -85,9 +85,7 @@
     <h1>How We Gaze</h1>
   </section>
   <section class="scroll">
-    <p>
-      Imagine a piece of art that you love.<br /><br />How do you look at it?
-    </p>
+    <p>Imagine a piece of art that you love. How do you look at it?</p>
   </section>
   <section class="scroll" data-effect="animate">
     <p>Do you study the work bit-by-bit?</p>

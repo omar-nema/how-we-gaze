@@ -7,6 +7,8 @@ import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
 // const serviceAccount = './firebaseCred.json';
 // console.log(serviceAccount);
 
+import { get as getSvelte } from 'svelte/store';
+import { update as updateSvelte } from 'svelte/store';
 import {
   getDatabase,
   ref,
@@ -17,6 +19,8 @@ import {
   push,
   runTransaction,
 } from 'firebase/database';
+
+import { offlineData, offlineMode } from '../stores/pageState';
 
 const firebaseConfig = {
   // credential: admin.credential.cert(serviceAccount),
@@ -36,16 +40,33 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
 
+export async function getOfflineData() {
+  let dataRaw = await fetch('./assets/data/offlineDb.json');
+  let dataJson = await dataRaw.json();
+  offlineData.update((x) => (x = dataJson));
+  return dataJson;
+}
+
+//build into here bbgirl
 export async function dbGet(itemPath) {
-  try {
-    let response = await get(child(ref(db), itemPath));
-    if (response.exists()) {
-      return response.val();
-    } else {
-      return null;
+  if (offlineMode && itemPath == 'works') {
+    return getSvelte(offlineData).works;
+  } else if (offlineMode && itemPath.includes('sessionData')) {
+    let key = itemPath.split('sessionData/')[1];
+    if (key) {
+      return getSvelte(offlineData).sessionData[key];
     }
-  } catch (error) {
-    console.error(error);
+  } else if (!offlineMode) {
+    try {
+      let response = await get(child(ref(db), itemPath));
+      if (response.exists()) {
+        return response.val();
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 
