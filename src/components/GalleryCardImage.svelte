@@ -4,6 +4,13 @@
   export let visViewMode;
   export let clips, clipHolder;
   export let imgFrame;
+  export let sessionIndex, personLength;
+  let mobile = false;
+  $: {
+    if ($screenWidth <= 800) {
+      mobile = true;
+    }
+  }
 
   const swipeConfig = {
     autoplay: false,
@@ -17,7 +24,7 @@
   let dimWidthToHt = data.width / data.height;
   //cardwidth should be factoer
   let maxW = Math.min($screenWidth, 800),
-    maxH = $screenHeight - 180;
+    maxH = $screenHeight - 220;
   let width = 'auto',
     ht = 'auto',
     styleSubstring = '';
@@ -40,6 +47,26 @@
   class="img-holder swipe-holder"
   style="width: {width}; height: {ht}; max-width: {data.width}px; max-height: {data.height}px"
 >
+  {#if !mobile}
+    <div
+      class="personToggle prev clickable"
+      class:disabled={sessionIndex == 0}
+      on:click={() => {
+        sessionIndex--;
+      }}
+    >
+      <span class="material-icons-round"> arrow_left </span>
+    </div>
+    <div
+      class="personToggle next clickable"
+      class:disabled={sessionIndex == personLength - 1}
+      on:click={() => {
+        sessionIndex++;
+      }}
+    >
+      <span class="material-icons-round"> arrow_right </span>
+    </div>
+  {/if}
   <img
     class:slice={visViewMode == 'slice'}
     class:agg={visViewMode == 'aggregate'}
@@ -53,6 +80,7 @@
     id="{data.key}-contour"
     style="width: 100%; height: 100%; position: absolute; top:0; left:0; z-index:10"
   />
+
   {#if visViewMode == 'slice'}
     <div bind:this={clipHolder}>
       {#each clips as clip}
@@ -77,6 +105,31 @@
     display: inline-block;
     margin: auto;
     border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .personToggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100000;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .disabled.personToggle {
+    opacity: 0;
+  }
+  .personToggle.prev {
+    left: 20px;
+  }
+  .personToggle.next {
+    right: 20px;
+  }
+  .personToggle .material-icons-round {
+    font-size: 28px;
   }
 
   img.agg {

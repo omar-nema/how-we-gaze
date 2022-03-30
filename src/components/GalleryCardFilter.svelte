@@ -113,16 +113,6 @@
 {/if}
 
 <style>
-  .card-filters {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-bottom: 25px;
-    justify-content: space-between;
-  }
-
   .filter-group {
     /* min-width: 350px; */
     font-size: var(--font-size-filter);

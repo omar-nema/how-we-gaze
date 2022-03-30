@@ -192,7 +192,8 @@
     max-width: 900px;
     width: 100%;
     background: var(--bg-contrast);
-    padding: 30px 40px;
+    padding: 25px 40px;
+    padding-bottom: 20px;
     margin: auto;
     margin-top: 70px;
     margin-bottom: 70px;

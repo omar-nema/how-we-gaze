@@ -29,47 +29,41 @@
     class:info-highlight={infoTipIndex == 0}
     class:info-hide={visViewMode == 'original'}
   >
-    <div
-      class="arrow-nav clickable"
-      class:disabled={sessionIndex == 0}
-      on:click={() => {
-        sessionIndex--;
-      }}
-    >
-      <span class="material-icons-round md-18 nav" style="font-size: 26px"
-        >arrow_left</span
+    {#if mobile}
+      <div
+        class="arrow-nav clickable"
+        class:disabled={sessionIndex == 0}
+        on:click={() => {
+          sessionIndex--;
+        }}
       >
-      {#if !mobile}
-        <span>Prev</span>
-      {/if}
-    </div>
+        <span class="material-icons-round md-18 nav" style="font-size: 26px"
+          >arrow_left</span
+        >
+      </div>
+    {/if}
 
     <select class="clickable" bind:value={sessionKey} bind:this={imgNav}>
       {#each cardSessionsArr as session, index}
         <option value={session}>
-          <span style="font-weight: 600; color: black;"
-            >{cardSessionsObj[session].name}'s Gaze</span
-          >
-          <span style="font-weight: 400; color: gray"
-            >({index + 1} of {cardSessionsArr.length})</span
-          >
+          <span>{cardSessionsObj[session].name}'s Gaze</span>
+          <span>({index + 1} of {cardSessionsArr.length})</span>
         </option>
       {/each}
     </select>
-    <div
-      class="clickable arrow-nav"
-      class:disabled={sessionIndex == cardSessionsArr.length - 1}
-      on:click={() => {
-        sessionIndex++;
-      }}
-    >
-      {#if !mobile}
-        <span>Next</span>
-      {/if}
-      <span class="material-icons-round md-18 nav" style="font-size: 26px"
-        >arrow_right</span
+    {#if mobile}
+      <div
+        class="clickable arrow-nav"
+        class:disabled={sessionIndex == cardSessionsArr.length - 1}
+        on:click={() => {
+          sessionIndex++;
+        }}
       >
-    </div>
+        <span class="material-icons-round md-18 nav" style="font-size: 26px"
+          >arrow_right</span
+        >
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -94,7 +88,7 @@
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .filter.person {

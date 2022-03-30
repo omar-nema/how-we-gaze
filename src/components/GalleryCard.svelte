@@ -28,7 +28,7 @@
   let sessionLoaded = false;
   let cardSessionsObj = data.sessionData;
   let cardSessionsArr = Object.keys(data.sessionData);
-  let sessionIndex = cardSessionsArr.length - 1;
+  let sessionIndex = cardSessionsArr.length - 2;
   let sessionKey = cardSessionsArr[sessionIndex.length - 1];
   let sessionData = null;
   let sessionSliderMax = 100;
@@ -152,9 +152,7 @@
     <div class="card-header">
       <h2 style="display: flex; align-items: center;">
         {#if $screenWidth >= 900}
-          <div
-            style="font-weight: 400; color: rgb(126 123 123);margin-right: 15px;"
-          >
+          <div style="color: rgb(126 123 123);margin-right: 15px;">
             Gaze Collection
           </div>
         {/if}
@@ -217,6 +215,8 @@
     <div class="center" bind:this={imgFrame}>
       <GalleryCardImage
         bind:clipHolder
+        bind:sessionIndex
+        personLength={cardSessionsArr.length}
         {data}
         {visViewMode}
         {clips}
@@ -291,7 +291,7 @@
   .card-filters {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
 
   @media screen and (max-width: 800px) {
