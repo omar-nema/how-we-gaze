@@ -93,6 +93,7 @@
   select option {
     text-align: center;
     width: 100%;
+    margin: auto;
   }
 
   .filter.person {
@@ -121,9 +122,7 @@
       overflow: hidden;
       padding: 0;
     }
-    .filter.selected {
-      background: #e0f6fc;
-    }
+
     .arrow-nav {
       height: 100%;
     }
@@ -139,6 +138,8 @@
     }
     select {
       font-weight: 500;
+      width: auto;
+      flex-grow: 1;
     }
   }
 </style>

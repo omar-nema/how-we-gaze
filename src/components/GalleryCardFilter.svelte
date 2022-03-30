@@ -267,6 +267,9 @@
     .filter-options {
       flex-grow: 1;
     }
+    .filter.selected {
+      background: #e0f6fc;
+    }
 
     #slider-holder {
       width: 30px;
