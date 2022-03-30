@@ -135,6 +135,7 @@
     .filter-group {
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
     select {
       font-weight: 500;
