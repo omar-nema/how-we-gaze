@@ -5,6 +5,10 @@
   export let clips, clipHolder;
   export let imgFrame;
   export let sessionIndex, personLength;
+
+  export let imgHolder;
+  export let svgHolder;
+
   let mobile = false;
   $: {
     if ($screenWidth <= 800) {
@@ -45,6 +49,7 @@
 
 <div
   class="img-holder swipe-holder"
+  bind:this={imgHolder}
   style="width: {width}; height: {ht}; max-width: {data.width}px; max-height: {data.height}px"
 >
   {#if !mobile}
@@ -76,6 +81,7 @@
   />
   <svg
     class="contour"
+    bind:this={svgHolder}
     class:active={visViewMode == 'aggregate'}
     id="{data.key}-contour"
     style="width: 100%; height: 100%; position: absolute; top:0; left:0; z-index:10"
@@ -140,6 +146,9 @@
   }
   img.slice {
     filter: blur(10px);
+  }
+  img {
+    opacity: 0;
   }
   .info-hide {
     opacity: 0;

@@ -38,7 +38,9 @@
   let visCurrFrame = 0;
   let infoTipIndex = -1;
   let clips = [];
+  //
   let imgFrame;
+  let imgHolder, svgHolder;
 
   onMount(async () => {
     await getSessionData(sessionKey);
@@ -55,14 +57,11 @@
 
   //VIEW MODE REACTIVITY
   $: {
+    //bind imgHolder and SVG
+
     ///running too many times
-    if (mount && visViewMode == 'aggregate') {
-      contourMapBlur(
-        sessionData,
-        `#${data.key} .img-holder`,
-        `#${data.key}-contour`,
-        data.url
-      );
+    if (mount && visViewMode == 'aggregate' && imgHolder && svgHolder) {
+      contourMapBlur(sessionData, imgHolder, svgHolder, data.url);
     }
   }
 
@@ -218,6 +217,8 @@
       <GalleryCardImage
         bind:clipHolder
         bind:sessionIndex
+        bind:imgHolder
+        bind:svgHolder
         personLength={cardSessionsArr.length}
         {data}
         {visViewMode}

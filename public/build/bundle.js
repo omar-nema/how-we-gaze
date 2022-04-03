@@ -5830,7 +5830,7 @@ var app = (function () {
             SessionStorage.remove('logging_enabled');
         }
     };
-    const log$1 = function (...varArgs) {
+    const log = function (...varArgs) {
         if (firstLog_ === true) {
             firstLog_ = false;
             if (logger === null && SessionStorage.get('logging_enabled') === true) {
@@ -5844,7 +5844,7 @@ var app = (function () {
     };
     const logWrapper = function (prefix) {
         return function (...varArgs) {
-            log$1(prefix, ...varArgs);
+            log(prefix, ...varArgs);
         };
     };
     const error = function (...varArgs) {
@@ -6338,7 +6338,7 @@ var app = (function () {
                 // TODO: Need to figure out all the cases this is raised and whether
                 // this makes sense.
                 if (error && error.code === 'auth/token-not-initialized') {
-                    log$1('Got auth/token-not-initialized error.  Treating as null token.');
+                    log('Got auth/token-not-initialized error.  Treating as null token.');
                     return null;
                 }
                 else {
@@ -7045,11 +7045,11 @@ var app = (function () {
                     this.myIFrame.doc.close();
                 }
                 catch (e) {
-                    log$1('frame writing exception');
+                    log('frame writing exception');
                     if (e.stack) {
-                        log$1(e.stack);
+                        log(e.stack);
                     }
-                    log$1(e);
+                    log(e);
                 }
             }
         }
@@ -7070,7 +7070,7 @@ var app = (function () {
                     const a = iframe.contentWindow.document;
                     if (!a) {
                         // Apologies for the log-spam, I need to do something to keep closure from optimizing out the assignment above.
-                        log$1('No IE domain setting required');
+                        log('No IE domain setting required');
                     }
                 }
                 catch (e) {
@@ -7271,7 +7271,7 @@ var app = (function () {
                                 }
                             };
                         newScript.onerror = () => {
-                            log$1('Long-poll script failed to load: ' + url);
+                            log('Long-poll script failed to load: ' + url);
                             this.sendNewPolls = false;
                             this.close();
                         };
@@ -9267,7 +9267,7 @@ var app = (function () {
                         this.appCheckTokenProvider_.getToken(forceRefresh)
                     ]);
                     if (!canceled) {
-                        log$1('getToken() completed. Creating connection.');
+                        log('getToken() completed. Creating connection.');
                         this.authToken_ = authToken && authToken.accessToken;
                         this.appCheckToken_ = appCheckToken && appCheckToken.token;
                         connection = new Connection(connId, this.repoInfo_, this.applicationId_, this.appCheckToken_, this.authToken_, onDataMessage, onReady, onDisconnect, 
@@ -9277,7 +9277,7 @@ var app = (function () {
                         }, lastSessionId);
                     }
                     else {
-                        log$1('getToken() completed but was canceled');
+                        log('getToken() completed but was canceled');
                     }
                 }
                 catch (error) {
@@ -9295,7 +9295,7 @@ var app = (function () {
             }
         }
         interrupt(reason) {
-            log$1('Interrupting connection for reason: ' + reason);
+            log('Interrupting connection for reason: ' + reason);
             this.interruptReasons_[reason] = true;
             if (this.realtime_) {
                 this.realtime_.close();
@@ -9311,7 +9311,7 @@ var app = (function () {
             }
         }
         resume(reason) {
-            log$1('Resuming connection for reason: ' + reason);
+            log('Resuming connection for reason: ' + reason);
             delete this.interruptReasons_[reason];
             if (isEmpty(this.interruptReasons_)) {
                 this.reconnectDelay_ = RECONNECT_MIN_DELAY;
@@ -9372,7 +9372,7 @@ var app = (function () {
             return listen;
         }
         onAuthRevoked_(statusCode, explanation) {
-            log$1('Auth token revoked: ' + statusCode + '/' + explanation);
+            log('Auth token revoked: ' + statusCode + '/' + explanation);
             this.authToken_ = null;
             this.forceTokenRefresh_ = true;
             this.realtime_.close();
@@ -9391,7 +9391,7 @@ var app = (function () {
             }
         }
         onAppCheckRevoked_(statusCode, explanation) {
-            log$1('App check token revoked: ' + statusCode + '/' + explanation);
+            log('App check token revoked: ' + statusCode + '/' + explanation);
             this.appCheckToken_ = null;
             this.forceTokenRefresh_ = true;
             // Note: We don't close the connection as the developer may not have
@@ -16096,7 +16096,7 @@ var app = (function () {
                 eventList.events[i] = null;
                 const eventFn = eventData.getEventRunner();
                 if (logger) {
-                    log$1('event: ' + eventData.toString());
+                    log('event: ' + eventData.toString());
                 }
                 exceptionGuard(eventFn);
             }
@@ -16415,7 +16415,7 @@ var app = (function () {
         if (repo.persistentConnection_) {
             prefix = repo.persistentConnection_.id + ':';
         }
-        log$1(prefix, ...varArgs);
+        log(prefix, ...varArgs);
     }
     function repoCallOnCompleteCallback(repo, callback, status, errorReason) {
         if (callback) {
@@ -17746,7 +17746,7 @@ var app = (function () {
                 fatal("Can't determine Firebase Database URL. Be sure to include " +
                     ' a Project ID when calling firebase.initializeApp().');
             }
-            log$1('Using default host for project ', app.options.projectId);
+            log('Using default host for project ', app.options.projectId);
             dbUrl = `${app.options.projectId}-default-rtdb.firebaseio.com`;
         }
         let parsedUrl = parseRepoInfo(dbUrl, nodeAdmin);
@@ -22466,167 +22466,10 @@ var app = (function () {
       return linearish(scale);
     }
 
-    function nice(domain, interval) {
-      domain = domain.slice();
-
-      var i0 = 0,
-          i1 = domain.length - 1,
-          x0 = domain[i0],
-          x1 = domain[i1],
-          t;
-
-      if (x1 < x0) {
-        t = i0, i0 = i1, i1 = t;
-        t = x0, x0 = x1, x1 = t;
-      }
-
-      domain[i0] = interval.floor(x0);
-      domain[i1] = interval.ceil(x1);
-      return domain;
-    }
-
-    function transformLog(x) {
-      return Math.log(x);
-    }
-
-    function transformExp(x) {
-      return Math.exp(x);
-    }
-
-    function transformLogn(x) {
-      return -Math.log(-x);
-    }
-
-    function transformExpn(x) {
-      return -Math.exp(-x);
-    }
-
-    function pow10(x) {
-      return isFinite(x) ? +("1e" + x) : x < 0 ? 0 : x;
-    }
-
-    function powp(base) {
-      return base === 10 ? pow10
-          : base === Math.E ? Math.exp
-          : x => Math.pow(base, x);
-    }
-
-    function logp(base) {
-      return base === Math.E ? Math.log
-          : base === 10 && Math.log10
-          || base === 2 && Math.log2
-          || (base = Math.log(base), x => Math.log(x) / base);
-    }
-
-    function reflect(f) {
-      return (x, k) => -f(-x, k);
-    }
-
-    function loggish(transform) {
-      const scale = transform(transformLog, transformExp);
-      const domain = scale.domain;
-      let base = 10;
-      let logs;
-      let pows;
-
-      function rescale() {
-        logs = logp(base), pows = powp(base);
-        if (domain()[0] < 0) {
-          logs = reflect(logs), pows = reflect(pows);
-          transform(transformLogn, transformExpn);
-        } else {
-          transform(transformLog, transformExp);
-        }
-        return scale;
-      }
-
-      scale.base = function(_) {
-        return arguments.length ? (base = +_, rescale()) : base;
-      };
-
-      scale.domain = function(_) {
-        return arguments.length ? (domain(_), rescale()) : domain();
-      };
-
-      scale.ticks = count => {
-        const d = domain();
-        let u = d[0];
-        let v = d[d.length - 1];
-        const r = v < u;
-
-        if (r) ([u, v] = [v, u]);
-
-        let i = logs(u);
-        let j = logs(v);
-        let k;
-        let t;
-        const n = count == null ? 10 : +count;
-        let z = [];
-
-        if (!(base % 1) && j - i < n) {
-          i = Math.floor(i), j = Math.ceil(j);
-          if (u > 0) for (; i <= j; ++i) {
-            for (k = 1; k < base; ++k) {
-              t = i < 0 ? k / pows(-i) : k * pows(i);
-              if (t < u) continue;
-              if (t > v) break;
-              z.push(t);
-            }
-          } else for (; i <= j; ++i) {
-            for (k = base - 1; k >= 1; --k) {
-              t = i > 0 ? k / pows(-i) : k * pows(i);
-              if (t < u) continue;
-              if (t > v) break;
-              z.push(t);
-            }
-          }
-          if (z.length * 2 < n) z = ticks(u, v, n);
-        } else {
-          z = ticks(i, j, Math.min(j - i, n)).map(pows);
-        }
-        return r ? z.reverse() : z;
-      };
-
-      scale.tickFormat = (count, specifier) => {
-        if (count == null) count = 10;
-        if (specifier == null) specifier = base === 10 ? "s" : ",";
-        if (typeof specifier !== "function") {
-          if (!(base % 1) && (specifier = formatSpecifier(specifier)).precision == null) specifier.trim = true;
-          specifier = format(specifier);
-        }
-        if (count === Infinity) return specifier;
-        const k = Math.max(1, base * count / scale.ticks().length); // TODO fast estimate?
-        return d => {
-          let i = d / pows(Math.round(logs(d)));
-          if (i * base < base - 0.5) i *= base;
-          return i <= k ? specifier(d) : "";
-        };
-      };
-
-      scale.nice = () => {
-        return domain(nice(domain(), {
-          floor: x => pows(Math.floor(logs(x))),
-          ceil: x => pows(Math.ceil(logs(x)))
-        }));
-      };
-
-      return scale;
-    }
-
-    function log() {
-      const scale = loggish(transformer()).domain([1, 10]);
-      scale.copy = () => copy(scale, log()).base(scale.base());
-      initRange.apply(scale, arguments);
-      return scale;
-    }
-
     async function contourMapBlur(data, containerAll, containerSvg, url) {
       let bbox = select(containerAll).node().getBoundingClientRect();
       let width = bbox.width;
       let height = 0.705 * width;
-
-      console.log(get_store_value(screenWidth));
-      let svg = select(containerSvg);
       let margin = 30;
 
       let xPos = linear()
@@ -22638,8 +22481,9 @@ var app = (function () {
 
       let bandwidth, thresholds;
       if (get_store_value(screenWidth) <= 800) {
-        bandwidth = 30;
-        thresholds = 15;
+        //if we want mobile
+        bandwidth = 50;
+        thresholds = 30;
       } else {
         bandwidth = 70;
         thresholds = 30;
@@ -22652,44 +22496,28 @@ var app = (function () {
         .bandwidth(bandwidth)
         .thresholds(thresholds)(data);
 
-      console.log('conts ', contours.length);
-
       let minCoords = min(contours, (d) => d.value);
       let maxCoords = max(contours, (d) => d.value);
 
-      let blurScale = log()
-        .domain([
-          maxCoords,
-          maxCoords * 0.75,
-          ,
-          maxCoords / 2,
-          maxCoords / 3,
-          maxCoords / 4,
-          maxCoords / 10,
-          minCoords,
-        ])
-        .range([0, 0.5, 0.75, 1, 1.5, 2, 10]);
-
-      blurScale = linear()
+      let blurScale = linear()
         .domain([maxCoords, maxCoords * 0.75, minCoords])
-        .range([0, 0.25, 5]);
-
-      // blurScale = d3.scaleLinear().domain([maxCoords, minCoords]).range([0, 5]);
-
-      //the update isn't happening properly
-
-      // let blurScale = d3.scaleLinear().domain([maxCoords, minCoords]).range([0, 0]);
+        .range([0, 0.25, 4]);
 
       let opacityScale = linear()
         .domain([maxCoords, minCoords])
         .range([1, 1]);
 
-      svg
-        .selectAll('.clipPathGroup')
-        .data(contours, (d) => d.coordinates[0])
-        .join((enter) => {
-          let clipPath = enter.append('g').attr('class', 'clipPathGroup');
+      select(containerSvg).selectAll('.clipPathGroup').remove();
 
+      let dataSel = select(containerSvg)
+        .selectAll('.clipPathGroup')
+        .data(contours, (d) => {
+          return d.coordinates[0];
+        });
+
+      dataSel.join(
+        (enter) => {
+          let clipPath = enter.append('g').attr('class', 'clipPathGroup');
           clipPath
             .append('clipPath')
             .attr('id', (d, i) => 'path-' + i)
@@ -22697,7 +22525,6 @@ var app = (function () {
             .attr('stroke-linejoin', 'round')
             // .attr('fill', (d) => fillScale(d.value))
             .attr('d', index());
-
           clipPath
             .append('image')
             .attr('clip-path', (d, i) => `url(#path-${i})`)
@@ -22710,7 +22537,25 @@ var app = (function () {
               (d) =>
                 `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
             );
-        });
+        },
+        (update) => {
+          console.log(update);
+          let clipG = update.selectAll('.clipPathGroup');
+          clipG.select('clipPath').attr('d', index());
+          clipG
+            .select('image')
+            .style(
+              'filter',
+              (d) =>
+                `opacity(${opacityScale(d.value)}) blur(${blurScale(d.value)}px)`
+            );
+        },
+        (exit) => {
+          exit.remove();
+        }
+      );
+
+      return;
     }
 
     /* src\components\Tooltip.svelte generated by Svelte v3.44.0 */
@@ -22814,11 +22659,11 @@ var app = (function () {
 
     function get_each_context$5(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[20] = list[i];
+    	child_ctx[24] = list[i];
     	return child_ctx;
     }
 
-    // (50:2) {#if !mobile}
+    // (55:2) {#if !mobile}
     function create_if_block_1$8(ctx) {
     	let div0;
     	let span0;
@@ -22837,16 +22682,16 @@ var app = (function () {
     			div1 = element("div");
     			span1 = element("span");
     			span1.textContent = "arrow_right";
-    			attr_dev(span0, "class", "material-icons-round svelte-1skb688");
-    			add_location(span0, file$h, 57, 6, 1468);
-    			attr_dev(div0, "class", "personToggle prev clickable svelte-1skb688");
+    			attr_dev(span0, "class", "material-icons-round svelte-15ok7mf");
+    			add_location(span0, file$h, 62, 6, 1547);
+    			attr_dev(div0, "class", "personToggle prev clickable svelte-15ok7mf");
     			toggle_class(div0, "disabled", /*sessionIndex*/ ctx[1] == 0);
-    			add_location(div0, file$h, 50, 4, 1304);
-    			attr_dev(span1, "class", "material-icons-round svelte-1skb688");
-    			add_location(span1, file$h, 66, 6, 1719);
-    			attr_dev(div1, "class", "personToggle next clickable svelte-1skb688");
-    			toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*personLength*/ ctx[5] - 1);
-    			add_location(div1, file$h, 59, 4, 1540);
+    			add_location(div0, file$h, 55, 4, 1383);
+    			attr_dev(span1, "class", "material-icons-round svelte-15ok7mf");
+    			add_location(span1, file$h, 71, 6, 1798);
+    			attr_dev(div1, "class", "personToggle next clickable svelte-15ok7mf");
+    			toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*personLength*/ ctx[7] - 1);
+    			add_location(div1, file$h, 64, 4, 1619);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -22857,8 +22702,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div0, "click", /*click_handler*/ ctx[13], false, false, false),
-    					listen_dev(div1, "click", /*click_handler_1*/ ctx[14], false, false, false)
+    					listen_dev(div0, "click", /*click_handler*/ ctx[15], false, false, false),
+    					listen_dev(div1, "click", /*click_handler_1*/ ctx[16], false, false, false)
     				];
 
     				mounted = true;
@@ -22869,8 +22714,8 @@ var app = (function () {
     				toggle_class(div0, "disabled", /*sessionIndex*/ ctx[1] == 0);
     			}
 
-    			if (dirty & /*sessionIndex, personLength*/ 34) {
-    				toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*personLength*/ ctx[5] - 1);
+    			if (dirty & /*sessionIndex, personLength*/ 130) {
+    				toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*personLength*/ ctx[7] - 1);
     			}
     		},
     		d: function destroy(detaching) {
@@ -22886,17 +22731,17 @@ var app = (function () {
     		block,
     		id: create_if_block_1$8.name,
     		type: "if",
-    		source: "(50:2) {#if !mobile}",
+    		source: "(55:2) {#if !mobile}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (84:2) {#if visViewMode == 'slice'}
+    // (90:2) {#if visViewMode == 'slice'}
     function create_if_block$a(ctx) {
     	let div;
-    	let each_value = /*clips*/ ctx[4];
+    	let each_value = /*clips*/ ctx[6];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -22912,7 +22757,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			add_location(div, file$h, 84, 4, 2198);
+    			add_location(div, file$h, 90, 4, 2304);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -22921,11 +22766,11 @@ var app = (function () {
     				each_blocks[i].m(div, null);
     			}
 
-    			/*div_binding*/ ctx[15](div);
+    			/*div_binding*/ ctx[18](div);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*clips, data*/ 20) {
-    				each_value = /*clips*/ ctx[4];
+    			if (dirty & /*clips, data*/ 80) {
+    				each_value = /*clips*/ ctx[6];
     				validate_each_argument(each_value);
     				let i;
 
@@ -22951,7 +22796,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			destroy_each(each_blocks, detaching);
-    			/*div_binding*/ ctx[15](null);
+    			/*div_binding*/ ctx[18](null);
     		}
     	};
 
@@ -22959,14 +22804,14 @@ var app = (function () {
     		block,
     		id: create_if_block$a.name,
     		type: "if",
-    		source: "(84:2) {#if visViewMode == 'slice'}",
+    		source: "(90:2) {#if visViewMode == 'slice'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (86:6) {#each clips as clip}
+    // (92:6) {#each clips as clip}
     function create_each_block$5(ctx) {
     	let img;
     	let img_src_value;
@@ -22974,30 +22819,30 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			img = element("img");
-    			attr_dev(img, "class", "clip svelte-1skb688");
-    			set_style(img, "clip-path", "circle(" + /*clip*/ ctx[20].r + "% at " + /*clip*/ ctx[20].ctrx + "% " + /*clip*/ ctx[20].ctry + "%)");
-    			set_style(img, "filter", "blur(" + /*clip*/ ctx[20].blur + "px)");
-    			set_style(img, "opacity", "$" + /*clip*/ ctx[20].opacity);
-    			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[2].url)) attr_dev(img, "src", img_src_value);
-    			add_location(img, file$h, 86, 8, 2265);
+    			attr_dev(img, "class", "clip svelte-15ok7mf");
+    			set_style(img, "clip-path", "circle(" + /*clip*/ ctx[24].r + "% at " + /*clip*/ ctx[24].ctrx + "% " + /*clip*/ ctx[24].ctry + "%)");
+    			set_style(img, "filter", "blur(" + /*clip*/ ctx[24].blur + "px)");
+    			set_style(img, "opacity", "$" + /*clip*/ ctx[24].opacity);
+    			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) attr_dev(img, "src", img_src_value);
+    			add_location(img, file$h, 92, 8, 2371);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*clips*/ 16) {
-    				set_style(img, "clip-path", "circle(" + /*clip*/ ctx[20].r + "% at " + /*clip*/ ctx[20].ctrx + "% " + /*clip*/ ctx[20].ctry + "%)");
+    			if (dirty & /*clips*/ 64) {
+    				set_style(img, "clip-path", "circle(" + /*clip*/ ctx[24].r + "% at " + /*clip*/ ctx[24].ctrx + "% " + /*clip*/ ctx[24].ctry + "%)");
     			}
 
-    			if (dirty & /*clips*/ 16) {
-    				set_style(img, "filter", "blur(" + /*clip*/ ctx[20].blur + "px)");
+    			if (dirty & /*clips*/ 64) {
+    				set_style(img, "filter", "blur(" + /*clip*/ ctx[24].blur + "px)");
     			}
 
-    			if (dirty & /*clips*/ 16) {
-    				set_style(img, "opacity", "$" + /*clip*/ ctx[20].opacity);
+    			if (dirty & /*clips*/ 64) {
+    				set_style(img, "opacity", "$" + /*clip*/ ctx[24].opacity);
     			}
 
-    			if (dirty & /*data*/ 4 && !src_url_equal(img.src, img_src_value = /*data*/ ctx[2].url)) {
+    			if (dirty & /*data*/ 16 && !src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) {
     				attr_dev(img, "src", img_src_value);
     			}
     		},
@@ -23010,7 +22855,7 @@ var app = (function () {
     		block,
     		id: create_each_block$5.name,
     		type: "each",
-    		source: "(86:6) {#each clips as clip}",
+    		source: "(92:6) {#each clips as clip}",
     		ctx
     	});
 
@@ -23026,8 +22871,8 @@ var app = (function () {
     	let svg;
     	let svg_id_value;
     	let t2;
-    	let if_block0 = !/*mobile*/ ctx[6] && create_if_block_1$8(ctx);
-    	let if_block1 = /*visViewMode*/ ctx[3] == 'slice' && create_if_block$a(ctx);
+    	let if_block0 = !/*mobile*/ ctx[8] && create_if_block_1$8(ctx);
+    	let if_block1 = /*visViewMode*/ ctx[5] == 'slice' && create_if_block$a(ctx);
 
     	const block = {
     		c: function create() {
@@ -23039,28 +22884,28 @@ var app = (function () {
     			svg = svg_element("svg");
     			t2 = space();
     			if (if_block1) if_block1.c();
-    			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[2].url)) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "style", /*styleSubstring*/ ctx[9]);
-    			attr_dev(img, "class", "main svelte-1skb688");
-    			toggle_class(img, "slice", /*visViewMode*/ ctx[3] == 'slice');
-    			toggle_class(img, "agg", /*visViewMode*/ ctx[3] == 'aggregate');
-    			add_location(img, file$h, 69, 2, 1799);
-    			attr_dev(svg, "class", "contour svelte-1skb688");
-    			attr_dev(svg, "id", svg_id_value = "" + (/*data*/ ctx[2].key + "-contour"));
+    			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "style", /*styleSubstring*/ ctx[11]);
+    			attr_dev(img, "class", "main svelte-15ok7mf");
+    			toggle_class(img, "slice", /*visViewMode*/ ctx[5] == 'slice');
+    			toggle_class(img, "agg", /*visViewMode*/ ctx[5] == 'aggregate');
+    			add_location(img, file$h, 74, 2, 1878);
+    			attr_dev(svg, "class", "contour svelte-15ok7mf");
+    			attr_dev(svg, "id", svg_id_value = "" + (/*data*/ ctx[4].key + "-contour"));
     			set_style(svg, "width", "100%");
     			set_style(svg, "height", "100%");
     			set_style(svg, "position", "absolute");
     			set_style(svg, "top", "0");
     			set_style(svg, "left", "0");
     			set_style(svg, "z-index", "10");
-    			toggle_class(svg, "active", /*visViewMode*/ ctx[3] == 'aggregate');
-    			add_location(svg, file$h, 76, 2, 1965);
-    			attr_dev(div, "class", "img-holder swipe-holder svelte-1skb688");
-    			set_style(div, "width", /*width*/ ctx[7]);
-    			set_style(div, "height", /*ht*/ ctx[8]);
-    			set_style(div, "max-width", /*data*/ ctx[2].width + "px");
-    			set_style(div, "max-height", /*data*/ ctx[2].height + "px");
-    			add_location(div, file$h, 45, 0, 1143);
+    			toggle_class(svg, "active", /*visViewMode*/ ctx[5] == 'aggregate');
+    			add_location(svg, file$h, 81, 2, 2044);
+    			attr_dev(div, "class", "img-holder swipe-holder svelte-15ok7mf");
+    			set_style(div, "width", /*width*/ ctx[9]);
+    			set_style(div, "height", /*ht*/ ctx[10]);
+    			set_style(div, "max-width", /*data*/ ctx[4].width + "px");
+    			set_style(div, "max-height", /*data*/ ctx[4].height + "px");
+    			add_location(div, file$h, 49, 0, 1197);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23072,11 +22917,13 @@ var app = (function () {
     			append_dev(div, img);
     			append_dev(div, t1);
     			append_dev(div, svg);
+    			/*svg_binding*/ ctx[17](svg);
     			append_dev(div, t2);
     			if (if_block1) if_block1.m(div, null);
+    			/*div_binding_1*/ ctx[19](div);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (!/*mobile*/ ctx[6]) {
+    			if (!/*mobile*/ ctx[8]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
@@ -23089,31 +22936,31 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (dirty & /*data*/ 4 && !src_url_equal(img.src, img_src_value = /*data*/ ctx[2].url)) {
+    			if (dirty & /*data*/ 16 && !src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*styleSubstring*/ 512) {
-    				attr_dev(img, "style", /*styleSubstring*/ ctx[9]);
+    			if (dirty & /*styleSubstring*/ 2048) {
+    				attr_dev(img, "style", /*styleSubstring*/ ctx[11]);
     			}
 
-    			if (dirty & /*visViewMode*/ 8) {
-    				toggle_class(img, "slice", /*visViewMode*/ ctx[3] == 'slice');
+    			if (dirty & /*visViewMode*/ 32) {
+    				toggle_class(img, "slice", /*visViewMode*/ ctx[5] == 'slice');
     			}
 
-    			if (dirty & /*visViewMode*/ 8) {
-    				toggle_class(img, "agg", /*visViewMode*/ ctx[3] == 'aggregate');
+    			if (dirty & /*visViewMode*/ 32) {
+    				toggle_class(img, "agg", /*visViewMode*/ ctx[5] == 'aggregate');
     			}
 
-    			if (dirty & /*data*/ 4 && svg_id_value !== (svg_id_value = "" + (/*data*/ ctx[2].key + "-contour"))) {
+    			if (dirty & /*data*/ 16 && svg_id_value !== (svg_id_value = "" + (/*data*/ ctx[4].key + "-contour"))) {
     				attr_dev(svg, "id", svg_id_value);
     			}
 
-    			if (dirty & /*visViewMode*/ 8) {
-    				toggle_class(svg, "active", /*visViewMode*/ ctx[3] == 'aggregate');
+    			if (dirty & /*visViewMode*/ 32) {
+    				toggle_class(svg, "active", /*visViewMode*/ ctx[5] == 'aggregate');
     			}
 
-    			if (/*visViewMode*/ ctx[3] == 'slice') {
+    			if (/*visViewMode*/ ctx[5] == 'slice') {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
@@ -23126,20 +22973,20 @@ var app = (function () {
     				if_block1 = null;
     			}
 
-    			if (dirty & /*width*/ 128) {
-    				set_style(div, "width", /*width*/ ctx[7]);
+    			if (dirty & /*width*/ 512) {
+    				set_style(div, "width", /*width*/ ctx[9]);
     			}
 
-    			if (dirty & /*ht*/ 256) {
-    				set_style(div, "height", /*ht*/ ctx[8]);
+    			if (dirty & /*ht*/ 1024) {
+    				set_style(div, "height", /*ht*/ ctx[10]);
     			}
 
-    			if (dirty & /*data*/ 4) {
-    				set_style(div, "max-width", /*data*/ ctx[2].width + "px");
+    			if (dirty & /*data*/ 16) {
+    				set_style(div, "max-width", /*data*/ ctx[4].width + "px");
     			}
 
-    			if (dirty & /*data*/ 4) {
-    				set_style(div, "max-height", /*data*/ ctx[2].height + "px");
+    			if (dirty & /*data*/ 16) {
+    				set_style(div, "max-height", /*data*/ ctx[4].height + "px");
     			}
     		},
     		i: noop$3,
@@ -23147,7 +22994,9 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     			if (if_block0) if_block0.d();
+    			/*svg_binding*/ ctx[17](null);
     			if (if_block1) if_block1.d();
+    			/*div_binding_1*/ ctx[19](null);
     		}
     	};
 
@@ -23166,9 +23015,9 @@ var app = (function () {
     	let $screenHeight;
     	let $screenWidth;
     	validate_store(screenHeight, 'screenHeight');
-    	component_subscribe($$self, screenHeight, $$value => $$invalidate(16, $screenHeight = $$value));
+    	component_subscribe($$self, screenHeight, $$value => $$invalidate(20, $screenHeight = $$value));
     	validate_store(screenWidth, 'screenWidth');
-    	component_subscribe($$self, screenWidth, $$value => $$invalidate(12, $screenWidth = $$value));
+    	component_subscribe($$self, screenWidth, $$value => $$invalidate(14, $screenWidth = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('GalleryCardImage', slots, []);
     	let { data } = $$props;
@@ -23176,6 +23025,8 @@ var app = (function () {
     	let { clips, clipHolder } = $$props;
     	let { imgFrame } = $$props;
     	let { sessionIndex, personLength } = $$props;
+    	let { imgHolder } = $$props;
+    	let { svgHolder } = $$props;
     	let mobile = false;
 
     	const swipeConfig = {
@@ -23201,7 +23052,9 @@ var app = (function () {
     		'clipHolder',
     		'imgFrame',
     		'sessionIndex',
-    		'personLength'
+    		'personLength',
+    		'imgHolder',
+    		'svgHolder'
     	];
 
     	Object.keys($$props).forEach(key => {
@@ -23216,6 +23069,13 @@ var app = (function () {
     		$$invalidate(1, sessionIndex++, sessionIndex);
     	};
 
+    	function svg_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			svgHolder = $$value;
+    			$$invalidate(3, svgHolder);
+    		});
+    	}
+
     	function div_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			clipHolder = $$value;
@@ -23223,14 +23083,23 @@ var app = (function () {
     		});
     	}
 
+    	function div_binding_1($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			imgHolder = $$value;
+    			$$invalidate(2, imgHolder);
+    		});
+    	}
+
     	$$self.$$set = $$props => {
-    		if ('data' in $$props) $$invalidate(2, data = $$props.data);
-    		if ('visViewMode' in $$props) $$invalidate(3, visViewMode = $$props.visViewMode);
-    		if ('clips' in $$props) $$invalidate(4, clips = $$props.clips);
+    		if ('data' in $$props) $$invalidate(4, data = $$props.data);
+    		if ('visViewMode' in $$props) $$invalidate(5, visViewMode = $$props.visViewMode);
+    		if ('clips' in $$props) $$invalidate(6, clips = $$props.clips);
     		if ('clipHolder' in $$props) $$invalidate(0, clipHolder = $$props.clipHolder);
-    		if ('imgFrame' in $$props) $$invalidate(10, imgFrame = $$props.imgFrame);
+    		if ('imgFrame' in $$props) $$invalidate(12, imgFrame = $$props.imgFrame);
     		if ('sessionIndex' in $$props) $$invalidate(1, sessionIndex = $$props.sessionIndex);
-    		if ('personLength' in $$props) $$invalidate(5, personLength = $$props.personLength);
+    		if ('personLength' in $$props) $$invalidate(7, personLength = $$props.personLength);
+    		if ('imgHolder' in $$props) $$invalidate(2, imgHolder = $$props.imgHolder);
+    		if ('svgHolder' in $$props) $$invalidate(3, svgHolder = $$props.svgHolder);
     	};
 
     	$$self.$capture_state = () => ({
@@ -23243,6 +23112,8 @@ var app = (function () {
     		imgFrame,
     		sessionIndex,
     		personLength,
+    		imgHolder,
+    		svgHolder,
     		mobile,
     		swipeConfig,
     		dimWidthToHt,
@@ -23256,20 +23127,22 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('data' in $$props) $$invalidate(2, data = $$props.data);
-    		if ('visViewMode' in $$props) $$invalidate(3, visViewMode = $$props.visViewMode);
-    		if ('clips' in $$props) $$invalidate(4, clips = $$props.clips);
+    		if ('data' in $$props) $$invalidate(4, data = $$props.data);
+    		if ('visViewMode' in $$props) $$invalidate(5, visViewMode = $$props.visViewMode);
+    		if ('clips' in $$props) $$invalidate(6, clips = $$props.clips);
     		if ('clipHolder' in $$props) $$invalidate(0, clipHolder = $$props.clipHolder);
-    		if ('imgFrame' in $$props) $$invalidate(10, imgFrame = $$props.imgFrame);
+    		if ('imgFrame' in $$props) $$invalidate(12, imgFrame = $$props.imgFrame);
     		if ('sessionIndex' in $$props) $$invalidate(1, sessionIndex = $$props.sessionIndex);
-    		if ('personLength' in $$props) $$invalidate(5, personLength = $$props.personLength);
-    		if ('mobile' in $$props) $$invalidate(6, mobile = $$props.mobile);
-    		if ('dimWidthToHt' in $$props) $$invalidate(18, dimWidthToHt = $$props.dimWidthToHt);
-    		if ('maxW' in $$props) $$invalidate(11, maxW = $$props.maxW);
-    		if ('maxH' in $$props) $$invalidate(19, maxH = $$props.maxH);
-    		if ('width' in $$props) $$invalidate(7, width = $$props.width);
-    		if ('ht' in $$props) $$invalidate(8, ht = $$props.ht);
-    		if ('styleSubstring' in $$props) $$invalidate(9, styleSubstring = $$props.styleSubstring);
+    		if ('personLength' in $$props) $$invalidate(7, personLength = $$props.personLength);
+    		if ('imgHolder' in $$props) $$invalidate(2, imgHolder = $$props.imgHolder);
+    		if ('svgHolder' in $$props) $$invalidate(3, svgHolder = $$props.svgHolder);
+    		if ('mobile' in $$props) $$invalidate(8, mobile = $$props.mobile);
+    		if ('dimWidthToHt' in $$props) $$invalidate(22, dimWidthToHt = $$props.dimWidthToHt);
+    		if ('maxW' in $$props) $$invalidate(13, maxW = $$props.maxW);
+    		if ('maxH' in $$props) $$invalidate(23, maxH = $$props.maxH);
+    		if ('width' in $$props) $$invalidate(9, width = $$props.width);
+    		if ('ht' in $$props) $$invalidate(10, ht = $$props.ht);
+    		if ('styleSubstring' in $$props) $$invalidate(11, styleSubstring = $$props.styleSubstring);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -23277,25 +23150,25 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$screenWidth*/ 4096) {
+    		if ($$self.$$.dirty & /*$screenWidth*/ 16384) {
     			{
     				if ($screenWidth <= 800) {
-    					$$invalidate(6, mobile = true);
+    					$$invalidate(8, mobile = true);
     				}
     			}
     		}
 
-    		if ($$self.$$.dirty & /*imgFrame, maxW, data*/ 3076) {
+    		if ($$self.$$.dirty & /*imgFrame, maxW, data*/ 12304) {
     			{
     				if (imgFrame) {
-    					$$invalidate(11, maxW = Math.min(maxW, imgFrame.getBoundingClientRect().width));
+    					$$invalidate(13, maxW = Math.min(maxW, imgFrame.getBoundingClientRect().width));
 
     					if (dimWidthToHt < 1) {
-    						$$invalidate(8, ht = Math.min(maxH, data.height / data.width * maxW) + 'px');
-    						$$invalidate(9, styleSubstring = 'height: 100%');
+    						$$invalidate(10, ht = Math.min(maxH, data.height / data.width * maxW) + 'px');
+    						$$invalidate(11, styleSubstring = 'height: 100%');
     					} else {
-    						$$invalidate(7, width = Math.min(maxW, maxH * (data.width / data.height)) + 'px');
-    						$$invalidate(9, styleSubstring = 'width: 100%');
+    						$$invalidate(9, width = Math.min(maxW, maxH * (data.width / data.height)) + 'px');
+    						$$invalidate(11, styleSubstring = 'width: 100%');
     					}
     				}
     			}
@@ -23305,6 +23178,8 @@ var app = (function () {
     	return [
     		clipHolder,
     		sessionIndex,
+    		imgHolder,
+    		svgHolder,
     		data,
     		visViewMode,
     		clips,
@@ -23318,7 +23193,9 @@ var app = (function () {
     		$screenWidth,
     		click_handler,
     		click_handler_1,
-    		div_binding
+    		svg_binding,
+    		div_binding,
+    		div_binding_1
     	];
     }
 
@@ -23327,13 +23204,15 @@ var app = (function () {
     		super(options);
 
     		init$1(this, options, instance$h, create_fragment$h, safe_not_equal, {
-    			data: 2,
-    			visViewMode: 3,
-    			clips: 4,
+    			data: 4,
+    			visViewMode: 5,
+    			clips: 6,
     			clipHolder: 0,
-    			imgFrame: 10,
+    			imgFrame: 12,
     			sessionIndex: 1,
-    			personLength: 5
+    			personLength: 7,
+    			imgHolder: 2,
+    			svgHolder: 3
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -23346,15 +23225,15 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*data*/ ctx[2] === undefined && !('data' in props)) {
+    		if (/*data*/ ctx[4] === undefined && !('data' in props)) {
     			console.warn("<GalleryCardImage> was created without expected prop 'data'");
     		}
 
-    		if (/*visViewMode*/ ctx[3] === undefined && !('visViewMode' in props)) {
+    		if (/*visViewMode*/ ctx[5] === undefined && !('visViewMode' in props)) {
     			console.warn("<GalleryCardImage> was created without expected prop 'visViewMode'");
     		}
 
-    		if (/*clips*/ ctx[4] === undefined && !('clips' in props)) {
+    		if (/*clips*/ ctx[6] === undefined && !('clips' in props)) {
     			console.warn("<GalleryCardImage> was created without expected prop 'clips'");
     		}
 
@@ -23362,7 +23241,7 @@ var app = (function () {
     			console.warn("<GalleryCardImage> was created without expected prop 'clipHolder'");
     		}
 
-    		if (/*imgFrame*/ ctx[10] === undefined && !('imgFrame' in props)) {
+    		if (/*imgFrame*/ ctx[12] === undefined && !('imgFrame' in props)) {
     			console.warn("<GalleryCardImage> was created without expected prop 'imgFrame'");
     		}
 
@@ -23370,8 +23249,16 @@ var app = (function () {
     			console.warn("<GalleryCardImage> was created without expected prop 'sessionIndex'");
     		}
 
-    		if (/*personLength*/ ctx[5] === undefined && !('personLength' in props)) {
+    		if (/*personLength*/ ctx[7] === undefined && !('personLength' in props)) {
     			console.warn("<GalleryCardImage> was created without expected prop 'personLength'");
+    		}
+
+    		if (/*imgHolder*/ ctx[2] === undefined && !('imgHolder' in props)) {
+    			console.warn("<GalleryCardImage> was created without expected prop 'imgHolder'");
+    		}
+
+    		if (/*svgHolder*/ ctx[3] === undefined && !('svgHolder' in props)) {
+    			console.warn("<GalleryCardImage> was created without expected prop 'svgHolder'");
     		}
     	}
 
@@ -23428,6 +23315,22 @@ var app = (function () {
     	}
 
     	set personLength(value) {
+    		throw new Error("<GalleryCardImage>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get imgHolder() {
+    		throw new Error("<GalleryCardImage>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set imgHolder(value) {
+    		throw new Error("<GalleryCardImage>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get svgHolder() {
+    		throw new Error("<GalleryCardImage>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set svgHolder(value) {
     		throw new Error("<GalleryCardImage>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -28298,7 +28201,7 @@ var app = (function () {
     const { Object: Object_1$1 } = globals;
     const file$d = "src\\components\\GalleryCard.svelte";
 
-    // (136:0) {#if mount}
+    // (135:0) {#if mount}
     function create_if_block$6(ctx) {
     	let t0;
     	let div4;
@@ -28334,54 +28237,56 @@ var app = (function () {
     	let gallerycardimage;
     	let updating_clipHolder;
     	let updating_sessionIndex;
+    	let updating_imgHolder;
+    	let updating_svgHolder;
     	let t12;
     	let div4_id_value;
     	let current;
-    	let if_block0 = /*$tooltipShow*/ ctx[17] && create_if_block_6$1(ctx);
-    	let if_block1 = /*infoTipIndex*/ ctx[14] >= 0 && create_if_block_5$1(ctx);
-    	let if_block2 = /*$screenWidth*/ ctx[19] >= 900 && create_if_block_4$1(ctx);
-    	let if_block3 = /*$screenWidth*/ ctx[19] >= 800 && create_if_block_3$4(ctx);
-    	let if_block4 = /*$screenWidth*/ ctx[19] <= 800 && create_if_block_2$5(ctx);
+    	let if_block0 = /*$tooltipShow*/ ctx[19] && create_if_block_6$1(ctx);
+    	let if_block1 = /*infoTipIndex*/ ctx[16] >= 0 && create_if_block_5$1(ctx);
+    	let if_block2 = /*$screenWidth*/ ctx[21] >= 900 && create_if_block_4$1(ctx);
+    	let if_block3 = /*$screenWidth*/ ctx[21] >= 800 && create_if_block_3$4(ctx);
+    	let if_block4 = /*$screenWidth*/ ctx[21] <= 800 && create_if_block_2$5(ctx);
 
     	function gallerycardfilter_visFilter_binding(value) {
-    		/*gallerycardfilter_visFilter_binding*/ ctx[30](value);
+    		/*gallerycardfilter_visFilter_binding*/ ctx[32](value);
     	}
 
     	function gallerycardfilter_gazeBtn_binding(value) {
-    		/*gallerycardfilter_gazeBtn_binding*/ ctx[31](value);
+    		/*gallerycardfilter_gazeBtn_binding*/ ctx[33](value);
     	}
 
     	function gallerycardfilter_sessionSliderMax_binding(value) {
-    		/*gallerycardfilter_sessionSliderMax_binding*/ ctx[32](value);
+    		/*gallerycardfilter_sessionSliderMax_binding*/ ctx[34](value);
     	}
 
     	function gallerycardfilter_visCurrFrame_binding(value) {
-    		/*gallerycardfilter_visCurrFrame_binding*/ ctx[33](value);
+    		/*gallerycardfilter_visCurrFrame_binding*/ ctx[35](value);
     	}
 
     	function gallerycardfilter_visPlayStatus_binding(value) {
-    		/*gallerycardfilter_visPlayStatus_binding*/ ctx[34](value);
+    		/*gallerycardfilter_visPlayStatus_binding*/ ctx[36](value);
     	}
 
     	function gallerycardfilter_visViewMode_binding(value) {
-    		/*gallerycardfilter_visViewMode_binding*/ ctx[35](value);
+    		/*gallerycardfilter_visViewMode_binding*/ ctx[37](value);
     	}
 
     	let gallerycardfilter_props = {
-    		infoTipIndex: /*infoTipIndex*/ ctx[14],
+    		infoTipIndex: /*infoTipIndex*/ ctx[16],
     		sessionData: /*sessionData*/ ctx[4]
     	};
 
-    	if (/*visFilter*/ ctx[9] !== void 0) {
-    		gallerycardfilter_props.visFilter = /*visFilter*/ ctx[9];
+    	if (/*visFilter*/ ctx[11] !== void 0) {
+    		gallerycardfilter_props.visFilter = /*visFilter*/ ctx[11];
     	}
 
-    	if (/*gazeBtn*/ ctx[10] !== void 0) {
-    		gallerycardfilter_props.gazeBtn = /*gazeBtn*/ ctx[10];
+    	if (/*gazeBtn*/ ctx[12] !== void 0) {
+    		gallerycardfilter_props.gazeBtn = /*gazeBtn*/ ctx[12];
     	}
 
-    	if (/*sessionSliderMax*/ ctx[13] !== void 0) {
-    		gallerycardfilter_props.sessionSliderMax = /*sessionSliderMax*/ ctx[13];
+    	if (/*sessionSliderMax*/ ctx[15] !== void 0) {
+    		gallerycardfilter_props.sessionSliderMax = /*sessionSliderMax*/ ctx[15];
     	}
 
     	if (/*visCurrFrame*/ ctx[7] !== void 0) {
@@ -28409,27 +28314,43 @@ var app = (function () {
     	binding_callbacks.push(() => bind(gallerycardfilter, 'visViewMode', gallerycardfilter_visViewMode_binding));
 
     	function gallerycardimage_clipHolder_binding(value) {
-    		/*gallerycardimage_clipHolder_binding*/ ctx[36](value);
+    		/*gallerycardimage_clipHolder_binding*/ ctx[38](value);
     	}
 
     	function gallerycardimage_sessionIndex_binding(value) {
-    		/*gallerycardimage_sessionIndex_binding*/ ctx[37](value);
+    		/*gallerycardimage_sessionIndex_binding*/ ctx[39](value);
+    	}
+
+    	function gallerycardimage_imgHolder_binding(value) {
+    		/*gallerycardimage_imgHolder_binding*/ ctx[40](value);
+    	}
+
+    	function gallerycardimage_svgHolder_binding(value) {
+    		/*gallerycardimage_svgHolder_binding*/ ctx[41](value);
     	}
 
     	let gallerycardimage_props = {
-    		personLength: /*cardSessionsArr*/ ctx[21].length,
+    		personLength: /*cardSessionsArr*/ ctx[23].length,
     		data: /*data*/ ctx[0],
     		visViewMode: /*visViewMode*/ ctx[5],
-    		clips: /*clips*/ ctx[15],
-    		imgFrame: /*imgFrame*/ ctx[16]
+    		clips: /*clips*/ ctx[17],
+    		imgFrame: /*imgFrame*/ ctx[18]
     	};
 
-    	if (/*clipHolder*/ ctx[12] !== void 0) {
-    		gallerycardimage_props.clipHolder = /*clipHolder*/ ctx[12];
+    	if (/*clipHolder*/ ctx[14] !== void 0) {
+    		gallerycardimage_props.clipHolder = /*clipHolder*/ ctx[14];
     	}
 
     	if (/*sessionIndex*/ ctx[2] !== void 0) {
     		gallerycardimage_props.sessionIndex = /*sessionIndex*/ ctx[2];
+    	}
+
+    	if (/*imgHolder*/ ctx[8] !== void 0) {
+    		gallerycardimage_props.imgHolder = /*imgHolder*/ ctx[8];
+    	}
+
+    	if (/*svgHolder*/ ctx[9] !== void 0) {
+    		gallerycardimage_props.svgHolder = /*svgHolder*/ ctx[9];
     	}
 
     	gallerycardimage = new GalleryCardImage({
@@ -28439,7 +28360,9 @@ var app = (function () {
 
     	binding_callbacks.push(() => bind(gallerycardimage, 'clipHolder', gallerycardimage_clipHolder_binding));
     	binding_callbacks.push(() => bind(gallerycardimage, 'sessionIndex', gallerycardimage_sessionIndex_binding));
-    	let if_block5 = /*$screenWidth*/ ctx[19] > 800 && create_if_block_1$5(ctx);
+    	binding_callbacks.push(() => bind(gallerycardimage, 'imgHolder', gallerycardimage_imgHolder_binding));
+    	binding_callbacks.push(() => bind(gallerycardimage, 'svgHolder', gallerycardimage_svgHolder_binding));
+    	let if_block5 = /*$screenWidth*/ ctx[21] > 800 && create_if_block_1$5(ctx);
 
     	const block = {
     		c: function create() {
@@ -28475,34 +28398,34 @@ var app = (function () {
     			t12 = space();
     			if (if_block5) if_block5.c();
     			attr_dev(i, "class", "svelte-renilx");
-    			add_location(i, file$d, 166, 29, 4427);
-    			add_location(span0, file$d, 165, 12, 4390);
+    			add_location(i, file$d, 165, 29, 4445);
+    			add_location(span0, file$d, 164, 12, 4408);
     			attr_dev(span1, "class", "material-icons-round svelte-renilx");
     			set_style(span1, "font-size", "12px");
     			set_style(span1, "margin-left", "6px");
-    			add_location(span1, file$d, 168, 12, 4481);
+    			add_location(span1, file$d, 167, 12, 4499);
     			attr_dev(a, "class", "clickable svelte-renilx");
     			set_style(a, "display", "flex");
     			set_style(a, "align-items", "center");
     			attr_dev(a, "href", a_href_value = /*data*/ ctx[0].origLink);
     			attr_dev(a, "target", "_blank");
-    			add_location(a, file$d, 159, 10, 4210);
+    			add_location(a, file$d, 158, 10, 4228);
     			set_style(h2, "display", "flex");
     			set_style(h2, "align-items", "center");
     			attr_dev(h2, "class", "svelte-renilx");
-    			add_location(h2, file$d, 153, 8, 3974);
+    			add_location(h2, file$d, 152, 8, 3992);
     			attr_dev(div0, "class", "card-header svelte-renilx");
-    			add_location(div0, file$d, 152, 6, 3939);
+    			add_location(div0, file$d, 151, 6, 3957);
     			attr_dev(div1, "class", "card-filters svelte-renilx");
-    			add_location(div1, file$d, 191, 6, 5063);
+    			add_location(div1, file$d, 190, 6, 5081);
     			attr_dev(div2, "class", "card-top svelte-renilx");
-    			add_location(div2, file$d, 151, 4, 3909);
+    			add_location(div2, file$d, 150, 4, 3927);
     			attr_dev(div3, "class", "center svelte-renilx");
-    			add_location(div3, file$d, 216, 4, 5680);
+    			add_location(div3, file$d, 215, 4, 5698);
     			attr_dev(div4, "class", "card-outer svelte-renilx");
     			attr_dev(div4, "id", div4_id_value = /*data*/ ctx[0].key);
-    			toggle_class(div4, "active", /*data*/ ctx[0].key == /*$cardInView*/ ctx[18]);
-    			add_location(div4, file$d, 142, 2, 3679);
+    			toggle_class(div4, "active", /*data*/ ctx[0].key == /*$cardInView*/ ctx[20]);
+    			add_location(div4, file$d, 141, 2, 3697);
     		},
     		m: function mount(target, anchor) {
     			if (if_block0) if_block0.m(target, anchor);
@@ -28535,14 +28458,14 @@ var app = (function () {
     			mount_component(gallerycardimage, div3, null);
     			append_dev(div3, t12);
     			if (if_block5) if_block5.m(div3, null);
-    			/*div3_binding*/ ctx[41](div3);
-    			/*div4_binding*/ ctx[42](div4);
+    			/*div3_binding*/ ctx[45](div3);
+    			/*div4_binding*/ ctx[46](div4);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
-    			if (/*$tooltipShow*/ ctx[17]) {
+    			if (/*$tooltipShow*/ ctx[19]) {
     				if (if_block0) {
-    					if (dirty[0] & /*$tooltipShow*/ 131072) {
+    					if (dirty[0] & /*$tooltipShow*/ 524288) {
     						transition_in(if_block0, 1);
     					}
     				} else {
@@ -28561,11 +28484,11 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (/*infoTipIndex*/ ctx[14] >= 0) {
+    			if (/*infoTipIndex*/ ctx[16] >= 0) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[0] & /*infoTipIndex*/ 16384) {
+    					if (dirty[0] & /*infoTipIndex*/ 65536) {
     						transition_in(if_block1, 1);
     					}
     				} else {
@@ -28584,7 +28507,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (/*$screenWidth*/ ctx[19] >= 900) {
+    			if (/*$screenWidth*/ ctx[21] >= 900) {
     				if (if_block2) ; else {
     					if_block2 = create_if_block_4$1(ctx);
     					if_block2.c();
@@ -28602,7 +28525,7 @@ var app = (function () {
     				attr_dev(a, "href", a_href_value);
     			}
 
-    			if (/*$screenWidth*/ ctx[19] >= 800) {
+    			if (/*$screenWidth*/ ctx[21] >= 800) {
     				if (if_block3) {
     					if_block3.p(ctx, dirty);
     				} else {
@@ -28615,11 +28538,11 @@ var app = (function () {
     				if_block3 = null;
     			}
 
-    			if (/*$screenWidth*/ ctx[19] <= 800) {
+    			if (/*$screenWidth*/ ctx[21] <= 800) {
     				if (if_block4) {
     					if_block4.p(ctx, dirty);
 
-    					if (dirty[0] & /*$screenWidth*/ 524288) {
+    					if (dirty[0] & /*$screenWidth*/ 2097152) {
     						transition_in(if_block4, 1);
     					}
     				} else {
@@ -28639,24 +28562,24 @@ var app = (function () {
     			}
 
     			const gallerycardfilter_changes = {};
-    			if (dirty[0] & /*infoTipIndex*/ 16384) gallerycardfilter_changes.infoTipIndex = /*infoTipIndex*/ ctx[14];
+    			if (dirty[0] & /*infoTipIndex*/ 65536) gallerycardfilter_changes.infoTipIndex = /*infoTipIndex*/ ctx[16];
     			if (dirty[0] & /*sessionData*/ 16) gallerycardfilter_changes.sessionData = /*sessionData*/ ctx[4];
 
-    			if (!updating_visFilter && dirty[0] & /*visFilter*/ 512) {
+    			if (!updating_visFilter && dirty[0] & /*visFilter*/ 2048) {
     				updating_visFilter = true;
-    				gallerycardfilter_changes.visFilter = /*visFilter*/ ctx[9];
+    				gallerycardfilter_changes.visFilter = /*visFilter*/ ctx[11];
     				add_flush_callback(() => updating_visFilter = false);
     			}
 
-    			if (!updating_gazeBtn && dirty[0] & /*gazeBtn*/ 1024) {
+    			if (!updating_gazeBtn && dirty[0] & /*gazeBtn*/ 4096) {
     				updating_gazeBtn = true;
-    				gallerycardfilter_changes.gazeBtn = /*gazeBtn*/ ctx[10];
+    				gallerycardfilter_changes.gazeBtn = /*gazeBtn*/ ctx[12];
     				add_flush_callback(() => updating_gazeBtn = false);
     			}
 
-    			if (!updating_sessionSliderMax && dirty[0] & /*sessionSliderMax*/ 8192) {
+    			if (!updating_sessionSliderMax && dirty[0] & /*sessionSliderMax*/ 32768) {
     				updating_sessionSliderMax = true;
-    				gallerycardfilter_changes.sessionSliderMax = /*sessionSliderMax*/ ctx[13];
+    				gallerycardfilter_changes.sessionSliderMax = /*sessionSliderMax*/ ctx[15];
     				add_flush_callback(() => updating_sessionSliderMax = false);
     			}
 
@@ -28682,12 +28605,12 @@ var app = (function () {
     			const gallerycardimage_changes = {};
     			if (dirty[0] & /*data*/ 1) gallerycardimage_changes.data = /*data*/ ctx[0];
     			if (dirty[0] & /*visViewMode*/ 32) gallerycardimage_changes.visViewMode = /*visViewMode*/ ctx[5];
-    			if (dirty[0] & /*clips*/ 32768) gallerycardimage_changes.clips = /*clips*/ ctx[15];
-    			if (dirty[0] & /*imgFrame*/ 65536) gallerycardimage_changes.imgFrame = /*imgFrame*/ ctx[16];
+    			if (dirty[0] & /*clips*/ 131072) gallerycardimage_changes.clips = /*clips*/ ctx[17];
+    			if (dirty[0] & /*imgFrame*/ 262144) gallerycardimage_changes.imgFrame = /*imgFrame*/ ctx[18];
 
-    			if (!updating_clipHolder && dirty[0] & /*clipHolder*/ 4096) {
+    			if (!updating_clipHolder && dirty[0] & /*clipHolder*/ 16384) {
     				updating_clipHolder = true;
-    				gallerycardimage_changes.clipHolder = /*clipHolder*/ ctx[12];
+    				gallerycardimage_changes.clipHolder = /*clipHolder*/ ctx[14];
     				add_flush_callback(() => updating_clipHolder = false);
     			}
 
@@ -28697,13 +28620,25 @@ var app = (function () {
     				add_flush_callback(() => updating_sessionIndex = false);
     			}
 
+    			if (!updating_imgHolder && dirty[0] & /*imgHolder*/ 256) {
+    				updating_imgHolder = true;
+    				gallerycardimage_changes.imgHolder = /*imgHolder*/ ctx[8];
+    				add_flush_callback(() => updating_imgHolder = false);
+    			}
+
+    			if (!updating_svgHolder && dirty[0] & /*svgHolder*/ 512) {
+    				updating_svgHolder = true;
+    				gallerycardimage_changes.svgHolder = /*svgHolder*/ ctx[9];
+    				add_flush_callback(() => updating_svgHolder = false);
+    			}
+
     			gallerycardimage.$set(gallerycardimage_changes);
 
-    			if (/*$screenWidth*/ ctx[19] > 800) {
+    			if (/*$screenWidth*/ ctx[21] > 800) {
     				if (if_block5) {
     					if_block5.p(ctx, dirty);
 
-    					if (dirty[0] & /*$screenWidth*/ 524288) {
+    					if (dirty[0] & /*$screenWidth*/ 2097152) {
     						transition_in(if_block5, 1);
     					}
     				} else {
@@ -28726,8 +28661,8 @@ var app = (function () {
     				attr_dev(div4, "id", div4_id_value);
     			}
 
-    			if (dirty[0] & /*data, $cardInView*/ 262145) {
-    				toggle_class(div4, "active", /*data*/ ctx[0].key == /*$cardInView*/ ctx[18]);
+    			if (dirty[0] & /*data, $cardInView*/ 1048577) {
+    				toggle_class(div4, "active", /*data*/ ctx[0].key == /*$cardInView*/ ctx[20]);
     			}
     		},
     		i: function intro(local) {
@@ -28760,8 +28695,8 @@ var app = (function () {
     			destroy_component(gallerycardfilter);
     			destroy_component(gallerycardimage);
     			if (if_block5) if_block5.d();
-    			/*div3_binding*/ ctx[41](null);
-    			/*div4_binding*/ ctx[42](null);
+    			/*div3_binding*/ ctx[45](null);
+    			/*div4_binding*/ ctx[46](null);
     		}
     	};
 
@@ -28769,14 +28704,14 @@ var app = (function () {
     		block,
     		id: create_if_block$6.name,
     		type: "if",
-    		source: "(136:0) {#if mount}",
+    		source: "(135:0) {#if mount}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (137:2) {#if $tooltipShow}
+    // (136:2) {#if $tooltipShow}
     function create_if_block_6$1(ctx) {
     	let div;
     	let tooltip;
@@ -28788,7 +28723,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(tooltip.$$.fragment);
-    			add_location(div, file$d, 137, 4, 3592);
+    			add_location(div, file$d, 136, 4, 3610);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -28823,29 +28758,29 @@ var app = (function () {
     		block,
     		id: create_if_block_6$1.name,
     		type: "if",
-    		source: "(137:2) {#if $tooltipShow}",
+    		source: "(136:2) {#if $tooltipShow}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (149:4) {#if infoTipIndex >= 0}
+    // (148:4) {#if infoTipIndex >= 0}
     function create_if_block_5$1(ctx) {
     	let gallerycardtip;
     	let updating_infoTipIndex;
     	let current;
 
     	function gallerycardtip_infoTipIndex_binding(value) {
-    		/*gallerycardtip_infoTipIndex_binding*/ ctx[25](value);
+    		/*gallerycardtip_infoTipIndex_binding*/ ctx[27](value);
     	}
 
     	let gallerycardtip_props = {
-    		helperTextPositions: /*helperTextPositions*/ ctx[22]
+    		helperTextPositions: /*helperTextPositions*/ ctx[24]
     	};
 
-    	if (/*infoTipIndex*/ ctx[14] !== void 0) {
-    		gallerycardtip_props.infoTipIndex = /*infoTipIndex*/ ctx[14];
+    	if (/*infoTipIndex*/ ctx[16] !== void 0) {
+    		gallerycardtip_props.infoTipIndex = /*infoTipIndex*/ ctx[16];
     	}
 
     	gallerycardtip = new GalleryCardTip({
@@ -28866,9 +28801,9 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const gallerycardtip_changes = {};
 
-    			if (!updating_infoTipIndex && dirty[0] & /*infoTipIndex*/ 16384) {
+    			if (!updating_infoTipIndex && dirty[0] & /*infoTipIndex*/ 65536) {
     				updating_infoTipIndex = true;
-    				gallerycardtip_changes.infoTipIndex = /*infoTipIndex*/ ctx[14];
+    				gallerycardtip_changes.infoTipIndex = /*infoTipIndex*/ ctx[16];
     				add_flush_callback(() => updating_infoTipIndex = false);
     			}
 
@@ -28892,14 +28827,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5$1.name,
     		type: "if",
-    		source: "(149:4) {#if infoTipIndex >= 0}",
+    		source: "(148:4) {#if infoTipIndex >= 0}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (155:10) {#if $screenWidth >= 900}
+    // (154:10) {#if $screenWidth >= 900}
     function create_if_block_4$1(ctx) {
     	let div;
 
@@ -28909,7 +28844,7 @@ var app = (function () {
     			div.textContent = "Gaze Collection";
     			set_style(div, "color", "rgb(126 123 123)");
     			set_style(div, "margin-right", "15px");
-    			add_location(div, file$d, 155, 12, 4073);
+    			add_location(div, file$d, 154, 12, 4091);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -28923,14 +28858,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4$1.name,
     		type: "if",
-    		source: "(155:10) {#if $screenWidth >= 900}",
+    		source: "(154:10) {#if $screenWidth >= 900}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (177:8) {#if $screenWidth >= 800}
+    // (176:8) {#if $screenWidth >= 800}
     function create_if_block_3$4(ctx) {
     	let div;
     	let span;
@@ -28944,16 +28879,16 @@ var app = (function () {
     			span.textContent = "info";
     			attr_dev(span, "class", "material-icons-round md-14 svelte-renilx");
     			set_style(span, "color", "#bfb9b9");
-    			add_location(span, file$d, 184, 12, 4901);
+    			add_location(span, file$d, 183, 12, 4919);
     			attr_dev(div, "class", "clickable svelte-renilx");
-    			add_location(div, file$d, 177, 10, 4728);
+    			add_location(div, file$d, 176, 10, 4746);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, span);
 
     			if (!mounted) {
-    				dispose = listen_dev(div, "click", /*click_handler*/ ctx[26], false, false, false);
+    				dispose = listen_dev(div, "click", /*click_handler*/ ctx[28], false, false, false);
     				mounted = true;
     			}
     		},
@@ -28969,14 +28904,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3$4.name,
     		type: "if",
-    		source: "(177:8) {#if $screenWidth >= 800}",
+    		source: "(176:8) {#if $screenWidth >= 800}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (193:8) {#if $screenWidth <= 800}
+    // (192:8) {#if $screenWidth <= 800}
     function create_if_block_2$5(ctx) {
     	let gallerycardperson;
     	let updating_imgNav;
@@ -28985,26 +28920,26 @@ var app = (function () {
     	let current;
 
     	function gallerycardperson_imgNav_binding(value) {
-    		/*gallerycardperson_imgNav_binding*/ ctx[27](value);
+    		/*gallerycardperson_imgNav_binding*/ ctx[29](value);
     	}
 
     	function gallerycardperson_sessionKey_binding(value) {
-    		/*gallerycardperson_sessionKey_binding*/ ctx[28](value);
+    		/*gallerycardperson_sessionKey_binding*/ ctx[30](value);
     	}
 
     	function gallerycardperson_sessionIndex_binding(value) {
-    		/*gallerycardperson_sessionIndex_binding*/ ctx[29](value);
+    		/*gallerycardperson_sessionIndex_binding*/ ctx[31](value);
     	}
 
     	let gallerycardperson_props = {
-    		cardSessionsArr: /*cardSessionsArr*/ ctx[21],
-    		cardSessionsObj: /*cardSessionsObj*/ ctx[20],
+    		cardSessionsArr: /*cardSessionsArr*/ ctx[23],
+    		cardSessionsObj: /*cardSessionsObj*/ ctx[22],
     		visViewMode: /*visViewMode*/ ctx[5],
-    		infoTipIndex: /*infoTipIndex*/ ctx[14]
+    		infoTipIndex: /*infoTipIndex*/ ctx[16]
     	};
 
-    	if (/*imgNav*/ ctx[8] !== void 0) {
-    		gallerycardperson_props.imgNav = /*imgNav*/ ctx[8];
+    	if (/*imgNav*/ ctx[10] !== void 0) {
+    		gallerycardperson_props.imgNav = /*imgNav*/ ctx[10];
     	}
 
     	if (/*sessionKey*/ ctx[3] !== void 0) {
@@ -29035,11 +28970,11 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const gallerycardperson_changes = {};
     			if (dirty[0] & /*visViewMode*/ 32) gallerycardperson_changes.visViewMode = /*visViewMode*/ ctx[5];
-    			if (dirty[0] & /*infoTipIndex*/ 16384) gallerycardperson_changes.infoTipIndex = /*infoTipIndex*/ ctx[14];
+    			if (dirty[0] & /*infoTipIndex*/ 65536) gallerycardperson_changes.infoTipIndex = /*infoTipIndex*/ ctx[16];
 
-    			if (!updating_imgNav && dirty[0] & /*imgNav*/ 256) {
+    			if (!updating_imgNav && dirty[0] & /*imgNav*/ 1024) {
     				updating_imgNav = true;
-    				gallerycardperson_changes.imgNav = /*imgNav*/ ctx[8];
+    				gallerycardperson_changes.imgNav = /*imgNav*/ ctx[10];
     				add_flush_callback(() => updating_imgNav = false);
     			}
 
@@ -29075,14 +29010,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2$5.name,
     		type: "if",
-    		source: "(193:8) {#if $screenWidth <= 800}",
+    		source: "(192:8) {#if $screenWidth <= 800}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (227:6) {#if $screenWidth > 800}
+    // (228:6) {#if $screenWidth > 800}
     function create_if_block_1$5(ctx) {
     	let gallerycardperson;
     	let updating_imgNav;
@@ -29091,26 +29026,26 @@ var app = (function () {
     	let current;
 
     	function gallerycardperson_imgNav_binding_1(value) {
-    		/*gallerycardperson_imgNav_binding_1*/ ctx[38](value);
+    		/*gallerycardperson_imgNav_binding_1*/ ctx[42](value);
     	}
 
     	function gallerycardperson_sessionKey_binding_1(value) {
-    		/*gallerycardperson_sessionKey_binding_1*/ ctx[39](value);
+    		/*gallerycardperson_sessionKey_binding_1*/ ctx[43](value);
     	}
 
     	function gallerycardperson_sessionIndex_binding_1(value) {
-    		/*gallerycardperson_sessionIndex_binding_1*/ ctx[40](value);
+    		/*gallerycardperson_sessionIndex_binding_1*/ ctx[44](value);
     	}
 
     	let gallerycardperson_props = {
-    		cardSessionsArr: /*cardSessionsArr*/ ctx[21],
-    		cardSessionsObj: /*cardSessionsObj*/ ctx[20],
+    		cardSessionsArr: /*cardSessionsArr*/ ctx[23],
+    		cardSessionsObj: /*cardSessionsObj*/ ctx[22],
     		visViewMode: /*visViewMode*/ ctx[5],
-    		infoTipIndex: /*infoTipIndex*/ ctx[14]
+    		infoTipIndex: /*infoTipIndex*/ ctx[16]
     	};
 
-    	if (/*imgNav*/ ctx[8] !== void 0) {
-    		gallerycardperson_props.imgNav = /*imgNav*/ ctx[8];
+    	if (/*imgNav*/ ctx[10] !== void 0) {
+    		gallerycardperson_props.imgNav = /*imgNav*/ ctx[10];
     	}
 
     	if (/*sessionKey*/ ctx[3] !== void 0) {
@@ -29141,11 +29076,11 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const gallerycardperson_changes = {};
     			if (dirty[0] & /*visViewMode*/ 32) gallerycardperson_changes.visViewMode = /*visViewMode*/ ctx[5];
-    			if (dirty[0] & /*infoTipIndex*/ 16384) gallerycardperson_changes.infoTipIndex = /*infoTipIndex*/ ctx[14];
+    			if (dirty[0] & /*infoTipIndex*/ 65536) gallerycardperson_changes.infoTipIndex = /*infoTipIndex*/ ctx[16];
 
-    			if (!updating_imgNav && dirty[0] & /*imgNav*/ 256) {
+    			if (!updating_imgNav && dirty[0] & /*imgNav*/ 1024) {
     				updating_imgNav = true;
-    				gallerycardperson_changes.imgNav = /*imgNav*/ ctx[8];
+    				gallerycardperson_changes.imgNav = /*imgNav*/ ctx[10];
     				add_flush_callback(() => updating_imgNav = false);
     			}
 
@@ -29181,7 +29116,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1$5.name,
     		type: "if",
-    		source: "(227:6) {#if $screenWidth > 800}",
+    		source: "(228:6) {#if $screenWidth > 800}",
     		ctx
     	});
 
@@ -29261,11 +29196,11 @@ var app = (function () {
     	let $cardInView;
     	let $screenWidth;
     	validate_store(tooltipShow, 'tooltipShow');
-    	component_subscribe($$self, tooltipShow, $$value => $$invalidate(17, $tooltipShow = $$value));
+    	component_subscribe($$self, tooltipShow, $$value => $$invalidate(19, $tooltipShow = $$value));
     	validate_store(cardInView, 'cardInView');
-    	component_subscribe($$self, cardInView, $$value => $$invalidate(18, $cardInView = $$value));
+    	component_subscribe($$self, cardInView, $$value => $$invalidate(20, $cardInView = $$value));
     	validate_store(screenWidth, 'screenWidth');
-    	component_subscribe($$self, screenWidth, $$value => $$invalidate(19, $screenWidth = $$value));
+    	component_subscribe($$self, screenWidth, $$value => $$invalidate(21, $screenWidth = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('GalleryCard', slots, []);
     	let { data } = $$props;
@@ -29288,7 +29223,11 @@ var app = (function () {
     	let visCurrFrame = 0;
     	let infoTipIndex = -1;
     	let clips = [];
+
+    	//
     	let imgFrame;
+
+    	let imgHolder, svgHolder;
 
     	onMount(async () => {
     		await getSessionData(sessionKey);
@@ -29304,9 +29243,9 @@ var app = (function () {
     		$$invalidate(4, sessionData = await dbGet('sessionData/' + key));
 
     		if (sessionData) {
-    			$$invalidate(13, sessionSliderMax = sessionData.length);
-    			$$invalidate(23, sessionLoaded = true);
-    			$$invalidate(15, clips = await createClips(data.url, sessionData));
+    			$$invalidate(15, sessionSliderMax = sessionData.length);
+    			$$invalidate(25, sessionLoaded = true);
+    			$$invalidate(17, clips = await createClips(data.url, sessionData));
     			$$invalidate(7, visCurrFrame = 0);
     		}
 
@@ -29324,22 +29263,22 @@ var app = (function () {
 
     	function gallerycardtip_infoTipIndex_binding(value) {
     		infoTipIndex = value;
-    		$$invalidate(14, infoTipIndex);
+    		$$invalidate(16, infoTipIndex);
     	}
 
     	const click_handler = () => {
     		jump(data.key);
-    		$$invalidate(14, infoTipIndex = 0);
+    		$$invalidate(16, infoTipIndex = 0);
     	};
 
     	function gallerycardperson_imgNav_binding(value) {
     		imgNav = value;
-    		$$invalidate(8, imgNav);
+    		$$invalidate(10, imgNav);
     	}
 
     	function gallerycardperson_sessionKey_binding(value) {
     		sessionKey = value;
-    		((($$invalidate(3, sessionKey), $$invalidate(1, mount)), $$invalidate(21, cardSessionsArr)), $$invalidate(2, sessionIndex));
+    		((($$invalidate(3, sessionKey), $$invalidate(1, mount)), $$invalidate(23, cardSessionsArr)), $$invalidate(2, sessionIndex));
     	}
 
     	function gallerycardperson_sessionIndex_binding(value) {
@@ -29349,17 +29288,17 @@ var app = (function () {
 
     	function gallerycardfilter_visFilter_binding(value) {
     		visFilter = value;
-    		$$invalidate(9, visFilter);
+    		$$invalidate(11, visFilter);
     	}
 
     	function gallerycardfilter_gazeBtn_binding(value) {
     		gazeBtn = value;
-    		$$invalidate(10, gazeBtn);
+    		$$invalidate(12, gazeBtn);
     	}
 
     	function gallerycardfilter_sessionSliderMax_binding(value) {
     		sessionSliderMax = value;
-    		$$invalidate(13, sessionSliderMax);
+    		$$invalidate(15, sessionSliderMax);
     	}
 
     	function gallerycardfilter_visCurrFrame_binding(value) {
@@ -29379,7 +29318,7 @@ var app = (function () {
 
     	function gallerycardimage_clipHolder_binding(value) {
     		clipHolder = value;
-    		$$invalidate(12, clipHolder);
+    		$$invalidate(14, clipHolder);
     	}
 
     	function gallerycardimage_sessionIndex_binding(value) {
@@ -29387,14 +29326,24 @@ var app = (function () {
     		$$invalidate(2, sessionIndex);
     	}
 
+    	function gallerycardimage_imgHolder_binding(value) {
+    		imgHolder = value;
+    		$$invalidate(8, imgHolder);
+    	}
+
+    	function gallerycardimage_svgHolder_binding(value) {
+    		svgHolder = value;
+    		$$invalidate(9, svgHolder);
+    	}
+
     	function gallerycardperson_imgNav_binding_1(value) {
     		imgNav = value;
-    		$$invalidate(8, imgNav);
+    		$$invalidate(10, imgNav);
     	}
 
     	function gallerycardperson_sessionKey_binding_1(value) {
     		sessionKey = value;
-    		((($$invalidate(3, sessionKey), $$invalidate(1, mount)), $$invalidate(21, cardSessionsArr)), $$invalidate(2, sessionIndex));
+    		((($$invalidate(3, sessionKey), $$invalidate(1, mount)), $$invalidate(23, cardSessionsArr)), $$invalidate(2, sessionIndex));
     	}
 
     	function gallerycardperson_sessionIndex_binding_1(value) {
@@ -29405,14 +29354,14 @@ var app = (function () {
     	function div3_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			imgFrame = $$value;
-    			$$invalidate(16, imgFrame);
+    			$$invalidate(18, imgFrame);
     		});
     	}
 
     	function div4_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			card = $$value;
-    			$$invalidate(11, card);
+    			$$invalidate(13, card);
     		});
     	}
 
@@ -29457,6 +29406,8 @@ var app = (function () {
     		infoTipIndex,
     		clips,
     		imgFrame,
+    		imgHolder,
+    		svgHolder,
     		helperTextPositions,
     		imgNav,
     		visFilter,
@@ -29473,26 +29424,28 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ('data' in $$props) $$invalidate(0, data = $$props.data);
     		if ('mount' in $$props) $$invalidate(1, mount = $$props.mount);
-    		if ('sessionLoaded' in $$props) $$invalidate(23, sessionLoaded = $$props.sessionLoaded);
-    		if ('cardSessionsObj' in $$props) $$invalidate(20, cardSessionsObj = $$props.cardSessionsObj);
-    		if ('cardSessionsArr' in $$props) $$invalidate(21, cardSessionsArr = $$props.cardSessionsArr);
+    		if ('sessionLoaded' in $$props) $$invalidate(25, sessionLoaded = $$props.sessionLoaded);
+    		if ('cardSessionsObj' in $$props) $$invalidate(22, cardSessionsObj = $$props.cardSessionsObj);
+    		if ('cardSessionsArr' in $$props) $$invalidate(23, cardSessionsArr = $$props.cardSessionsArr);
     		if ('sessionIndex' in $$props) $$invalidate(2, sessionIndex = $$props.sessionIndex);
     		if ('sessionKey' in $$props) $$invalidate(3, sessionKey = $$props.sessionKey);
     		if ('sessionData' in $$props) $$invalidate(4, sessionData = $$props.sessionData);
-    		if ('sessionSliderMax' in $$props) $$invalidate(13, sessionSliderMax = $$props.sessionSliderMax);
+    		if ('sessionSliderMax' in $$props) $$invalidate(15, sessionSliderMax = $$props.sessionSliderMax);
     		if ('visViewMode' in $$props) $$invalidate(5, visViewMode = $$props.visViewMode);
     		if ('visPlayStatus' in $$props) $$invalidate(6, visPlayStatus = $$props.visPlayStatus);
     		if ('visCurrFrame' in $$props) $$invalidate(7, visCurrFrame = $$props.visCurrFrame);
-    		if ('infoTipIndex' in $$props) $$invalidate(14, infoTipIndex = $$props.infoTipIndex);
-    		if ('clips' in $$props) $$invalidate(15, clips = $$props.clips);
-    		if ('imgFrame' in $$props) $$invalidate(16, imgFrame = $$props.imgFrame);
-    		if ('helperTextPositions' in $$props) $$invalidate(22, helperTextPositions = $$props.helperTextPositions);
-    		if ('imgNav' in $$props) $$invalidate(8, imgNav = $$props.imgNav);
-    		if ('visFilter' in $$props) $$invalidate(9, visFilter = $$props.visFilter);
-    		if ('gazeBtn' in $$props) $$invalidate(10, gazeBtn = $$props.gazeBtn);
-    		if ('card' in $$props) $$invalidate(11, card = $$props.card);
-    		if ('clipHolder' in $$props) $$invalidate(12, clipHolder = $$props.clipHolder);
-    		if ('domClips' in $$props) $$invalidate(24, domClips = $$props.domClips);
+    		if ('infoTipIndex' in $$props) $$invalidate(16, infoTipIndex = $$props.infoTipIndex);
+    		if ('clips' in $$props) $$invalidate(17, clips = $$props.clips);
+    		if ('imgFrame' in $$props) $$invalidate(18, imgFrame = $$props.imgFrame);
+    		if ('imgHolder' in $$props) $$invalidate(8, imgHolder = $$props.imgHolder);
+    		if ('svgHolder' in $$props) $$invalidate(9, svgHolder = $$props.svgHolder);
+    		if ('helperTextPositions' in $$props) $$invalidate(24, helperTextPositions = $$props.helperTextPositions);
+    		if ('imgNav' in $$props) $$invalidate(10, imgNav = $$props.imgNav);
+    		if ('visFilter' in $$props) $$invalidate(11, visFilter = $$props.visFilter);
+    		if ('gazeBtn' in $$props) $$invalidate(12, gazeBtn = $$props.gazeBtn);
+    		if ('card' in $$props) $$invalidate(13, card = $$props.card);
+    		if ('clipHolder' in $$props) $$invalidate(14, clipHolder = $$props.clipHolder);
+    		if ('domClips' in $$props) $$invalidate(26, domClips = $$props.domClips);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -29510,17 +29463,18 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*mount, visViewMode, sessionData, data*/ 51) {
+    		if ($$self.$$.dirty[0] & /*mount, visViewMode, imgHolder, svgHolder, sessionData, data*/ 819) {
     			//VIEW MODE REACTIVITY
     			{
+    				//bind imgHolder and SVG
     				///running too many times
-    				if (mount && visViewMode == 'aggregate') {
-    					contourMapBlur(sessionData, `#${data.key} .img-holder`, `#${data.key}-contour`, data.url);
+    				if (mount && visViewMode == 'aggregate' && imgHolder && svgHolder) {
+    					contourMapBlur(sessionData, imgHolder, svgHolder, data.url);
     				}
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*imgNav, visFilter, gazeBtn, card*/ 3840) {
+    		if ($$self.$$.dirty[0] & /*imgNav, visFilter, gazeBtn, card*/ 15360) {
     			{
     				if (imgNav && visFilter && gazeBtn) {
     					let textObjects = [imgNav, visFilter, gazeBtn];
@@ -29534,10 +29488,10 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*clipHolder*/ 4096) {
+    		if ($$self.$$.dirty[0] & /*clipHolder*/ 16384) {
     			{
     				if (clipHolder) {
-    					$$invalidate(24, domClips = clipHolder.childNodes);
+    					$$invalidate(26, domClips = clipHolder.childNodes);
     				}
     			}
     		}
@@ -29560,7 +29514,7 @@ var app = (function () {
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*visCurrFrame, mount, sessionLoaded, sessionData, visViewMode, domClips*/ 25166002) {
+    		if ($$self.$$.dirty[0] & /*visCurrFrame, mount, sessionLoaded, sessionData, visViewMode, domClips*/ 100663474) {
     			{
 
     				if (mount && sessionLoaded) {
@@ -29581,6 +29535,8 @@ var app = (function () {
     		visViewMode,
     		visPlayStatus,
     		visCurrFrame,
+    		imgHolder,
+    		svgHolder,
     		imgNav,
     		visFilter,
     		gazeBtn,
@@ -29611,6 +29567,8 @@ var app = (function () {
     		gallerycardfilter_visViewMode_binding,
     		gallerycardimage_clipHolder_binding,
     		gallerycardimage_sessionIndex_binding,
+    		gallerycardimage_imgHolder_binding,
+    		gallerycardimage_svgHolder_binding,
     		gallerycardperson_imgNav_binding_1,
     		gallerycardperson_sessionKey_binding_1,
     		gallerycardperson_sessionIndex_binding_1,
