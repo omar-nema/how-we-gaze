@@ -26,7 +26,7 @@
 
   //CUSTOM WIDTH AND HEIGHT CALC
   let dimWidthToHt = data.width / data.height;
-  //cardwidth should be factoer
+  //cardwidth should be n
   let maxW = Math.min($screenWidth, 800),
     maxH = $screenHeight - 220;
   let width = 'auto',
@@ -147,9 +147,7 @@
   img.slice {
     filter: blur(10px);
   }
-  img {
-    opacity: 0;
-  }
+
   .info-hide {
     opacity: 0;
   }

@@ -22507,7 +22507,9 @@ var app = (function () {
         .domain([maxCoords, minCoords])
         .range([1, 1]);
 
-      select(containerSvg).selectAll('.clipPathGroup').remove();
+      // d3.select(containerSvg).selectAll('.clipPathGroup').remove();
+
+      const svgId = select(containerSvg).attr('id');
 
       let dataSel = select(containerSvg)
         .selectAll('.clipPathGroup')
@@ -22520,14 +22522,14 @@ var app = (function () {
           let clipPath = enter.append('g').attr('class', 'clipPathGroup');
           clipPath
             .append('clipPath')
-            .attr('id', (d, i) => 'path-' + i)
+            .attr('id', (d, i) => `path-${svgId}-${i}`)
             .append('path')
             .attr('stroke-linejoin', 'round')
             // .attr('fill', (d) => fillScale(d.value))
             .attr('d', index());
           clipPath
             .append('image')
-            .attr('clip-path', (d, i) => `url(#path-${i})`)
+            .attr('clip-path', (d, i) => `url(#path-${svgId}-${i})`)
             .attr('width', '100%')
             .attr('height', '100%')
             .attr('xlink:href', url)
@@ -22682,16 +22684,16 @@ var app = (function () {
     			div1 = element("div");
     			span1 = element("span");
     			span1.textContent = "arrow_right";
-    			attr_dev(span0, "class", "material-icons-round svelte-15ok7mf");
-    			add_location(span0, file$h, 62, 6, 1547);
-    			attr_dev(div0, "class", "personToggle prev clickable svelte-15ok7mf");
+    			attr_dev(span0, "class", "material-icons-round svelte-g24phw");
+    			add_location(span0, file$h, 62, 6, 1541);
+    			attr_dev(div0, "class", "personToggle prev clickable svelte-g24phw");
     			toggle_class(div0, "disabled", /*sessionIndex*/ ctx[1] == 0);
-    			add_location(div0, file$h, 55, 4, 1383);
-    			attr_dev(span1, "class", "material-icons-round svelte-15ok7mf");
-    			add_location(span1, file$h, 71, 6, 1798);
-    			attr_dev(div1, "class", "personToggle next clickable svelte-15ok7mf");
+    			add_location(div0, file$h, 55, 4, 1377);
+    			attr_dev(span1, "class", "material-icons-round svelte-g24phw");
+    			add_location(span1, file$h, 71, 6, 1792);
+    			attr_dev(div1, "class", "personToggle next clickable svelte-g24phw");
     			toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*personLength*/ ctx[7] - 1);
-    			add_location(div1, file$h, 64, 4, 1619);
+    			add_location(div1, file$h, 64, 4, 1613);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -22757,7 +22759,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			add_location(div, file$h, 90, 4, 2304);
+    			add_location(div, file$h, 90, 4, 2298);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -22819,12 +22821,12 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			img = element("img");
-    			attr_dev(img, "class", "clip svelte-15ok7mf");
+    			attr_dev(img, "class", "clip svelte-g24phw");
     			set_style(img, "clip-path", "circle(" + /*clip*/ ctx[24].r + "% at " + /*clip*/ ctx[24].ctrx + "% " + /*clip*/ ctx[24].ctry + "%)");
     			set_style(img, "filter", "blur(" + /*clip*/ ctx[24].blur + "px)");
     			set_style(img, "opacity", "$" + /*clip*/ ctx[24].opacity);
     			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) attr_dev(img, "src", img_src_value);
-    			add_location(img, file$h, 92, 8, 2371);
+    			add_location(img, file$h, 92, 8, 2365);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -22886,11 +22888,11 @@ var app = (function () {
     			if (if_block1) if_block1.c();
     			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "style", /*styleSubstring*/ ctx[11]);
-    			attr_dev(img, "class", "main svelte-15ok7mf");
+    			attr_dev(img, "class", "main svelte-g24phw");
     			toggle_class(img, "slice", /*visViewMode*/ ctx[5] == 'slice');
     			toggle_class(img, "agg", /*visViewMode*/ ctx[5] == 'aggregate');
-    			add_location(img, file$h, 74, 2, 1878);
-    			attr_dev(svg, "class", "contour svelte-15ok7mf");
+    			add_location(img, file$h, 74, 2, 1872);
+    			attr_dev(svg, "class", "contour svelte-g24phw");
     			attr_dev(svg, "id", svg_id_value = "" + (/*data*/ ctx[4].key + "-contour"));
     			set_style(svg, "width", "100%");
     			set_style(svg, "height", "100%");
@@ -22899,13 +22901,13 @@ var app = (function () {
     			set_style(svg, "left", "0");
     			set_style(svg, "z-index", "10");
     			toggle_class(svg, "active", /*visViewMode*/ ctx[5] == 'aggregate');
-    			add_location(svg, file$h, 81, 2, 2044);
-    			attr_dev(div, "class", "img-holder swipe-holder svelte-15ok7mf");
+    			add_location(svg, file$h, 81, 2, 2038);
+    			attr_dev(div, "class", "img-holder swipe-holder svelte-g24phw");
     			set_style(div, "width", /*width*/ ctx[9]);
     			set_style(div, "height", /*ht*/ ctx[10]);
     			set_style(div, "max-width", /*data*/ ctx[4].width + "px");
     			set_style(div, "max-height", /*data*/ ctx[4].height + "px");
-    			add_location(div, file$h, 49, 0, 1197);
+    			add_location(div, file$h, 49, 0, 1191);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23040,7 +23042,7 @@ var app = (function () {
     	//CUSTOM WIDTH AND HEIGHT CALC
     	let dimWidthToHt = data.width / data.height;
 
-    	//cardwidth should be factoer
+    	//cardwidth should be n
     	let maxW = Math.min($screenWidth, 800), maxH = $screenHeight - 220;
 
     	let width = 'auto', ht = 'auto', styleSubstring = '';

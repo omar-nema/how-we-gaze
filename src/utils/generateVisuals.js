@@ -49,7 +49,9 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
     .domain([maxCoords, minCoords])
     .range([1, 1]);
 
-  d3.select(containerSvg).selectAll('.clipPathGroup').remove();
+  // d3.select(containerSvg).selectAll('.clipPathGroup').remove();
+
+  const svgId = d3.select(containerSvg).attr('id');
 
   let dataSel = d3
     .select(containerSvg)
@@ -63,14 +65,14 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
       let clipPath = enter.append('g').attr('class', 'clipPathGroup');
       clipPath
         .append('clipPath')
-        .attr('id', (d, i) => 'path-' + i)
+        .attr('id', (d, i) => `path-${svgId}-${i}`)
         .append('path')
         .attr('stroke-linejoin', 'round')
         // .attr('fill', (d) => fillScale(d.value))
         .attr('d', d3.geoPath());
       clipPath
         .append('image')
-        .attr('clip-path', (d, i) => `url(#path-${i})`)
+        .attr('clip-path', (d, i) => `url(#path-${svgId}-${i})`)
         .attr('width', '100%')
         .attr('height', '100%')
         .attr('xlink:href', url)
