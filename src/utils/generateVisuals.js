@@ -21,7 +21,7 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
   let bandwidth, thresholds;
   if (get(screenWidth) <= 800) {
     //if we want mobile
-    bandwidth = 50;
+    bandwidth = 30;
     thresholds = 30;
   } else {
     bandwidth = 70;

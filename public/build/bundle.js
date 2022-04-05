@@ -22482,7 +22482,7 @@ var app = (function () {
       let bandwidth, thresholds;
       if (get_store_value(screenWidth) <= 800) {
         //if we want mobile
-        bandwidth = 50;
+        bandwidth = 30;
         thresholds = 30;
       } else {
         bandwidth = 70;
