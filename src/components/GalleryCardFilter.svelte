@@ -142,6 +142,8 @@
     margin: 0;
     width: 100%;
     text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
     text-transform: capitalize;
     text-overflow: ellipsis;
     overflow-wrap: break-word;

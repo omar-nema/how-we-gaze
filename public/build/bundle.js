@@ -26732,7 +26732,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			span.textContent = "Pause";
-    			attr_dev(span, "class", "play-toggle svelte-1g984qd");
+    			attr_dev(span, "class", "play-toggle svelte-oq52il");
     			add_location(span, file$f, 44, 8, 1306);
     		},
     		m: function mount(target, anchor) {
@@ -26769,7 +26769,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			span.textContent = "Animate";
-    			attr_dev(span, "class", "play-toggle svelte-1g984qd");
+    			attr_dev(span, "class", "play-toggle svelte-oq52il");
     			add_location(span, file$f, 42, 8, 1241);
     		},
     		m: function mount(target, anchor) {
@@ -26808,11 +26808,11 @@ var app = (function () {
     			span = element("span");
     			span.textContent = "Add Your Gaze";
     			add_location(span, file$f, 108, 8, 2916);
-    			attr_dev(div0, "class", "filter clickable add svelte-1g984qd");
+    			attr_dev(div0, "class", "filter clickable add svelte-oq52il");
     			add_location(div0, file$f, 100, 6, 2715);
-    			attr_dev(div1, "class", "filter-options svelte-1g984qd");
+    			attr_dev(div1, "class", "filter-options svelte-oq52il");
     			add_location(div1, file$f, 95, 4, 2562);
-    			attr_dev(div2, "class", "viewer-filter filter-group svelte-1g984qd");
+    			attr_dev(div2, "class", "viewer-filter filter-group svelte-oq52il");
     			toggle_class(div2, "info-highlight", /*infoTipIndex*/ ctx[7] == 2);
     			add_location(div2, file$f, 91, 2, 2460);
     		},
@@ -26909,25 +26909,25 @@ var app = (function () {
     			attr_dev(input, "min", "0");
     			attr_dev(input, "max", /*sessionSliderMax*/ ctx[5]);
     			attr_dev(input, "step", "1");
-    			attr_dev(input, "class", "svelte-1g984qd");
+    			attr_dev(input, "class", "svelte-oq52il");
     			add_location(input, file$f, 53, 8, 1507);
     			attr_dev(span0, "id", "slider-holder");
-    			attr_dev(span0, "class", "svelte-1g984qd");
+    			attr_dev(span0, "class", "svelte-oq52il");
     			add_location(span0, file$f, 52, 6, 1472);
-    			attr_dev(div0, "class", "filter time clickable svelte-1g984qd");
+    			attr_dev(div0, "class", "filter time clickable svelte-oq52il");
     			toggle_class(div0, "selected", /*visViewMode*/ ctx[4] == 'slice');
     			add_location(div0, file$f, 23, 4, 653);
     			add_location(span1, file$f, 76, 6, 2096);
-    			attr_dev(div1, "class", "filter clickable svelte-1g984qd");
+    			attr_dev(div1, "class", "filter clickable svelte-oq52il");
     			toggle_class(div1, "selected", /*visViewMode*/ ctx[4] == 'aggregate');
     			add_location(div1, file$f, 67, 4, 1819);
     			add_location(span2, file$f, 86, 6, 2379);
-    			attr_dev(div2, "class", "filter clickable svelte-1g984qd");
+    			attr_dev(div2, "class", "filter clickable svelte-oq52il");
     			toggle_class(div2, "selected", /*visViewMode*/ ctx[4] == 'original');
     			add_location(div2, file$f, 78, 4, 2136);
-    			attr_dev(div3, "class", "filter-options svelte-1g984qd");
+    			attr_dev(div3, "class", "filter-options svelte-oq52il");
     			add_location(div3, file$f, 22, 2, 619);
-    			attr_dev(div4, "class", "visual-filter filter-group svelte-1g984qd");
+    			attr_dev(div4, "class", "visual-filter filter-group svelte-oq52il");
     			toggle_class(div4, "info-highlight", /*infoTipIndex*/ ctx[7] == 1);
     			add_location(div4, file$f, 8, 0, 240);
     		},
