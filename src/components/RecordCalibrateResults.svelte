@@ -1,15 +1,12 @@
 <script>
   import { artworkMetadata } from '../stores/artworkMetadata';
+  import { pageState, selectedImage, jumpCard } from '../stores/pageState';
   import {
     gazerRecordingArt,
+    testMode,
     sessionID,
     loadingInd,
-    stateIndex,
-    pageState,
-    selectedImage,
-    jumpCard,
-    testMode,
-  } from '../stores/pageState';
+  } from '../stores/gazerState';
   import {
     dbGet,
     dbWrite,
@@ -67,9 +64,6 @@
     });
 
     hideGazerForLater();
-  }
-
-  $: {
   }
 
   if ($testMode == 0) {

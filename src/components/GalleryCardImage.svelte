@@ -117,7 +117,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 100000;
+    z-index: 11;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 100%;
     display: flex;

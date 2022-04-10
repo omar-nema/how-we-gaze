@@ -5,7 +5,7 @@
     gazerInitDone,
     calibrationPct,
     gazerInitVideoDone,
-  } from '../stores/pageState';
+  } from '../stores/gazerState';
 
   export let calibrated;
 

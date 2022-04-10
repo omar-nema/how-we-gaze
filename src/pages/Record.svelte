@@ -1,7 +1,6 @@
 <script>
+  import { pageState, selectedImage } from '../stores/pageState';
   import {
-    pageState,
-    selectedImage,
     gazerReady,
     gazerInitVideoDone,
     calibrationPct,
@@ -10,7 +9,9 @@
     loadingInd,
     sessionID,
     gazerInitDone,
-  } from '../stores/pageState';
+    testMode,
+  } from '../stores/gazerState';
+
   import { slide, fade } from 'svelte/transition';
   import Overview from '../components/RecordOverview.svelte';
   import CalibrateVid from '../components/RecordCalibrateVid.svelte';
@@ -18,6 +19,7 @@
   import CalibrateInstructions from '../components/RecordCalibrateInstructions.svelte';
   import CalibrateResults from '../components/RecordCalibrateResults.svelte';
   import CalibrateView from '../components/RecordView.svelte';
+  import Log from '../components/RecordLog.svelte';
   import { onMount } from 'svelte';
   import {
     gazerInitialize,
@@ -36,14 +38,17 @@
   let sectionsNotCalibrated = [
     {
       sectionName: 'overview',
+      sectionLabel: 'Overview',
       videoShown: false,
       btnLabel: 'Start!',
       disableBack: true,
       showLoader: true,
       btnBackLabel: 'Back to Overview',
+      disableNext: true,
     },
     {
       sectionName: 'calibrate-vid',
+      sectionLabel: 'Calibration - Align Face',
       videoShown: true,
       videoPos: 'middle',
       disableBack: false,
@@ -54,6 +59,7 @@
     },
     {
       sectionName: 'calibrate-instructions',
+      sectionLabel: 'Calibration - Instructions',
       videoShown: true,
       videoPos: 'top',
       btnBackLabel: 'Back to Video Alignment',
@@ -61,6 +67,7 @@
     },
     {
       sectionName: 'calibrate-exercise',
+      sectionLabel: 'Calibration - Exercise',
       videoShown: true,
       videoPos: 'top',
       disableNext: true,
@@ -70,19 +77,30 @@
     },
     {
       sectionName: 'view',
+      sectionLabel: 'View',
       videoShown: false,
       btnLabel: 'Proceed',
       disableNext: false,
       btnBackLabel: 'Back to Calibration',
       showLoader: true,
     },
+    // {
+    //   sectionName: 'results',
+    //   sectionLabel: 'Results',
+    //   videoShown: false,
+    //   btnLabel: 'View Pattern',
+    //   disableBack: true,
+    //   hideNext: true,
+    //   btnBackLabel: 'Back to Calibration',
+    // },
     {
-      sectionName: 'results',
+      sectionName: 'log',
+      sectionLabel: 'Add Reaction',
       videoShown: false,
-      btnLabel: 'View Pattern',
+      btnLabel: 'Submit Reactions and View Gaze',
       disableBack: true,
-      hideNext: true,
-      btnBackLabel: 'Back to Calibration',
+      hideNext: false,
+      btnBackLabel: 'Back to Results',
     },
   ];
   //change from index
@@ -100,7 +118,6 @@
     sectionsNotCalibrated[4],
     sectionsNotCalibrated[5],
   ];
-
   let sections = sectionsNotCalibrated;
 
   async function checkExistingCalibration() {
@@ -142,13 +159,16 @@
   let gazeActive, gazeRecording, currSection;
   $: {
     $gazerInitVideoDone;
-    currSection = sections[$stateIndex];
     if (currSection.videoShown == true && $gazerInitVideoDone == true) {
       webgazer.showVideo(true);
       gazerMoveVideo(currSection.videoPos);
     } else {
       webgazer.showVideo(false);
     }
+  }
+
+  $: {
+    currSection = sections[$stateIndex];
     currSection.disableBack ? (disableBack = true) : (disableBack = false);
     currSection.disableNext ? (disableNext = true) : (disableNext = false);
     currSection.hideNext ? (hideNext = true) : (hideNext = false);
@@ -170,30 +190,17 @@
   }
 
   $: {
+    //needs to change on state index change
     if ($calibrationPct > $calibrationCutoff) {
       disableNext = false;
     }
   }
-
-  //detect if going back BAD BAD BAD code
-  // $: {
-  //   if ($gazerInitVideoDone) {
-  //     disableNext = false;
-  //   }
-  // }
-  // $: {
-  //   if ($calibrationPct > $calibrationCutoff) {
-  //     disableNext = false;
-  //   }
-  // }
 </script>
 
 <section class="experiment-container">
   <div class="container-header">
     <div class="current-selection">
-      Gazing at:<span class="selection-holder"
-        >{$selectedImage.title} by {$selectedImage.artist}</span
-      >
+      {currSection.sectionLabel}
     </div>
     <div class="nav-ind">
       {#each sections as section}
@@ -204,7 +211,7 @@
   <div class="container-body">
     {#if sections[$stateIndex].sectionName == 'overview'}
       <div>
-        <Overview />
+        <Overview bind:currSection />
       </div>
     {:else if sections[$stateIndex].sectionName == 'calibrate-vid'}
       <div>
@@ -218,6 +225,8 @@
       <CalibrateView />
     {:else if sections[$stateIndex].sectionName == 'results'}
       <CalibrateResults />
+    {:else if sections[$stateIndex].sectionName == 'log'}
+      <Log />
     {/if}
   </div>
   <div class="container-footer">
@@ -231,12 +240,13 @@
       </div>
     {:else}
       <div
-        class="btn-prev btn disabled"
-        class:accent={$calibrationPct && $calibrationPct < 70}
+        class="btn-prev btn disabled btn-light"
+        class:accent={$calibrationPct &&
+          $calibrationPct < 70 &&
+          $testMode !== 1}
         class:disabled={disableBack == true}
         on:click={() => {
           if (sections[$stateIndex].sectionName == 'calibrate-exercise') {
-            console.log('yea that me');
             gazerRestartCalibration();
           }
           $stateIndex--;
@@ -268,18 +278,28 @@
 </section>
 
 <style>
+  :global(.container-footer .btn) {
+    font-size: 16px;
+    padding: 11px 40px;
+    border-radius: 7px;
+  }
   header {
     justify-content: space-between;
   }
   h3 {
     text-decoration: none;
   }
+  .current-selection {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
   .experiment-container {
     background: var(--bg-contrast);
     width: 100%;
-    margin-top: 60px;
+    margin-top: 50px;
     height: auto;
-    box-shadow: var(--box-shadow-light);
+    border-radius: 5px;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
@@ -289,15 +309,16 @@
     padding: 0 30px;
   }
   .container-body {
-    height: calc(100vh - 3 * var(--header-ht) - 65px);
+    height: calc(100vh - 2 * var(--header-ht-gazer) - 75px);
     padding: 0 30px;
-    font-size: 18px;
+    font-size: 16px;
     position: relative;
+    font-weight: 400;
   }
   .container-header,
   .container-footer {
     width: 100%;
-    height: var(--header-ht);
+    height: var(--header-ht-gazer);
     /* background: var(--bg-contrast-darker); */
   }
   .container-header {

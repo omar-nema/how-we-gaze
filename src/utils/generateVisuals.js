@@ -52,7 +52,6 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
   // d3.select(containerSvg).selectAll('.clipPathGroup').remove();
 
   const svgId = d3.select(containerSvg).attr('id');
-
   let dataSel = d3
     .select(containerSvg)
     .selectAll('.clipPathGroup')
@@ -84,7 +83,6 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
         );
     },
     (update) => {
-      console.log(update);
       let clipG = update.selectAll('.clipPathGroup');
       clipG.select('clipPath').attr('d', d3.geoPath());
       clipG

@@ -1,13 +1,12 @@
 <script>
   import {
-    gazerInitDone,
-    gazerInitVideoDone,
     pageState,
     modalState,
     cardInView,
     screenWidth,
     scrollThresh,
   } from '../stores/pageState';
+  import { gazerInitDone, gazerInitVideoDone } from '../stores/gazerState';
 
   import { loadedWorksKeys } from '../stores/artworkMetadata';
   import { hideGazerForLater } from '../utils/gazerUtils';

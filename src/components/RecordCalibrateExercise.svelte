@@ -3,7 +3,8 @@
     gazerRecordingTraining,
     calibrationPct,
     calibrationCutoff,
-  } from '../stores/pageState';
+    testMode,
+  } from '../stores/gazerState';
   import {
     gazerPauseTraining,
     gazerCalibrationRecording,
@@ -15,6 +16,13 @@
 
   let numRows = 4;
   let ptsPerRow = 4;
+  if ($testMode == 1) {
+    numRows = 1;
+    ptsPerRow = 1;
+  }
+  if ($testMode) {
+    $calibrationCutoff = -50;
+  }
 
   let calibrationPoints = [];
 
@@ -103,7 +111,7 @@
   </div>
   <div class="center-dot" />
 {:else if calibrationMode == 'done'}
-  {#if $calibrationPct > $calibrationCutoff}
+  {#if $calibrationPct > $calibrationCutoff || $testMode == 1}
     <p style="color: var(--color-pos)">
       Your calculated accuracy is <strong>{$calibrationPct}%</strong>!
     </p>

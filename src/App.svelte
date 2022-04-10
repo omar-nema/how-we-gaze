@@ -1,6 +1,7 @@
 <script>
   //stores
-  import { pageState, screenWidth, screenHeight, screenModality, gazerReady, modalState } from './stores/pageState';
+  import { pageState, screenWidth, screenHeight, screenModality, modalState } from './stores/pageState';
+  import {  gazerReady } from './stores/gazerState';
   import screenSize from './utils/screenSize';
 
   //svelte
@@ -131,6 +132,7 @@
     --font-size-md: 18px;
     --font-size-lg: 26px;
     --header-ht: 50px;
+    --header-ht-gazer: 55px;
     --color-pos: #02bf86;
     --color-neg: #e9412b;
     --color-accent-sec: #7c7777;
@@ -188,6 +190,11 @@
     border-radius: 5px;
     transition: opacity 0.2s ease-in-out;
   }
+  :global(.btn-light){
+    font-weight: 500;
+    background: #EEEEEE;
+    color: #989090;
+  }
   :global(.card-outer){
     max-width: 900px;
     width: 100%;
@@ -200,6 +207,7 @@
     border-radius: 10px;
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
   }
+
 
   @media screen and (max-width: 800px) {
     :global(:root) { 
@@ -230,7 +238,6 @@
   :global(.btn.accent) {
     background: var(--color-accent);
     color: white;
-    box-shadow: var(--box-shadow-light);
   }
   :global(header) {
     width: 100%;

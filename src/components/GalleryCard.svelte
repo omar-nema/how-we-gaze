@@ -40,7 +40,8 @@
   let clips = [];
   //
   let imgFrame;
-  let imgHolder, svgHolder;
+  let imgHolder = null,
+    svgHolder = null;
 
   onMount(async () => {
     await getSessionData(sessionKey);
@@ -67,7 +68,10 @@
 
   //HELPER TEXT MOVEMENT
   let helperTextPositions = [[], [0, 0], [0, 0]];
-  let imgNav, visFilter, gazeBtn, card;
+  let imgNav = null,
+    visFilter = null,
+    gazeBtn = null,
+    card = null;
   $: {
     if (imgNav && visFilter && gazeBtn) {
       let textObjects = [imgNav, visFilter, gazeBtn];
@@ -96,7 +100,8 @@
   }
 
   //ANIMATION
-  let clipHolder, domClips;
+  let clipHolder = null,
+    domClips = null;
   $: {
     if (clipHolder) {
       domClips = clipHolder.childNodes;
@@ -209,6 +214,7 @@
           bind:visViewMode
           {infoTipIndex}
           {sessionData}
+          {data}
         />
       </div>
     </div>

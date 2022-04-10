@@ -2,8 +2,8 @@
   export let gazeBtn, visFilter;
   export let sessionSliderMax, sessionData;
   export let visCurrFrame, visPlayStatus, visViewMode;
-  export let infoTipIndex;
-  import { screenWidth } from '../stores/pageState';
+  export let infoTipIndex, data;
+  import { screenWidth, selectedImage, pageState } from '../stores/pageState';
 </script>
 
 <div
