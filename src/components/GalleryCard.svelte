@@ -31,8 +31,10 @@
   let sessionIndex = cardSessionsArr.length - 2;
   let sessionKey = cardSessionsArr[sessionIndex.length - 1];
   let sessionData = null;
+  let sessionReactions = null;
   let sessionSliderMax = 100;
   let visViewMode = 'slice';
+  let visViewReactions = false;
   //slice
   let visPlayStatus = 'pause';
   let visCurrFrame = 0;
@@ -96,6 +98,7 @@
       clips = await createClips(data.url, sessionData);
       visCurrFrame = 0;
     }
+    sessionReactions = await dbGet('reactions/' + key);
     return;
   }
 
@@ -212,9 +215,11 @@
           bind:visCurrFrame
           bind:visPlayStatus
           bind:visViewMode
+          bind:visViewReactions
           {infoTipIndex}
           {sessionData}
           {data}
+          {sessionReactions}
         />
       </div>
     </div>
@@ -228,6 +233,8 @@
         personLength={cardSessionsArr.length}
         {data}
         {visViewMode}
+        {visViewReactions}
+        {sessionReactions}
         {clips}
         {imgFrame}
       />
@@ -310,6 +317,28 @@
     justify-content: space-between;
     margin-bottom: 25px;
     padding-bottom: 15px;
+  }
+
+  :global(.reaction-pin) {
+    z-index: 100;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    padding: 20px;
+  }
+  :global(.reaction-pin-inner) {
+    background: #0000008c;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 100%;
+    filter: drop-shadow(rgba(0, 0, 0, 0.2) 1px 1px 6px);
+    transition: background 0.2s ease-in-out, filter 0.2s ease-in-out;
+  }
+  :global(.reaction-pin:hover .reaction-pin-inner) {
+    filter: drop-shadow(rgba(0, 0, 0, 1) 1px 1px 6px);
   }
 
   @media screen and (max-width: 800px) {

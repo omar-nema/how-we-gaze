@@ -1,13 +1,22 @@
 <script>
-  import { screenWidth, screenHeight } from '../stores/pageState';
+  import {
+    screenWidth,
+    screenHeight,
+    tooltipText,
+    tooltipShow,
+  } from '../stores/pageState';
+  import Tooltip from '../components/Tooltip.svelte';
+  import { updateTooltip } from '../utils/tooltipUtils';
   export let data;
   export let visViewMode;
   export let clips, clipHolder;
   export let imgFrame;
   export let sessionIndex, personLength;
-
+  export let visViewReactions;
+  export let sessionReactions;
   export let imgHolder;
   export let svgHolder;
+  import { fade } from 'svelte/transition';
 
   let mobile = false;
   $: {
@@ -15,6 +24,8 @@
       mobile = true;
     }
   }
+
+  $: sessionReactions;
 
   const swipeConfig = {
     autoplay: false,
@@ -47,11 +58,54 @@
   }
 </script>
 
+{#if $tooltipShow}
+  <div transition:fade={{ duration: 50 }}>
+    <Tooltip />
+  </div>
+{/if}
 <div
   class="img-holder swipe-holder"
   bind:this={imgHolder}
   style="width: {width}; height: {ht}; max-width: {data.width}px; max-height: {data.height}px"
 >
+  {#if sessionReactions && visViewReactions}
+    {#each sessionReactions as reaction}
+      <div
+        transition:fade={{ duration: 300 }}
+        class="reaction-pin"
+        style="left: {100 * reaction.xPct}%; top: {100 * reaction.yPct}%"
+        on:mouseover={(e) => {
+          let text = '';
+          if (reaction.text) {
+            text = reaction.text;
+          } else {
+            text = reaction.emoji.toString().replace(',', ' ');
+          }
+          updateTooltip(e.x, e.y, text);
+        }}
+        on:mousemove={(e) => {
+          updateTooltip(e.x, e.y);
+        }}
+        on:mouseleave={(e) => {
+          updateTooltip();
+        }}
+      >
+        <div class="reaction-pin-inner">
+          <span
+            class="material-icons-round md-18 nav"
+            style="font-size: 20px; color: white"
+          >
+            {#if reaction.emoji}
+              emoji_emotions
+            {:else if reaction.text}
+              comment
+            {/if}
+          </span>
+        </div>
+      </div>
+    {/each}
+  {/if}
+
   {#if !mobile}
     <div
       class="personToggle prev clickable"
@@ -178,6 +232,13 @@
   }
   .contour.active {
     opacity: 1;
+  }
+
+  :global(.tooltip) {
+    font-size: 14px !important;
+  }
+  .reaction-pin {
+    padding: 5px;
   }
 
   @media screen and (max-width: 800px) {

@@ -49,14 +49,21 @@ export async function getOfflineData() {
 
 //build into here bbgirl
 export async function dbGet(itemPath) {
-  if (offlineMode && itemPath == 'works') {
+  if (getSvelte(offlineMode) && itemPath == 'works') {
     return getSvelte(offlineData).works;
-  } else if (offlineMode && itemPath.includes('sessionData')) {
+  } else if (getSvelte(offlineMode) && itemPath.includes('sessionData')) {
     let key = itemPath.split('sessionData/')[1];
     if (key) {
       return getSvelte(offlineData).sessionData[key];
     }
-  } else if (!offlineMode) {
+  } else if (getSvelte(offlineMode) && itemPath.includes('reactions')) {
+    let key = itemPath.split('reactions/')[1];
+    if (key) {
+      return getSvelte(offlineData).reactions[key];
+    } else {
+      return null;
+    }
+  } else if (!getSvelte(offlineMode)) {
     try {
       let response = await get(child(ref(db), itemPath));
       if (response.exists()) {

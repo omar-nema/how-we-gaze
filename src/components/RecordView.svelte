@@ -1,15 +1,13 @@
 <script>
   import { gazerArtRecording } from '../utils/gazerUtils';
   import { selectedImage } from '../stores/pageState';
+  import { testMode } from '../stores/gazerState';
 
   let imageInactive = true;
   setTimeout(() => {
     imageInactive = false;
     gazerArtRecording();
   }, 3000);
-  //20 seconds after that
-  //start recording, this time to a diff variable
-  //stateIndex is plus plused in this bitch
 </script>
 
 <div class="wrapper-full">

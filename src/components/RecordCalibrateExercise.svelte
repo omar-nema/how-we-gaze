@@ -83,8 +83,6 @@
   }
 </script>
 
-<h3>Calibrate: Exercise</h3>
-
 {#if calibrationMode == 'dots'}
   {#each calibrationPoints as pt}
     <div

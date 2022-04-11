@@ -1,5 +1,5 @@
 <script>
-  import { pageState, selectedImage } from '../stores/pageState';
+  import { pageState, selectedImage, jumpCard } from '../stores/pageState';
   import {
     gazerReady,
     gazerInitVideoDone,
@@ -10,8 +10,10 @@
     sessionID,
     gazerInitDone,
     testMode,
+    sessionName,
+    gazeReactions,
+    gazerRecordingArt,
   } from '../stores/gazerState';
-
   import { slide, fade } from 'svelte/transition';
   import Overview from '../components/RecordOverview.svelte';
   import CalibrateVid from '../components/RecordCalibrateVid.svelte';
@@ -21,12 +23,16 @@
   import CalibrateView from '../components/RecordView.svelte';
   import Log from '../components/RecordLog.svelte';
   import { onMount } from 'svelte';
+  //to write to db
   import {
     gazerInitialize,
     gazerMoveVideo,
     gazerInitVideo,
     gazerRestartCalibration,
   } from '../utils/gazerUtils.js';
+  import { hideGazerForLater } from '../utils/gazerUtils';
+
+  import { dbGet, dbWrite } from '../utils/firebaseUtils.js';
   import { time_ranges_to_array } from 'svelte/internal';
   import * as localforage from 'localforage';
 
@@ -84,15 +90,6 @@
       btnBackLabel: 'Back to Calibration',
       showLoader: true,
     },
-    // {
-    //   sectionName: 'results',
-    //   sectionLabel: 'Results',
-    //   videoShown: false,
-    //   btnLabel: 'View Pattern',
-    //   disableBack: true,
-    //   hideNext: true,
-    //   btnBackLabel: 'Back to Calibration',
-    // },
     {
       sectionName: 'log',
       sectionLabel: 'Add Reaction',
@@ -106,6 +103,7 @@
   //change from index
   let sectionsCalibrated = [
     {
+      sectionLabel: 'Calibration - Align Face',
       sectionName: 'calibrate-vid',
       videoShown: true,
       videoPos: 'middle',
@@ -154,6 +152,36 @@
     }
     document.querySelector('body').className = 'gaze';
   });
+
+  //WRITE DATA TO DB - REACTIONS AND SESSION
+  async function submitSession() {
+    if ($testMode == 0) {
+      await dbWrite(
+        'works/' + $selectedImage.key + '/sessionData/' + $sessionID + '/name',
+        $sessionName
+      );
+      console.log('session written to db');
+      await dbWrite('reactions/' + $sessionID, $gazeReactions);
+      console.log('reaction written to db');
+    }
+
+    //switch pages only after video container is moved to body
+    let observer = new MutationObserver((mutationRecords) => {
+      if (mutationRecords[0].removedNodes.length > 0) {
+        jumpCard.set($selectedImage.key);
+        pageState.set('gallery');
+      }
+    });
+    // observe everything except attributes
+    observer.observe(document.querySelector('.container-body'), {
+      childList: true, // observe direct children
+      subtree: false, // lower descendants too
+      characterDataOldValue: true, // pass old data to callback
+    });
+
+    hideGazerForLater();
+    $gazeReactions = [];
+  }
 
   //move video, disable next and prev buttons on subpage change
   let gazeActive, gazeRecording, currSection;
@@ -214,17 +242,13 @@
         <Overview bind:currSection />
       </div>
     {:else if sections[$stateIndex].sectionName == 'calibrate-vid'}
-      <div>
-        <CalibrateVid {calibrated} />
-      </div>
+      <CalibrateVid {calibrated} />
     {:else if sections[$stateIndex].sectionName == 'calibrate-instructions'}
       <CalibrateInstructions />
     {:else if sections[$stateIndex].sectionName == 'calibrate-exercise'}
       <CalibrateExercise />
     {:else if sections[$stateIndex].sectionName == 'view'}
       <CalibrateView />
-    {:else if sections[$stateIndex].sectionName == 'results'}
-      <CalibrateResults />
     {:else if sections[$stateIndex].sectionName == 'log'}
       <Log />
     {/if}
@@ -232,7 +256,7 @@
   <div class="container-footer">
     {#if calibrated && $stateIndex !== sections.length - 1}
       <div
-        class="btn re-cal clickable"
+        class="btn clickable btn-light re-cal clickable"
         class:disabled={calibrated == false}
         on:click={recalibrate}
       >
@@ -261,6 +285,8 @@
         on:click={() => {
           if ($stateIndex < sections.length - 2) {
             $stateIndex++;
+          } else {
+            submitSession();
           }
         }}
         class="btn-next btn accent clickable"

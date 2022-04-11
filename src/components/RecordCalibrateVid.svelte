@@ -23,7 +23,6 @@
 </script>
 
 {#if calibrated == true}
-  <h3>Existing Calibration Loaded</h3>
   <p class="inst">
     Your webcam was already calibrated with an accuracy rate of <strong
       >{$calibrationPct}%</strong
@@ -31,7 +30,6 @@
     art!
   </p>
 {:else if calibrated == false}
-  <h3>Calibrate: Video</h3>
   <p class="inst">
     We’ll need to first calibrate your webcam in order to proceed. Ensure that
     your are in a well-lit environment, and that your face is in the green

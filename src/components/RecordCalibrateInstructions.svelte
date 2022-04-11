@@ -2,7 +2,6 @@
   import { slide, fade } from 'svelte/transition';
 </script>
 
-<h3>Calibrate: Instructions</h3>
 <p class="instr">
   Great! Your face calibration will be displayed on the right for reference.
   Next, we’ll calibrate your eye tracking movement on the screen. Remember these

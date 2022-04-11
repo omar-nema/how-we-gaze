@@ -108,10 +108,10 @@ export async function gazerArtRecording() {
       sessionID: get(sessionID),
       calibrationPct: get(calibrationPct),
     };
-
     let gazerArray = get(gazerRecordingArt); //this is prob not good
     gazerArray.push(recordingObj);
     gazerRecordingArt.set(gazerArray);
+    console.log(gazerArray);
   });
   let duration;
   if (get(testMode) == 1) {

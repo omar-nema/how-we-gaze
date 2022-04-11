@@ -72,7 +72,6 @@
   }
 </script>
 
-<h3>Calibrate: Results</h3>
 <p>
   Great work! We’re generating your custom visualization (it will take up to 30
   seconds). In the meantime, enter the name with which you’d like associate your

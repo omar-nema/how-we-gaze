@@ -21,4 +21,4 @@ export let sessionID = writable(null);
 export let sessionName = writable(null);
 
 //set to 0 for normal, 1 to prevent writing to db
-export let testMode = readable(1);
+export let testMode = readable(0);

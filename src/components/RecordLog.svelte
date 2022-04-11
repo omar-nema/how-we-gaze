@@ -4,12 +4,11 @@
     tooltipText,
     tooltipShow,
     pageState,
-    jumpCard,
   } from '../stores/pageState';
   import {
     sessionID,
-    stateIndex,
     gazerRecordingArt,
+    stateIndex,
     testMode,
     loadingInd,
     sessionName,
@@ -25,7 +24,6 @@
     appendData,
     uploadBlob,
   } from '../utils/firebaseUtils.js';
-  import { hideGazerForLater } from '../utils/gazerUtils';
 
   let reaction = {};
   let reactions = [];
@@ -148,54 +146,23 @@
 
   $: {
     $gazeReactions = reactions;
-    console.log($gazeReactions);
   }
-
-  //WRITE DATA TO DB - REACTIONS AND SESSION
-  let sessionData = $gazerRecordingArt;
-  let artworkId = $selectedImage.key,
-    artworkData = selectedImage;
 
   async function writeSessionToArtwork() {
-    let res = await dbGet('works/' + artworkId);
-    console.log(res);
+    let res = await dbGet('works/' + $selectedImage.key);
     if (!res) {
-      await dbWrite('works/' + artworkId, artworkData);
+      await dbWrite('works/' + $selectedImage.key, $selectedImage);
     }
-    return await dbWrite('works/' + artworkId + '/sessionData/' + $sessionID, {
-      name: 'Anonymous',
-    });
+    return await dbWrite(
+      'works/' + $selectedImage.key + '/sessionData/' + $sessionID,
+      {
+        name: $sessionName,
+      }
+    );
   }
   async function storeSessionData() {
-    await dbWrite('sessionData/' + $sessionID, sessionData);
-    return await dbWrite('sessionData/' + $sessionID, sessionData);
-  }
-  async function submitSession() {
-    if ($testMode == 0) {
-      await dbWrite(
-        'works/' + artworkId + '/sessionData/' + $sessionID + '/name',
-        $sessionName
-      );
-      console.log('session written to db');
-      await dbWrite('reactions/' + $sessionID, reactions);
-      console.log('reaction written to db');
-    }
-
-    //switch pages only after video container is moved to body
-    let observer = new MutationObserver((mutationRecords) => {
-      if (mutationRecords[0].removedNodes.length > 0) {
-        jumpCard.set($selectedImage.key);
-        pageState.set('gallery');
-      }
-    });
-    // observe everything except attributes
-    observer.observe(document.querySelector('.container-body'), {
-      childList: true, // observe direct children
-      subtree: false, // lower descendants too
-      characterDataOldValue: true, // pass old data to callback
-    });
-
-    hideGazerForLater();
+    await dbWrite('sessionData/' + $sessionID, $gazerRecordingArt);
+    return await dbWrite('sessionData/' + $sessionID, $gazerRecordingArt);
   }
   if ($testMode == 0) {
     storeSessionData();
@@ -204,7 +171,7 @@
 </script>
 
 <p>
-  As a last step, please <strong
+  We're almost done here! As a last step, please <strong
     >share how viewing this artwork made you feel</strong
   >. Click on any place in the image to add an emoji or text reaction! Add as
   many as you like.
@@ -470,27 +437,7 @@
   .hoverEffect.show {
     opacity: 1;
   }
-  .reaction-pin {
-    z-index: 1;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    padding: 20px;
-  }
-  .reaction-pin-inner {
-    background: #0000008c;
-    background: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    border-radius: 100%;
-    filter: drop-shadow(rgba(0, 0, 0, 0.2) 1px 1px 6px);
-    transition: background 0.2s ease-in-out, filter 0.2s ease-in-out;
-  }
-  .reaction-pin:hover .reaction-pin-inner {
-    filter: drop-shadow(rgba(0, 0, 0, 1) 1px 1px 6px);
-  }
+
   .emoji-holder {
     display: flex;
     font-size: 18px;

@@ -34,7 +34,6 @@
   afterUpdate(() => {
     if ($jumpCard) {
       let observer = new MutationObserver((mutationRecords) => {
-        console.log(mutationRecords);
         if (mutationRecords.length > 10) {
           window.scrollTo({
             top: document.querySelector('#' + $jumpCard).getBoundingClientRect()

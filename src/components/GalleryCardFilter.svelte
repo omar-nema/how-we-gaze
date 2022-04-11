@@ -2,7 +2,9 @@
   export let gazeBtn, visFilter;
   export let sessionSliderMax, sessionData;
   export let visCurrFrame, visPlayStatus, visViewMode;
+  export let visViewReactions = false;
   export let infoTipIndex, data;
+  export let sessionReactions;
   import { screenWidth, selectedImage, pageState } from '../stores/pageState';
 </script>
 
@@ -87,6 +89,17 @@
       <span>Original</span>
     </div>
   </div>
+  <div
+    class="filter clickable"
+    style="margin-left: 25px; border-radius: 5px"
+    on:click={() => {
+      visViewReactions = !visViewReactions;
+    }}
+    class:selected={visViewReactions}
+    class:disabled={!sessionReactions}
+  >
+    <span>Show Reactions</span>
+  </div>
 </div>
 {#if $screenWidth > 950}
   <div
@@ -94,10 +107,6 @@
     class:info-highlight={infoTipIndex == 2}
   >
     <div class="filter-options">
-      <!-- <div class="label compact">
-      <span class="material-icons-round md-14">add</span>
-
-    </div> -->
       <div
         bind:this={gazeBtn}
         class="filter clickable add"
@@ -156,7 +165,6 @@
 
   .filter {
     background: var(--bg-contrast-darker);
-
     height: 100%;
     border: 0.5px dashed transparent;
     transition: all 0.15s linear;
@@ -257,6 +265,10 @@
   }
   .play-toggle {
     width: 50px;
+  }
+  .disabled {
+    pointer-events: none;
+    opacity: 0.3;
   }
 
   @media screen and (max-width: 800px) {
