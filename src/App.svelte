@@ -16,6 +16,7 @@
   import Record from './pages/Record.svelte';
   import ModalNav from './components/ModalNav.svelte'
   import Intro from './components/Intro.svelte';
+  import About from './components/About.svelte';
 
   //to check if page visited and remove intro modal
   import * as localforage from 'localforage';
@@ -70,6 +71,8 @@
 
 {#if $modalState == 'intro'}
 <Intro></Intro>
+{:else if $modalState =='about'}
+<About></About>
 {/if}
 
 <main>

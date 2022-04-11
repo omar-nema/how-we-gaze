@@ -52,6 +52,26 @@
       </div>
       <div class="header-right">
         {#if $pageState == 'gallery'}
+          {#if $screenWidth > 950}
+            <div
+              transition:fade
+              class="btn clickable active btn-about"
+              on:click={() => {
+                $modalState = 'intro';
+              }}
+            >
+              Intro
+            </div>
+            <div
+              transition:fade
+              class="btn clickable active btn-about"
+              on:click={() => {
+                $modalState = 'about';
+              }}
+            >
+              About
+            </div>
+          {/if}
           <nav>
             {#if $screenWidth >= 800}
               <div>
@@ -83,17 +103,6 @@
               <span class="material-icons-round"> view_module </span>
             </div>
           </nav>
-          {#if $screenWidth > 950}
-            <div
-              transition:fade
-              class="btn clickable active btn-about"
-              on:click={() => {
-                $modalState = 'intro';
-              }}
-            >
-              About
-            </div>
-          {/if}
         {/if}
         <div
           transition:slide={{ duration: 500 }}
@@ -163,7 +172,7 @@
     margin: 0 10px;
   }
   .btn {
-    margin-left: 25px;
+    margin-left: 10px;
     color: var(--color-gray-faded);
     transition: color 0.3s linear;
     display: none;
@@ -187,6 +196,7 @@
   nav {
     display: flex;
     align-items: center;
+    margin-left: 20px;
   }
   nav .material-icons-round {
     font-size: 20px;

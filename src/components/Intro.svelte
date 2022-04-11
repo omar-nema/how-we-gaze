@@ -4,17 +4,7 @@
   import { slide, fade } from 'svelte/transition';
   //detect if visited
   import * as localforage from 'localforage';
-
-  function fadeSlide(node, options) {
-    const slideTrans = slide(node, options);
-    return {
-      duration: options.duration,
-      css: (t) => `
-				${slideTrans.css(t)}
-				opacity: ${t};
-			`,
-    };
-  }
+  import Modal from '../components/Modal.svelte';
 
   let showSvg = false;
   let animateSvg = false;
@@ -72,7 +62,7 @@
   });
 </script>
 
-<main id="modal" transition:fadeSlide={{ duration: 300 }}>
+<Modal>
   <div
     class="btn-close clickable"
     on:click={() => {
@@ -409,7 +399,7 @@
       </svg>
     </div>
   {/if}
-</main>
+</Modal>
 
 <style>
   h1 {

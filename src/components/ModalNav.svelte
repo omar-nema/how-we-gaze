@@ -2,6 +2,7 @@
   import { slide } from 'svelte/transition';
   import { modalState } from '../stores/pageState';
   import { loadedWorksKeys, loadedWorksArray } from '../stores/artworkMetadata';
+  import Modal from '../components/Modal.svelte';
   import jump from '../utils/jumpSection';
 
   function fadeSlide(node, options) {
@@ -28,7 +29,7 @@
   }
 </script>
 
-<div class="modal" transition:fadeSlide={{ duration: 150 }}>
+<Modal>
   <div class="container">
     <div class="cont-header">
       <h1>Navigate Artworks</h1>
@@ -61,36 +62,14 @@
       {/each}
     </div>
   </div>
-</div>
+</Modal>
 
 <style>
   .container {
     padding-top: 20px;
     width: 80%;
   }
-  .modal {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    /* top: var(--header-ht); */
-    top: 0;
-    left: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.9) 0%,
-      rgb(194 240 250 / 90%) 100%
-    );
-    z-index: 100;
-    backdrop-filter: blur(20px);
-    overflow: auto;
-  }
 
-  .cont-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
   .btn {
     /* background: #ffffff75; */
     border-radius: 5px;
@@ -99,10 +78,6 @@
     justify-content: center;
     align-items: center;
     padding: 4px 8px;
-  }
-  .material-icons-round {
-    font-size: 40px;
-    color: black;
   }
 
   .artwork-container {
