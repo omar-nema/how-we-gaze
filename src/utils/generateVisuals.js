@@ -3,6 +3,42 @@ import * as d3 from 'd3';
 import { get } from 'svelte/store';
 import { screenWidth } from '../stores/pageState';
 
+export async function pointVis(data, containerAll, containerSvg, url) {
+  console.log('yea dude');
+
+  let bbox = d3.select(containerAll).node().getBoundingClientRect();
+  let width = bbox.width;
+  let height = 0.705 * width;
+  let margin = 30;
+
+  let xPos = d3
+    .scaleLinear()
+    .domain([0, 100])
+    .range([margin, width - margin]);
+  let yPos = d3
+    .scaleLinear()
+    .domain([0, 100])
+    .range([margin, height - margin]);
+
+  let dataSel = d3
+    .select(containerSvg)
+    .append('g')
+    .selectAll('.point')
+    .data(data, (d) => d.xPct + d.sessionID);
+
+  console.log(data);
+
+  dataSel
+    .join('circle')
+    .attr('cx', (d) => xPos(d.xPct))
+    .attr('cy', (d) => yPos(d.yPct))
+    .attr('r', 2)
+    .attr('fill', 'black')
+    .attr('class', 'point')
+    .style('opacity', '0.5')
+    .style('filter', 'blur(1px)');
+}
+
 export async function contourMapBlur(data, containerAll, containerSvg, url) {
   let bbox = d3.select(containerAll).node().getBoundingClientRect();
   let width = bbox.width;

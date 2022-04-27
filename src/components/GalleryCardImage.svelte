@@ -136,7 +136,7 @@
   <svg
     class="contour"
     bind:this={svgHolder}
-    class:active={visViewMode == 'aggregate'}
+    class:active={visViewMode == 'aggregate' || visViewMode == 'point'}
     id="{data.key}-contour"
     style="width: 100%; height: 100%; position: absolute; top:0; left:0; z-index:10"
   />

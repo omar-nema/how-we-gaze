@@ -350,7 +350,6 @@
     left: 50%;
     transform: translateX(-50%) translateY(25px);
     width: 400px;
-    max-height: 40%;
     background: #e1eef1e6;
     border-radius: 5px;
     box-shadow: var(--box-shadow-med);

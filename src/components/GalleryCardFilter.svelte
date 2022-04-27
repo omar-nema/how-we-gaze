@@ -80,6 +80,17 @@
     </div>
     <div
       class="filter clickable"
+      class:selected={visViewMode == 'point'}
+      on:click={() => {
+        visPlayStatus = 'pause';
+        visViewMode = 'point';
+      }}
+    >
+      <!-- <span class="material-icons-round md-14">image</span> -->
+      <span>Point</span>
+    </div>
+    <div
+      class="filter clickable"
       class:selected={visViewMode == 'original'}
       on:click={() => {
         visViewMode = 'original';

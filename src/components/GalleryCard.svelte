@@ -10,7 +10,7 @@
   } from '../stores/pageState';
   import { dbGet } from '../utils/firebaseUtils.js';
   import { onMount } from 'svelte';
-  import { contourMapBlur } from '../utils/generateVisuals';
+  import { contourMapBlur, pointVis } from '../utils/generateVisuals';
   import Tooltip from './Tooltip.svelte';
   import GalleryCardImage from './GalleryCardImage.svelte';
   import GalleryCardTip from './GalleryCardTip.svelte';
@@ -65,6 +65,8 @@
     ///running too many times
     if (mount && visViewMode == 'aggregate' && imgHolder && svgHolder) {
       contourMapBlur(sessionData, imgHolder, svgHolder, data.url);
+    } else if (mount && visViewMode == 'point' && imgHolder && svgHolder) {
+      pointVis(sessionData, imgHolder, svgHolder, data.url);
     }
   }
 

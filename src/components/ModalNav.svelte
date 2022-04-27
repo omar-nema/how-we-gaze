@@ -66,8 +66,9 @@
 
 <style>
   .container {
-    padding-top: 20px;
-    width: 80%;
+    padding-top: 0px;
+    width: 100%;
+    max-width: 1800px;
   }
 
   .btn {
@@ -79,15 +80,19 @@
     align-items: center;
     padding: 4px 8px;
   }
+  .cont-header {
+    height: 90px;
+    align-items: center;
+    padding: 20px 10%;
+  }
 
   .artwork-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     padding-bottom: 150px;
-    height: calc(100vh - 230px);
+    height: calc(100vh - 160px);
     overflow: auto;
-    padding-top: 30px;
   }
   .artwork-holder {
     display: flex;

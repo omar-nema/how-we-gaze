@@ -42,6 +42,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    backdrop-filter: blur(5px);
   }
 
   :global(.material-icons-round) {

@@ -164,13 +164,10 @@
     opacity: 0.85;
   }
 
- 
-
-  
 
   :global(h1) {
-    font-size: 40px;
-    font-weight: 400;
+    font-size: 36px;
+    font-weight: 500;
   }
   :global(html){
     height: 100%;

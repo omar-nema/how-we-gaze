@@ -22,3 +22,5 @@ export let infoTipIndex = writable(-1); //for the explanatory pop-ups in gallery
 
 export let offlineMode = writable(true);
 export let offlineData = writable({});
+
+export let activeAccordionIndex = writable(null);
