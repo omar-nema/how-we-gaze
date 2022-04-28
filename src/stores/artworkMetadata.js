@@ -10,28 +10,28 @@ let artworkData = {
     width: 1745,
     height: 1228,
   },
-  rothko: {
-    key: 'rothko',
-    artist: 'Mark Rothko',
-    title: 'Record Number 24',
-    url: './assets/img/rothko.png',
-    sessionData: {},
-    dimWidthToHt: 0.65,
-    width: 1021,
-    height: 1571,
-  },
-  nevelson: {
-    key: 'nevelson',
-    artist: 'Louise Nevelson',
-    title: 'Untitled (Self-Portrait)',
-    url: './assets/img/nevelson.jpg',
-    sessionData: {},
-    dimWidthToHt: 0.756,
-    width: 378,
-    height: 500,
-    origLink:
-      'https://www.si.edu/object/untitled-self-portrait:npg_NPG.2002.307',
-  },
+  // rothko: {
+  //   key: 'rothko',
+  //   artist: 'Mark Rothko',
+  //   title: 'Record Number 24',
+  //   url: './assets/img/rothko.png',
+  //   sessionData: {},
+  //   dimWidthToHt: 0.65,
+  //   width: 1021,
+  //   height: 1571,
+  // },
+  // nevelson: {
+  //   key: 'nevelson',
+  //   artist: 'Louise Nevelson',
+  //   title: 'Untitled (Self-Portrait)',
+  //   url: './assets/img/nevelson.jpg',
+  //   sessionData: {},
+  //   dimWidthToHt: 0.756,
+  //   width: 378,
+  //   height: 500,
+  //   origLink:
+  //     'https://www.si.edu/object/untitled-self-portrait:npg_NPG.2002.307',
+  // },
   kahlo: {
     key: 'kahlo',
     artist: 'Magda Pach',
@@ -103,17 +103,17 @@ let artworkData = {
     origLink: 'https://collection.cooperhewitt.org/objects/18394565/',
   },
 
-  riley: {
-    key: 'riley',
-    artist: 'Bridget Riley',
-    title: 'Untitled',
-    url: './assets/img/riley.png',
-    sessionData: {},
-    width: 1080,
-    height: 1315,
-    dimWidthToHt: 1080 / 1315,
-    origLink: 'https://www.si.edu/object/bridget-riley:chndm_1976-25-5',
-  },
+  // riley: {
+  //   key: 'riley',
+  //   artist: 'Bridget Riley',
+  //   title: 'Untitled',
+  //   url: './assets/img/riley.png',
+  //   sessionData: {},
+  //   width: 1080,
+  //   height: 1315,
+  //   dimWidthToHt: 1080 / 1315,
+  //   origLink: 'https://www.si.edu/object/bridget-riley:chndm_1976-25-5',
+  // },
 
   lewitt: {
     key: 'lewitt',
@@ -127,17 +127,17 @@ let artworkData = {
     origLink:
       'https://www.si.edu/object/lines-points-points-portfolio-location-lines:saam_1990.60.2',
   },
-  albers: {
-    key: 'albers',
-    artist: 'Josef Albers',
-    title: 'Homage to the Square',
-    url: './assets/img/albers.png',
-    sessionData: {},
-    width: 1645,
-    height: 1705,
-    origLink:
-      'https://www.si.edu/object/homage-square-white-line-red:saam_1976.108.7',
-  },
+  // albers: {
+  //   key: 'albers',
+  //   artist: 'Josef Albers',
+  //   title: 'Homage to the Square',
+  //   url: './assets/img/albers.png',
+  //   sessionData: {},
+  //   width: 1645,
+  //   height: 1705,
+  //   origLink:
+  //     'https://www.si.edu/object/homage-square-white-line-red:saam_1976.108.7',
+  // },
 };
 
 export let artworkMetadata = writable(artworkData);

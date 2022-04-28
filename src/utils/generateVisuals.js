@@ -4,8 +4,6 @@ import { get } from 'svelte/store';
 import { screenWidth } from '../stores/pageState';
 
 export async function pointVis(data, containerAll, containerSvg, url) {
-  console.log('yea dude');
-
   let bbox = d3.select(containerAll).node().getBoundingClientRect();
   let width = bbox.width;
   let height = 0.705 * width;

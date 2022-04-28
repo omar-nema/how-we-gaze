@@ -19,6 +19,8 @@
   }
 
   let headerHover = false;
+
+  //class:hide={$scrollThresh && !headerHover} on header-wrapper
 </script>
 
 <header
@@ -29,7 +31,7 @@
     headerHover = false;
   }}
 >
-  <div class="header-wrapper" class:hide={$scrollThresh && !headerHover}>
+  <div class="header-wrapper">
     <div class="header-content">
       <div class="header-left">
         <span>How We Gaze</span>
@@ -132,7 +134,7 @@
     width: 100vw;
   }
   .header-wrapper {
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(1px);
     background-color: none;
     transition: all 0.15s linear;
     width: 100%;

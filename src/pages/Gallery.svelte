@@ -22,8 +22,15 @@
   async function getAllWorks() {
     let worksObject = await dbGet('works');
     if (worksObject) {
-      worksArray = Object.values(worksObject);
-      worksKeys = Object.keys(worksObject);
+      let filtered = {};
+      for (let d in $artworkMetadata) {
+        //don't show errthing in Db, just what i've toggled in local file
+        if (worksObject.hasOwnProperty(d)) {
+          filtered[d] = worksObject[d];
+        }
+      }
+      worksArray = Object.values(filtered);
+      worksKeys = Object.keys(filtered);
     }
     loadedWorksKeys.set(worksKeys);
     loadedWorksArray.set(worksArray);
@@ -79,8 +86,12 @@
       .
     </p>
   </div>
-  {#each worksArray as img}
-    <GalleryCard data={img} />
+  {#each worksArray as img, i}
+    {#if i == 0}
+      <GalleryCard data={img} visViewMode={'aggregate'} />
+    {:else}
+      <GalleryCard data={img} visViewMode={'slice'} />
+    {/if}
   {/each}
 </div>
 

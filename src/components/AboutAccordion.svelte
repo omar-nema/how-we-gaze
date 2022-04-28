@@ -1,11 +1,11 @@
 <script>
   import { slide } from 'svelte/transition';
   import { activeAccordionIndex } from '../stores/pageState';
-  let a = false;
+
   export let questionText, chipText;
   let expanded = false;
   let thisAcc;
-  let thisIndex;
+  let thisIndex = 9000;
 
   $: {
     if ($activeAccordionIndex == thisIndex) {
@@ -20,8 +20,6 @@
   class="question-cont"
   bind:this={thisAcc}
   on:click={() => {
-    a.classList.toggle('show');
-    expanded = !expanded;
     let all = document.querySelectorAll('.question-cont');
     thisIndex = Array.from(all).indexOf(thisAcc);
     if ($activeAccordionIndex !== thisIndex) {
@@ -47,9 +45,9 @@
       </div>
     </div>
   </div>
-  <div class="answer" bind:this={a}>
+  <div class="answer" class:show={$activeAccordionIndex == thisIndex}>
     {#if expanded}
-      <div in:slide={{ duration: 100 }} out:slide={{ duration: 100 }}>
+      <div transition:slide={{ duration: 100 }}>
         <slot />
       </div>
     {/if}
@@ -74,6 +72,7 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: all 0.15s linear;
+    font-size: 16px;
   }
   .question {
     display: flex;
@@ -87,6 +86,7 @@
     font-weight: 400;
     /* color: #0d61a4; */
     color: black;
+    font-size: 16px;
   }
   :global(.answer.show) {
     height: auto;
@@ -118,7 +118,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 20px;
-    font-size: 16px;
+    font-size: 14px;
     max-height: 40px;
   }
 </style>

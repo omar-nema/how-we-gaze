@@ -78,7 +78,7 @@
       <!-- <span class="material-icons-round md-14">image</span> -->
       <span>Aggregate</span>
     </div>
-    <div
+    <!-- <div
       class="filter clickable"
       class:selected={visViewMode == 'point'}
       on:click={() => {
@@ -86,9 +86,9 @@
         visViewMode = 'point';
       }}
     >
-      <!-- <span class="material-icons-round md-14">image</span> -->
+
       <span>Point</span>
-    </div>
+    </div> -->
     <div
       class="filter clickable"
       class:selected={visViewMode == 'original'}

@@ -7,7 +7,7 @@
 <Modal>
   <div class="inner">
     <div class="cont-header">
-      <h1>About the Project</h1>
+      <h1>Methods & Process</h1>
       <div
         class="clickable btn close"
         on:click={() => {
@@ -23,17 +23,21 @@
         chipText="Process"
       >
         <p>
-          I don't have a background in art history, and often mind myself lost
-          in a museum, wondering why certain pieces were selected, or what
-          others might see in a work that I don't connect to. This project was
-          created with the idea of using visualization to better understand
-          subjective visual perception.
+          Broadly, my work as both a practioner and educator focuses on using
+          data and technology to create visceral, evocative experiences.
         </p>
         <p>
-          More generally though, my work as both a practioner and educator
-          focuses on using technology to make us feel more human. I'm interested
-          in using data and technology to create visceral experiences.
+          For this project in particular, I was tasked with visualizing data
+          from the Smithsonian Museum Open Access Collection (as part of my
+          coursework at Parsons). Browsing through the collection, I found that
+          the context accompanying a piece of artwork was not always enough to
+          help me understand and connect with it. Viewing art is a visceral
+          experience - it is difficult to put into words. I wondered - could I
+          somehow create a tool that enables me to see how others are looking at
+          artwork? A series of explorations related to this anchor question led
+          me to develop the concept of using eye-tracking to visualize gazes.
         </p>
+        <p />
       </AboutAccordion>
 
       <AboutAccordion
@@ -41,25 +45,31 @@
         chipText="Process"
       >
         <p>
-          Each gaze session is recorded as a series of points. So I needed to
-          translate these points to a visualization of some sort.
+          Each gaze session is recorded as a series of points, so a series of x
+          and y coordinates was my starting point for the visualization.
         </p>
         <p>
-          I first experimented with more abstract visualization of these points
-          - like points or heatmaps overlayed onto the original image. The
+          I first experimented with abstract visualizations of these points -
+          like dots, heatmaps or contours overlayed onto the original image. The
           result was unsatisfying. In seeing quantitative data, I found that
-          viewers would simply draw clear-cut conclusions about a given gaze.
+          viewers would draw clear-cut conclusions about a given gaze, rather
+          than imagine how someone else would study it.
         </p>
         <div class="img-holder">
-          <img src="./assets/img/process/pointmaphires.png" />
+          <img
+            style="width: 45%"
+            src="./assets/img/process/pointmaphiresNocont.png"
+          />
+          <img style="width: 45%" src="./assets/img/process/contourmap.png" />
         </div>
         <p>
           The goal of this project is to have the viewer empathize and imagine
           how someone else might look at a given artwork. In order to so, I
           needed to tie the gaze to the original artwork, and make it feel like
           a cohesive work that can be examined. I experimented with a number of
-          different forms to create a more visceral experience, and found that
-          the 'blur map' worked best.
+          different forms that blend in with the original artwork. The
+          'aggregate blur' was most effective to me - it retained the integrity
+          of the artwork, but also clearly delineated the viewer's gaze.
         </p>
         <div class="img-holder">
           <img src="./assets/img/process/blurmap.png" />
@@ -72,7 +82,7 @@
       >
         <p>
           Yes! Email me at omar.nema@newschool.edu if you're interested to host
-          your own work here :)
+          your own work here.
         </p>
       </AboutAccordion>
 
@@ -81,8 +91,11 @@
         chipText="Curation"
       >
         <p>
-          I sought to include a variety of different artworks - abstract,
-          portrait, graphic, etc - in the gallery.
+          I sought to include a variety of artwork - both in style and time
+          period - in the gallery. Because I wanted to include high resolution
+          digital images, the works included are fairly modern (1400s or so).
+          Special shoutout to my friend Rayyan Mikati for helping me select the
+          works in this gallery.
         </p>
       </AboutAccordion>
 
@@ -91,8 +104,28 @@
         chipText="Technical"
       >
         <p>
-          It varies. Gazes can submitted to the gallery with 75% accuracy or
-          greater. The accuracy rate here means that
+          Gazes can submitted to the gallery only after a webcam is calibrated
+          with an accuracy rate of 75% or higher. Generally, accuracy for
+          submitted gazes ranges from 75% to 85%. This means that the margin of
+          error ranges from 12.5% to 7.5% of the container width used to
+          calibrate the eye tracker (pictured below).
+        </p>
+        <p>
+          Given the substantial margin of error, a single point is not very
+          accurate. However, each 20 second viewing session includes roughly
+          4000 points. A combination all of these points will shows clear
+          trends.
+        </p>
+        <div class="img-holder">
+          <img style="width: 100%" src="./assets/img/process/accuracy.png" />
+        </div>
+
+        <p>
+          Screen size, lighting, and webcam quality affect accuracy. Generally,
+          eye-tracking experiments in psychology research are done using
+          accurate, high-cost eye-tracking devices that resemble bulky goggles.
+          I prioritized accessibility rather than accuracy for this project, and
+          thus decided used the webcam.
         </p>
       </AboutAccordion>
 
@@ -101,21 +134,30 @@
         chipText="Technical"
       >
         <p>
-          Here's how the main visualization works: first, using webgazer.js, I
-          record
+          I used an existing open-source library - webgazer.js - for
+          eye-tracking. Webgazer.js uses the webcam to detect the location of a
+          viewer's eyes as coordinates on a screen. In order to use incorporate
+          webgazer into my project, I built out a calibration 'wizard' (shown
+          below).
         </p>
-        <p />
+
+        <div class="img-holder">
+          <img
+            style="width: 100%"
+            src="./assets/img/process/calibrateProcess.png"
+            class="noStyle"
+          />
+        </div>
       </AboutAccordion>
 
       <AboutAccordion
-        questionText={'Tell me more about the methods you used to create these blurry visuals'}
+        questionText={'How did you create the visuals for this project?'}
         chipText="Technical"
       >
         <p>
           Here's how the main visualization works: first, using webgazer.js, I
           record
         </p>
-        <p />
       </AboutAccordion>
 
       <AboutAccordion
@@ -127,7 +169,7 @@
           as framework, d3.js for generating visualizations, Firebase to store
           data in real-time, and webgazer.js for recording webcam viewing
           sessions. I also used Observable to process data and explore
-          visualizations, and Figma to design in the interface.
+          visualizations, and Figma to design the interface.
         </p>
       </AboutAccordion>
     </div>
@@ -144,16 +186,20 @@
   .img-holder {
     width: 100%;
     display: flex;
-    margin-bottom: 20px;
     margin: auto;
+    padding: 13px 0;
   }
   img {
     margin: auto;
     box-shadow: 0 1px 2px 0.5px rgb(0 0 0 / 10%);
-    width: 80%;
-    max-width: 500px;
+    max-width: 95%;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  img.noStyle {
+    box-shadow: none;
+    border: none;
+    border-radius: 0px;
   }
   .cont-body {
     margin-top: 20px;

@@ -81,9 +81,9 @@
     padding: 4px 8px;
   }
   .cont-header {
-    height: 90px;
+    height: 120px;
     align-items: center;
-    padding: 20px 10%;
+    padding: 0 10%;
   }
 
   .artwork-container {

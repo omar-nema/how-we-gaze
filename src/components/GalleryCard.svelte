@@ -33,7 +33,7 @@
   let sessionData = null;
   let sessionReactions = null;
   let sessionSliderMax = 100;
-  let visViewMode = 'slice';
+  export let visViewMode = 'slice';
   let visViewReactions = false;
   //slice
   let visPlayStatus = 'pause';
@@ -63,9 +63,21 @@
     //bind imgHolder and SVG
 
     ///running too many times
-    if (mount && visViewMode == 'aggregate' && imgHolder && svgHolder) {
+    if (
+      mount &&
+      visViewMode == 'aggregate' &&
+      imgHolder &&
+      svgHolder &&
+      sessionData
+    ) {
       contourMapBlur(sessionData, imgHolder, svgHolder, data.url);
-    } else if (mount && visViewMode == 'point' && imgHolder && svgHolder) {
+    } else if (
+      mount &&
+      visViewMode == 'point' &&
+      imgHolder &&
+      svgHolder &&
+      sessionData
+    ) {
       pointVis(sessionData, imgHolder, svgHolder, data.url);
     }
   }
