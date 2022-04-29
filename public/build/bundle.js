@@ -33037,7 +33037,7 @@ var app = (function () {
     			create_component(record.$$.fragment);
     			set_style(div, "height", "auto");
     			set_style(div, "width", "auto");
-    			add_location(div, file, 78, 4, 1782);
+    			add_location(div, file, 78, 4, 1860);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -33093,7 +33093,7 @@ var app = (function () {
     			create_component(gallery.$$.fragment);
     			set_style(div, "height", "auto");
     			set_style(div, "width", "auto");
-    			add_location(div, file, 74, 4, 1655);
+    			add_location(div, file, 74, 4, 1729);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -33182,13 +33182,13 @@ var app = (function () {
     			html = element("html");
     			script = element("script");
     			attr_dev(div, "class", "container");
-    			add_location(div, file, 69, 2, 1524);
-    			add_location(main, file, 67, 0, 1502);
+    			add_location(div, file, 69, 2, 1593);
+    			add_location(main, file, 67, 0, 1569);
     			document_1.title = "How We Gaze";
     			attr_dev(html, "lang", "en");
-    			add_location(html, file, 87, 1, 1939);
+    			add_location(html, file, 87, 1, 2026);
     			if (!src_url_equal(script.src, script_src_value = "./assets/webgazer.min.js")) attr_dev(script, "src", script_src_value);
-    			add_location(script, file, 88, 2, 1962);
+    			add_location(script, file, 88, 2, 2050);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
