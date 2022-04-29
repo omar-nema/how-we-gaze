@@ -155,9 +155,37 @@
         chipText="Technical"
       >
         <p>
-          Here's how the main visualization works: first, using webgazer.js, I
-          record
+          First, each gaze recording session is recorded as a series of points.
         </p>
+
+        <div class="img-holder small" style="flex-direction: column">
+          <img style="width: 100%" src="./assets/img/process/visExplain1.svg" />
+        </div>
+
+        <p>
+          Using the marching squares algorithm (built into <a
+            href="https://github.com/d3/d3-contour">d3 contour</a
+          >), all recorded points are grouped into contours. Note that points on
+          the bottom right are not dense enough to be grouped into a contour (so
+          anomalies are accounted for).
+        </p>
+
+        <div class="img-holder small" style="flex-direction: column">
+          <img style="width: 100%" src="./assets/img/process/visExplain2.svg" />
+        </div>
+
+        <p>
+          Next, I overlay the corresponding piece of the image onto the contour
+          using SVG clip-path. I then add a blur effect based on the number of
+          points in the contour: contours with higher point density have lower
+          point density, and vice-versa. Note that the images in the gallery
+          appear 'smoother' because there are more contours and points to draw
+          from (typically 4000 points, and 30 contours).
+        </p>
+
+        <div class="img-holder small" style="flex-direction: column">
+          <img style="width: 100%" src="./assets/img/process/visExplain3.svg" />
+        </div>
       </AboutAccordion>
 
       <AboutAccordion
@@ -188,6 +216,9 @@
     display: flex;
     margin: auto;
     padding: 13px 0;
+  }
+  .img-holder.small img {
+    max-width: 500px;
   }
   img {
     margin: auto;

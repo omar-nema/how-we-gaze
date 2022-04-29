@@ -90,7 +90,7 @@
     {#if i == 0}
       <GalleryCard data={img} visViewMode={'aggregate'} />
     {:else}
-      <GalleryCard data={img} visViewMode={'slice'} />
+      <GalleryCard data={img} visViewMode={'aggregate'} />
     {/if}
   {/each}
 </div>

@@ -22585,6 +22585,8 @@ var app = (function () {
         .bandwidth(bandwidth)
         .thresholds(thresholds)(data);
 
+      console.log(url, data, contours);
+
       let minCoords = min(contours, (d) => d.value);
       let maxCoords = max(contours, (d) => d.value);
 
@@ -30499,7 +30501,7 @@ var app = (function () {
     	gallerycard = new GalleryCard({
     			props: {
     				data: /*img*/ ctx[7],
-    				visViewMode: 'slice'
+    				visViewMode: 'aggregate'
     			},
     			$$inline: true
     		});
@@ -35789,7 +35791,7 @@ var app = (function () {
     			main = element("main");
     			if (default_slot) default_slot.c();
     			attr_dev(main, "id", "modal");
-    			attr_dev(main, "class", "svelte-16oqat2");
+    			attr_dev(main, "class", "svelte-li4y8f");
     			add_location(main, file$5, 15, 0, 298);
     		},
     		l: function claim(nodes) {
@@ -37199,7 +37201,7 @@ var app = (function () {
     			transition_in(default_slot, local);
 
     			add_render_callback(() => {
-    				if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 100 }, true);
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 200 }, true);
     				div_transition.run(1);
     			});
 
@@ -37207,7 +37209,7 @@ var app = (function () {
     		},
     		o: function outro(local) {
     			transition_out(default_slot, local);
-    			if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 100 }, false);
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 200 }, false);
     			div_transition.run(0);
     			current = false;
     		},
@@ -37600,19 +37602,19 @@ var app = (function () {
     			add_location(p1, file$1, 50, 8, 1983);
     			set_style(img0, "width", "45%");
     			if (!src_url_equal(img0.src, img0_src_value = "./assets/img/process/pointmaphiresNocont.png")) attr_dev(img0, "src", img0_src_value);
-    			attr_dev(img0, "class", "svelte-15e5l9m");
+    			attr_dev(img0, "class", "svelte-nbqm0b");
     			add_location(img0, file$1, 58, 10, 2421);
     			set_style(img1, "width", "45%");
     			if (!src_url_equal(img1.src, img1_src_value = "./assets/img/process/contourmap.png")) attr_dev(img1, "src", img1_src_value);
-    			attr_dev(img1, "class", "svelte-15e5l9m");
+    			attr_dev(img1, "class", "svelte-nbqm0b");
     			add_location(img1, file$1, 62, 10, 2547);
-    			attr_dev(div0, "class", "img-holder svelte-15e5l9m");
+    			attr_dev(div0, "class", "img-holder svelte-nbqm0b");
     			add_location(div0, file$1, 57, 8, 2385);
     			add_location(p2, file$1, 64, 8, 2641);
     			if (!src_url_equal(img2.src, img2_src_value = "./assets/img/process/blurmap.png")) attr_dev(img2, "src", img2_src_value);
-    			attr_dev(img2, "class", "svelte-15e5l9m");
+    			attr_dev(img2, "class", "svelte-nbqm0b");
     			add_location(img2, file$1, 74, 10, 3250);
-    			attr_dev(div1, "class", "img-holder svelte-15e5l9m");
+    			attr_dev(div1, "class", "img-holder svelte-nbqm0b");
     			add_location(div1, file$1, 73, 8, 3214);
     		},
     		m: function mount(target, anchor) {
@@ -37741,9 +37743,9 @@ var app = (function () {
     			add_location(p1, file$1, 112, 8, 4730);
     			set_style(img, "width", "100%");
     			if (!src_url_equal(img.src, img_src_value = "./assets/img/process/accuracy.png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "class", "svelte-15e5l9m");
+    			attr_dev(img, "class", "svelte-nbqm0b");
     			add_location(img, file$1, 119, 10, 5042);
-    			attr_dev(div, "class", "img-holder svelte-15e5l9m");
+    			attr_dev(div, "class", "img-holder svelte-nbqm0b");
     			add_location(div, file$1, 118, 8, 5006);
     			add_location(p2, file$1, 122, 8, 5137);
     		},
@@ -37797,9 +37799,9 @@ var app = (function () {
     			add_location(p, file$1, 135, 8, 5682);
     			set_style(img, "width", "100%");
     			if (!src_url_equal(img.src, img_src_value = "./assets/img/process/calibrateProcess.png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "class", "noStyle svelte-15e5l9m");
+    			attr_dev(img, "class", "noStyle svelte-nbqm0b");
     			add_location(img, file$1, 144, 10, 6077);
-    			attr_dev(div, "class", "img-holder svelte-15e5l9m");
+    			attr_dev(div, "class", "img-holder svelte-nbqm0b");
     			add_location(div, file$1, 143, 8, 6041);
     		},
     		m: function mount(target, anchor) {
@@ -37828,19 +37830,107 @@ var app = (function () {
 
     // (153:6) <AboutAccordion          questionText={'How did you create the visuals for this project?'}          chipText="Technical"        >
     function create_default_slot_2(ctx) {
-    	let p;
+    	let p0;
+    	let t1;
+    	let div0;
+    	let img0;
+    	let img0_src_value;
+    	let t2;
+    	let p1;
+    	let t3;
+    	let a;
+    	let t5;
+    	let t6;
+    	let div1;
+    	let img1;
+    	let img1_src_value;
+    	let t7;
+    	let p2;
+    	let t9;
+    	let div2;
+    	let img2;
+    	let img2_src_value;
 
     	const block = {
     		c: function create() {
-    			p = element("p");
-    			p.textContent = "Here's how the main visualization works: first, using webgazer.js, I\r\n          record";
-    			add_location(p, file$1, 156, 8, 6408);
+    			p0 = element("p");
+    			p0.textContent = "First, each gaze recording session is recorded as a series of points.";
+    			t1 = space();
+    			div0 = element("div");
+    			img0 = element("img");
+    			t2 = space();
+    			p1 = element("p");
+    			t3 = text("Using the marching squares algorithm (built into ");
+    			a = element("a");
+    			a.textContent = "d3 contour";
+    			t5 = text("), all recorded points are grouped into contours. Note that points on\r\n          the bottom right are not dense enough to be grouped into a contour (so\r\n          anomalies are accounted for).");
+    			t6 = space();
+    			div1 = element("div");
+    			img1 = element("img");
+    			t7 = space();
+    			p2 = element("p");
+    			p2.textContent = "Next, I overlay the corresponding piece of the image onto the contour\r\n          using SVG clip-path. I then add a blur effect based on the number of\r\n          points in the contour: contours with higher point density have lower\r\n          point density, and vice-versa. Note that the images in the gallery\r\n          appear 'smoother' because there are more contours and points to draw\r\n          from (typically 4000 points, and 30 contours).";
+    			t9 = space();
+    			div2 = element("div");
+    			img2 = element("img");
+    			add_location(p0, file$1, 156, 8, 6408);
+    			set_style(img0, "width", "100%");
+    			if (!src_url_equal(img0.src, img0_src_value = "./assets/img/process/visExplain1.svg")) attr_dev(img0, "src", img0_src_value);
+    			attr_dev(img0, "class", "svelte-nbqm0b");
+    			add_location(img0, file$1, 161, 10, 6591);
+    			attr_dev(div0, "class", "img-holder small svelte-nbqm0b");
+    			set_style(div0, "flex-direction", "column");
+    			add_location(div0, file$1, 160, 8, 6518);
+    			attr_dev(a, "href", "https://github.com/d3/d3-contour");
+    			add_location(a, file$1, 165, 59, 6753);
+    			add_location(p1, file$1, 164, 8, 6689);
+    			set_style(img1, "width", "100%");
+    			if (!src_url_equal(img1.src, img1_src_value = "./assets/img/process/visExplain2.svg")) attr_dev(img1, "src", img1_src_value);
+    			attr_dev(img1, "class", "svelte-nbqm0b");
+    			add_location(img1, file$1, 173, 10, 7126);
+    			attr_dev(div1, "class", "img-holder small svelte-nbqm0b");
+    			set_style(div1, "flex-direction", "column");
+    			add_location(div1, file$1, 172, 8, 7053);
+    			add_location(p2, file$1, 176, 8, 7224);
+    			set_style(img2, "width", "100%");
+    			if (!src_url_equal(img2.src, img2_src_value = "./assets/img/process/visExplain3.svg")) attr_dev(img2, "src", img2_src_value);
+    			attr_dev(img2, "class", "svelte-nbqm0b");
+    			add_location(img2, file$1, 186, 10, 7783);
+    			attr_dev(div2, "class", "img-holder small svelte-nbqm0b");
+    			set_style(div2, "flex-direction", "column");
+    			add_location(div2, file$1, 185, 8, 7710);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, p, anchor);
+    			insert_dev(target, p0, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, div0, anchor);
+    			append_dev(div0, img0);
+    			insert_dev(target, t2, anchor);
+    			insert_dev(target, p1, anchor);
+    			append_dev(p1, t3);
+    			append_dev(p1, a);
+    			append_dev(p1, t5);
+    			insert_dev(target, t6, anchor);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, img1);
+    			insert_dev(target, t7, anchor);
+    			insert_dev(target, p2, anchor);
+    			insert_dev(target, t9, anchor);
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, img2);
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p);
+    			if (detaching) detach_dev(p0);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(div0);
+    			if (detaching) detach_dev(t2);
+    			if (detaching) detach_dev(p1);
+    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(t7);
+    			if (detaching) detach_dev(p2);
+    			if (detaching) detach_dev(t9);
+    			if (detaching) detach_dev(div2);
     		}
     	};
 
@@ -37855,7 +37945,7 @@ var app = (function () {
     	return block;
     }
 
-    // (163:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText="Technical"        >
+    // (191:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText="Technical"        >
     function create_default_slot_1(ctx) {
     	let p;
 
@@ -37863,7 +37953,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "This project was built using open-source web libraries. I used Svelte\r\n          as framework, d3.js for generating visualizations, Firebase to store\r\n          data in real-time, and webgazer.js for recording webcam viewing\r\n          sessions. I also used Observable to process data and explore\r\n          visualizations, and Figma to design the interface.";
-    			add_location(p, file$1, 166, 8, 6708);
+    			add_location(p, file$1, 194, 8, 8054);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -37877,7 +37967,7 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(163:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText=\\\"Technical\\\"        >",
+    		source: "(191:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText=\\\"Technical\\\"        >",
     		ctx
     	});
 
@@ -38027,9 +38117,9 @@ var app = (function () {
     			add_location(div0, file$1, 10, 6, 299);
     			attr_dev(div1, "class", "cont-header");
     			add_location(div1, file$1, 8, 4, 232);
-    			attr_dev(div2, "class", "cont-body svelte-15e5l9m");
+    			attr_dev(div2, "class", "cont-body svelte-nbqm0b");
     			add_location(div2, file$1, 19, 4, 512);
-    			attr_dev(div3, "class", "inner svelte-15e5l9m");
+    			attr_dev(div3, "class", "inner svelte-nbqm0b");
     			add_location(div3, file$1, 7, 2, 207);
     		},
     		m: function mount(target, anchor) {

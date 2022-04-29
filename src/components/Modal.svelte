@@ -26,10 +26,11 @@
     top: 0;
     left: 0;
     z-index: 1000;
+
     background: linear-gradient(
         160deg,
         rgb(250 253 255) 0%,
-        rgb(203 241 250) 50%,
+        rgb(228 243 247) 50%,
         rgb(240, 240, 240) 100%
       )
       fixed;
