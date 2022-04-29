@@ -141,7 +141,7 @@
           below).
         </p>
 
-        <div class="img-holder">
+        <div class="img-holder small">
           <img
             style="width: 100%"
             src="./assets/img/process/calibrateProcess.png"

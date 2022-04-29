@@ -47,7 +47,7 @@
   </div>
   <div class="answer" class:show={$activeAccordionIndex == thisIndex}>
     {#if expanded}
-      <div transition:slide={{ duration: 200 }}>
+      <div transition:slide={{ duration: 150 }}>
         <slot />
       </div>
     {/if}

@@ -67,7 +67,7 @@
 </script>
 
 <div class="card-holder">
-  <div class="card-outer intro">
+  <div class="card-outer intro" style="font-size: 16px; font-weight: 400;">
     <p>
       Welcome to the Gallery! Each collection below visualizes how individuals
       gazed at a particular piece of artwork. Study the existing gazes in this

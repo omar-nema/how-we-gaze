@@ -30696,16 +30696,18 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			add_location(p0, file$g, 70, 4, 2080);
+    			add_location(p0, file$g, 70, 4, 2123);
     			attr_dev(span, "class", "material-icons-round");
     			set_style(span, "font-size", "12px");
-    			add_location(span, file$g, 80, 8, 2473);
+    			add_location(span, file$g, 80, 8, 2516);
     			attr_dev(a, "href", "https://www.si.edu/openaccess");
     			attr_dev(a, "target", "_blank");
     			attr_dev(a, "class", "svelte-1rryqxm");
-    			add_location(a, file$g, 76, 60, 2357);
-    			add_location(p1, file$g, 75, 4, 2292);
+    			add_location(a, file$g, 76, 60, 2400);
+    			add_location(p1, file$g, 75, 4, 2335);
     			attr_dev(div0, "class", "card-outer intro svelte-1rryqxm");
+    			set_style(div0, "font-size", "16px");
+    			set_style(div0, "font-weight", "400");
     			add_location(div0, file$g, 69, 2, 2044);
     			attr_dev(div1, "class", "card-holder svelte-1rryqxm");
     			add_location(div1, file$g, 68, 0, 2015);
@@ -37201,7 +37203,7 @@ var app = (function () {
     			transition_in(default_slot, local);
 
     			add_render_callback(() => {
-    				if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 200 }, true);
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 150 }, true);
     				div_transition.run(1);
     			});
 
@@ -37209,7 +37211,7 @@ var app = (function () {
     		},
     		o: function outro(local) {
     			transition_out(default_slot, local);
-    			if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 200 }, false);
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, slide, { duration: 150 }, false);
     			div_transition.run(0);
     			current = false;
     		},
@@ -37800,8 +37802,8 @@ var app = (function () {
     			set_style(img, "width", "100%");
     			if (!src_url_equal(img.src, img_src_value = "./assets/img/process/calibrateProcess.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "class", "noStyle svelte-nbqm0b");
-    			add_location(img, file$1, 144, 10, 6077);
-    			attr_dev(div, "class", "img-holder svelte-nbqm0b");
+    			add_location(img, file$1, 144, 10, 6083);
+    			attr_dev(div, "class", "img-holder small svelte-nbqm0b");
     			add_location(div, file$1, 143, 8, 6041);
     		},
     		m: function mount(target, anchor) {
@@ -37873,32 +37875,32 @@ var app = (function () {
     			t9 = space();
     			div2 = element("div");
     			img2 = element("img");
-    			add_location(p0, file$1, 156, 8, 6408);
+    			add_location(p0, file$1, 156, 8, 6414);
     			set_style(img0, "width", "100%");
     			if (!src_url_equal(img0.src, img0_src_value = "./assets/img/process/visExplain1.svg")) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "class", "svelte-nbqm0b");
-    			add_location(img0, file$1, 161, 10, 6591);
+    			add_location(img0, file$1, 161, 10, 6597);
     			attr_dev(div0, "class", "img-holder small svelte-nbqm0b");
     			set_style(div0, "flex-direction", "column");
-    			add_location(div0, file$1, 160, 8, 6518);
+    			add_location(div0, file$1, 160, 8, 6524);
     			attr_dev(a, "href", "https://github.com/d3/d3-contour");
-    			add_location(a, file$1, 165, 59, 6753);
-    			add_location(p1, file$1, 164, 8, 6689);
+    			add_location(a, file$1, 165, 59, 6759);
+    			add_location(p1, file$1, 164, 8, 6695);
     			set_style(img1, "width", "100%");
     			if (!src_url_equal(img1.src, img1_src_value = "./assets/img/process/visExplain2.svg")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "class", "svelte-nbqm0b");
-    			add_location(img1, file$1, 173, 10, 7126);
+    			add_location(img1, file$1, 173, 10, 7132);
     			attr_dev(div1, "class", "img-holder small svelte-nbqm0b");
     			set_style(div1, "flex-direction", "column");
-    			add_location(div1, file$1, 172, 8, 7053);
-    			add_location(p2, file$1, 176, 8, 7224);
+    			add_location(div1, file$1, 172, 8, 7059);
+    			add_location(p2, file$1, 176, 8, 7230);
     			set_style(img2, "width", "100%");
     			if (!src_url_equal(img2.src, img2_src_value = "./assets/img/process/visExplain3.svg")) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "class", "svelte-nbqm0b");
-    			add_location(img2, file$1, 186, 10, 7783);
+    			add_location(img2, file$1, 186, 10, 7789);
     			attr_dev(div2, "class", "img-holder small svelte-nbqm0b");
     			set_style(div2, "flex-direction", "column");
-    			add_location(div2, file$1, 185, 8, 7710);
+    			add_location(div2, file$1, 185, 8, 7716);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p0, anchor);
@@ -37953,7 +37955,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "This project was built using open-source web libraries. I used Svelte\r\n          as framework, d3.js for generating visualizations, Firebase to store\r\n          data in real-time, and webgazer.js for recording webcam viewing\r\n          sessions. I also used Observable to process data and explore\r\n          visualizations, and Figma to design the interface.";
-    			add_location(p, file$1, 194, 8, 8054);
+    			add_location(p, file$1, 194, 8, 8060);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
