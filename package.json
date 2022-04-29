@@ -6,7 +6,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
-    "deploy": "npm run build && npx gh-pages -d build"
+    "deploy": "npm run build && npx gh-pages -d public"
   },
   "devDependencies": {
     "@bulatdashiev/svelte-slider": "^1.0.3",
