@@ -10,6 +10,7 @@
   "devDependencies": {
     "@bulatdashiev/svelte-slider": "^1.0.3",
     "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "dotenv-webpack": "^7.0.3",
     "rollup": "^2.3.4",
@@ -21,7 +22,6 @@
     "svelte-swipe": "^1.8.2"
   },
   "dependencies": {
-    "@rollup/plugin-json": "^4.1.0",
     "d3": "^7.1.1",
     "dotenv": "^10.0.0",
     "firebase": "^9.1.3",

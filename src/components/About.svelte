@@ -24,7 +24,7 @@
       >
         <p>
           Broadly, my work as both a practioner and educator focuses on using
-          data and technology to create visceral, evocative experiences.
+          data and technology to augment communication and perception.
         </p>
         <p>
           For this project in particular, I was tasked with visualizing data
@@ -33,7 +33,7 @@
           the context accompanying a piece of artwork was not always enough to
           help me understand and connect with it. Viewing art is a visceral
           experience - it is difficult to put into words. I wondered - could I
-          somehow create a tool that enables me to see how others are looking at
+          create a tool that enables me to see how others are looking at
           artwork? A series of explorations related to this anchor question led
           me to develop the concept of using eye-tracking to visualize gazes.
         </p>
