@@ -38,7 +38,7 @@
   //CUSTOM WIDTH AND HEIGHT CALC
   let dimWidthToHt = data.width / data.height;
   //cardwidth should be n
-  let maxW = Math.min($screenWidth, 800),
+  let maxW = Math.min($screenWidth, 1050),
     maxH = $screenHeight - 220;
   let width = 'auto',
     ht = 'auto',

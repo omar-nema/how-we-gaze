@@ -78,7 +78,7 @@
 
       <AboutAccordion
         questionText={'How did you create the blurry visuals for this project?'}
-        chipText="Prcoess"
+        chipText="Process"
       >
         <p>
           In order to create the 'aggregate' blur visual used to represent each
@@ -119,12 +119,15 @@
       </AboutAccordion>
 
       <AboutAccordion
-        questionText={'Can I add my artwork to the gallery?'}
+        questionText={'Can I add artwork to the gallery?'}
         chipText="Curation"
       >
         <p>
-          Yes! Email me at omar.nema@newschool.edu if you're interested to host
-          your own work here.
+          I would love to take suggestions on what to include in the gallery!
+          Please fill out this <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSd8ALICBzpHRIgFI8BHoQekxhPbEPxabOzPr3H_DS8y_VT56Q/viewform"
+            >form</a
+          > if you're interested in suggesting a work!
         </p>
       </AboutAccordion>
 

@@ -183,8 +183,8 @@
   }
 
   .btn-about {
-    border-radius: 0;
-    padding: 5px 10px;
+    border-radius: 5px;
+    padding: 0px 10px;
   }
   .btn.active {
     color: var(--color-accent);
@@ -199,6 +199,8 @@
     display: flex;
     align-items: center;
     margin-left: 20px;
+    border-radius: 5px;
+    overflow: hidden;
   }
   nav .material-icons-round {
     font-size: 20px;
@@ -211,18 +213,15 @@
   }
   nav div {
     cursor: pointer;
-
     display: flex;
     align-items: center;
-
-    margin: 0 5px;
     justify-content: center;
+    padding: 0 3px;
   }
 
   nav div,
   .btn-about {
     background: #ffffff8f;
-    border-radius: 5px;
     transition: background 0.15s ease-in-out;
   }
 

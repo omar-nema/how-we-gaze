@@ -864,7 +864,7 @@ var app = (function () {
     let tooltipY = writable(null);
     let tooltipShow = writable(false);
 
-    let offlineMode = writable(false);
+    let offlineMode = writable(true);
     let offlineData = writable({});
 
     let activeAccordionIndex = writable(null);
@@ -22805,7 +22805,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(tooltip.$$.fragment);
-    			add_location(div, file$l, 61, 2, 1509);
+    			add_location(div, file$l, 61, 2, 1510);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -23030,13 +23030,13 @@ var app = (function () {
     			attr_dev(span, "class", "material-icons-round md-18 nav");
     			set_style(span, "font-size", "20px");
     			set_style(span, "color", "white");
-    			add_location(span, file$l, 93, 10, 2491);
+    			add_location(span, file$l, 93, 10, 2492);
     			attr_dev(div0, "class", "reaction-pin-inner");
-    			add_location(div0, file$l, 92, 8, 2447);
+    			add_location(div0, file$l, 92, 8, 2448);
     			attr_dev(div1, "class", "reaction-pin svelte-1xta71e");
     			set_style(div1, "left", 100 * /*reaction*/ ctx[33].xPct + "%");
     			set_style(div1, "top", 100 * /*reaction*/ ctx[33].yPct + "%");
-    			add_location(div1, file$l, 72, 6, 1844);
+    			add_location(div1, file$l, 72, 6, 1845);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -23136,15 +23136,15 @@ var app = (function () {
     			span1 = element("span");
     			span1.textContent = "arrow_right";
     			attr_dev(span0, "class", "material-icons-round svelte-1xta71e");
-    			add_location(span0, file$l, 116, 6, 3016);
+    			add_location(span0, file$l, 116, 6, 3017);
     			attr_dev(div0, "class", "personToggle prev clickable svelte-1xta71e");
     			toggle_class(div0, "disabled", /*sessionIndex*/ ctx[1] == 0);
-    			add_location(div0, file$l, 109, 4, 2852);
+    			add_location(div0, file$l, 109, 4, 2853);
     			attr_dev(span1, "class", "material-icons-round svelte-1xta71e");
-    			add_location(span1, file$l, 125, 6, 3267);
+    			add_location(span1, file$l, 125, 6, 3268);
     			attr_dev(div1, "class", "personToggle next clickable svelte-1xta71e");
     			toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*personLength*/ ctx[7] - 1);
-    			add_location(div1, file$l, 118, 4, 3088);
+    			add_location(div1, file$l, 118, 4, 3089);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -23210,7 +23210,7 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			add_location(div, file$l, 144, 4, 3799);
+    			add_location(div, file$l, 144, 4, 3800);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -23277,7 +23277,7 @@ var app = (function () {
     			set_style(img, "filter", "blur(" + /*clip*/ ctx[30].blur + "px)");
     			set_style(img, "opacity", "$" + /*clip*/ ctx[30].opacity);
     			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) attr_dev(img, "src", img_src_value);
-    			add_location(img, file$l, 146, 8, 3866);
+    			add_location(img, file$l, 146, 8, 3867);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -23351,7 +23351,7 @@ var app = (function () {
     			attr_dev(img, "class", "main svelte-1xta71e");
     			toggle_class(img, "slice", /*visViewMode*/ ctx[5] == 'slice');
     			toggle_class(img, "agg", /*visViewMode*/ ctx[5] == 'aggregate');
-    			add_location(img, file$l, 128, 2, 3347);
+    			add_location(img, file$l, 128, 2, 3348);
     			attr_dev(svg, "class", "contour svelte-1xta71e");
     			attr_dev(svg, "id", svg_id_value = "" + (/*data*/ ctx[4].key + "-contour"));
     			set_style(svg, "width", "100%");
@@ -23361,13 +23361,13 @@ var app = (function () {
     			set_style(svg, "left", "0");
     			set_style(svg, "z-index", "10");
     			toggle_class(svg, "active", /*visViewMode*/ ctx[5] == 'aggregate' || /*visViewMode*/ ctx[5] == 'point');
-    			add_location(svg, file$l, 135, 2, 3513);
+    			add_location(svg, file$l, 135, 2, 3514);
     			attr_dev(div, "class", "img-holder swipe-holder svelte-1xta71e");
     			set_style(div, "width", /*width*/ ctx[11]);
     			set_style(div, "height", /*ht*/ ctx[12]);
     			set_style(div, "max-width", /*data*/ ctx[4].width + "px");
     			set_style(div, "max-height", /*data*/ ctx[4].height + "px");
-    			add_location(div, file$l, 65, 0, 1585);
+    			add_location(div, file$l, 65, 0, 1586);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -23569,7 +23569,7 @@ var app = (function () {
     	let dimWidthToHt = data.width / data.height;
 
     	//cardwidth should be n
-    	let maxW = Math.min($screenWidth, 800), maxH = $screenHeight - 220;
+    	let maxW = Math.min($screenWidth, 1050), maxH = $screenHeight - 220;
 
     	let width = 'auto', ht = 'auto', styleSubstring = '';
 
@@ -31052,7 +31052,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			span.textContent = "Gaze";
-    			attr_dev(span, "class", "header-sub accent svelte-e0kscv");
+    			attr_dev(span, "class", "header-sub accent svelte-18r97f");
     			toggle_class(span, "active", /*$pageState*/ ctx[1] === 'record');
     			add_location(span, file$f, 46, 10, 1242);
     		},
@@ -31088,7 +31088,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			span.textContent = "Gallery";
-    			attr_dev(span, "class", "header-sub accent svelte-e0kscv");
+    			attr_dev(span, "class", "header-sub accent svelte-18r97f");
     			toggle_class(span, "active", /*$pageState*/ ctx[1] === 'gallery');
     			add_location(span, file$f, 39, 10, 1063);
     		},
@@ -31139,11 +31139,11 @@ var app = (function () {
     			div = element("div");
     			span = element("span");
     			span.textContent = "view_module";
-    			attr_dev(span, "class", "material-icons-round svelte-e0kscv");
+    			attr_dev(span, "class", "material-icons-round svelte-18r97f");
     			add_location(span, file$f, 104, 14, 2843);
-    			attr_dev(div, "class", "svelte-e0kscv");
+    			attr_dev(div, "class", "svelte-18r97f");
     			add_location(div, file$f, 99, 12, 2717);
-    			attr_dev(nav, "class", "svelte-e0kscv");
+    			attr_dev(nav, "class", "svelte-18r97f");
     			add_location(nav, file$f, 76, 10, 2055);
     		},
     		m: function mount(target, anchor) {
@@ -31246,9 +31246,9 @@ var app = (function () {
     			t1 = space();
     			div1 = element("div");
     			div1.textContent = "About";
-    			attr_dev(div0, "class", "btn clickable active btn-about svelte-e0kscv");
+    			attr_dev(div0, "class", "btn clickable active btn-about svelte-18r97f");
     			add_location(div0, file$f, 57, 12, 1540);
-    			attr_dev(div1, "class", "btn clickable active btn-about svelte-e0kscv");
+    			attr_dev(div1, "class", "btn clickable active btn-about svelte-18r97f");
     			add_location(div1, file$f, 66, 12, 1790);
     		},
     		m: function mount(target, anchor) {
@@ -31330,13 +31330,13 @@ var app = (function () {
     			div1 = element("div");
     			span1 = element("span");
     			span1.textContent = "keyboard_arrow_down";
-    			attr_dev(span0, "class", "material-icons-round svelte-e0kscv");
+    			attr_dev(span0, "class", "material-icons-round svelte-18r97f");
     			add_location(span0, file$f, 79, 16, 2138);
-    			attr_dev(div0, "class", "svelte-e0kscv");
+    			attr_dev(div0, "class", "svelte-18r97f");
     			add_location(div0, file$f, 78, 14, 2115);
-    			attr_dev(span1, "class", "material-icons-round svelte-e0kscv");
+    			attr_dev(span1, "class", "material-icons-round svelte-18r97f");
     			add_location(span1, file$f, 89, 16, 2430);
-    			attr_dev(div1, "class", "svelte-e0kscv");
+    			attr_dev(div1, "class", "svelte-18r97f");
     			add_location(div1, file$f, 88, 14, 2407);
     		},
     		m: function mount(target, anchor) {
@@ -31430,23 +31430,23 @@ var app = (function () {
     			span3 = element("span");
     			span3.textContent = "Back to Gallery";
     			add_location(span0, file$f, 36, 8, 948);
-    			attr_dev(span1, "class", "divider svelte-e0kscv");
+    			attr_dev(span1, "class", "divider svelte-18r97f");
     			add_location(span1, file$f, 37, 8, 982);
     			attr_dev(div0, "class", "header-left");
     			add_location(div0, file$f, 35, 6, 913);
-    			attr_dev(span2, "class", "material-icons-round svelte-e0kscv");
+    			attr_dev(span2, "class", "material-icons-round svelte-18r97f");
     			add_location(span2, file$f, 119, 10, 3310);
     			add_location(span3, file$f, 121, 10, 3378);
-    			attr_dev(div1, "class", "btn clickable svelte-e0kscv");
+    			attr_dev(div1, "class", "btn clickable svelte-18r97f");
     			toggle_class(div1, "active", /*$pageState*/ ctx[1] === 'record');
     			add_location(div1, file$f, 108, 8, 2961);
-    			attr_dev(div2, "class", "header-right svelte-e0kscv");
+    			attr_dev(div2, "class", "header-right svelte-18r97f");
     			add_location(div2, file$f, 54, 6, 1425);
-    			attr_dev(div3, "class", "header-content svelte-e0kscv");
+    			attr_dev(div3, "class", "header-content svelte-18r97f");
     			add_location(div3, file$f, 34, 4, 877);
-    			attr_dev(div4, "class", "header-wrapper svelte-e0kscv");
+    			attr_dev(div4, "class", "header-wrapper svelte-18r97f");
     			add_location(div4, file$f, 33, 2, 843);
-    			attr_dev(header, "class", "svelte-e0kscv");
+    			attr_dev(header, "class", "svelte-18r97f");
     			add_location(header, file$f, 25, 0, 715);
     		},
     		l: function claim(nodes) {
@@ -37777,7 +37777,7 @@ var app = (function () {
     	return block;
     }
 
-    // (79:6) <AboutAccordion          questionText={'How did you create the blurry visuals for this project?'}          chipText="Prcoess"        >
+    // (79:6) <AboutAccordion          questionText={'How did you create the blurry visuals for this project?'}          chipText="Process"        >
     function create_default_slot_6(ctx) {
     	let p0;
     	let t1;
@@ -37887,25 +37887,36 @@ var app = (function () {
     		block,
     		id: create_default_slot_6.name,
     		type: "slot",
-    		source: "(79:6) <AboutAccordion          questionText={'How did you create the blurry visuals for this project?'}          chipText=\\\"Prcoess\\\"        >",
+    		source: "(79:6) <AboutAccordion          questionText={'How did you create the blurry visuals for this project?'}          chipText=\\\"Process\\\"        >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (121:6) <AboutAccordion          questionText={'Can I add my artwork to the gallery?'}          chipText="Curation"        >
+    // (121:6) <AboutAccordion          questionText={'Can I add artwork to the gallery?'}          chipText="Curation"        >
     function create_default_slot_5(ctx) {
     	let p;
+    	let t0;
+    	let a;
+    	let t2;
 
     	const block = {
     		c: function create() {
     			p = element("p");
-    			p.textContent = "Yes! Email me at omar.nema@newschool.edu if you're interested to host\r\n          your own work here.";
-    			add_location(p, file$1, 124, 8, 5399);
+    			t0 = text("I would love to take suggestions on what to include in the gallery!\r\n          Please fill out this ");
+    			a = element("a");
+    			a.textContent = "form";
+    			t2 = text(" if you're interested in suggesting a work!");
+    			attr_dev(a, "href", "https://docs.google.com/forms/d/e/1FAIpQLSd8ALICBzpHRIgFI8BHoQekxhPbEPxabOzPr3H_DS8y_VT56Q/viewform");
+    			add_location(a, file$1, 126, 31, 5511);
+    			add_location(p, file$1, 124, 8, 5396);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
+    			append_dev(p, t0);
+    			append_dev(p, a);
+    			append_dev(p, t2);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(p);
@@ -37916,14 +37927,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_5.name,
     		type: "slot",
-    		source: "(121:6) <AboutAccordion          questionText={'Can I add my artwork to the gallery?'}          chipText=\\\"Curation\\\"        >",
+    		source: "(121:6) <AboutAccordion          questionText={'Can I add artwork to the gallery?'}          chipText=\\\"Curation\\\"        >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (131:6) <AboutAccordion          questionText={'Why did you select these particular images for the gallery?'}          chipText="Curation"        >
+    // (134:6) <AboutAccordion          questionText={'Why did you select these particular images for the gallery?'}          chipText="Curation"        >
     function create_default_slot_4(ctx) {
     	let p;
 
@@ -37931,7 +37942,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "I sought to include a variety of artwork - both in style and time\r\n          period - in the gallery. Because I wanted to include high resolution\r\n          digital images, the works included are fairly modern (1400s or so).\r\n          Shoutout to my friend Rayyan Mikati for helping me select the works in\r\n          this gallery!";
-    			add_location(p, file$1, 134, 8, 5712);
+    			add_location(p, file$1, 137, 8, 5909);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -37945,14 +37956,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(131:6) <AboutAccordion          questionText={'Why did you select these particular images for the gallery?'}          chipText=\\\"Curation\\\"        >",
+    		source: "(134:6) <AboutAccordion          questionText={'Why did you select these particular images for the gallery?'}          chipText=\\\"Curation\\\"        >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (144:6) <AboutAccordion          questionText={'How accurate are the gaze representations in your gallery?'}          chipText="Technical"        >
+    // (147:6) <AboutAccordion          questionText={'How accurate are the gaze representations in your gallery?'}          chipText="Technical"        >
     function create_default_slot_3(ctx) {
     	let p0;
     	let t1;
@@ -37977,15 +37988,15 @@ var app = (function () {
     			t5 = space();
     			div = element("div");
     			img = element("img");
-    			add_location(p0, file$1, 147, 8, 6256);
-    			add_location(p1, file$1, 154, 8, 6648);
-    			add_location(p2, file$1, 160, 8, 6924);
+    			add_location(p0, file$1, 150, 8, 6453);
+    			add_location(p1, file$1, 157, 8, 6845);
+    			add_location(p2, file$1, 163, 8, 7121);
     			set_style(img, "width", "100%");
     			if (!src_url_equal(img.src, img_src_value = "./assets/img/process/accuracy.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "class", "svelte-nbqm0b");
-    			add_location(img, file$1, 168, 10, 7346);
+    			add_location(img, file$1, 171, 10, 7543);
     			attr_dev(div, "class", "img-holder svelte-nbqm0b");
-    			add_location(div, file$1, 167, 8, 7310);
+    			add_location(div, file$1, 170, 8, 7507);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p0, anchor);
@@ -38012,14 +38023,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(144:6) <AboutAccordion          questionText={'How accurate are the gaze representations in your gallery?'}          chipText=\\\"Technical\\\"        >",
+    		source: "(147:6) <AboutAccordion          questionText={'How accurate are the gaze representations in your gallery?'}          chipText=\\\"Technical\\\"        >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (173:6) <AboutAccordion          questionText={'How does the whole eye tracking thing work?'}          chipText="Technical"        >
+    // (176:6) <AboutAccordion          questionText={'How does the whole eye tracking thing work?'}          chipText="Technical"        >
     function create_default_slot_2(ctx) {
     	let p;
     	let t1;
@@ -38034,13 +38045,13 @@ var app = (function () {
     			t1 = space();
     			div = element("div");
     			img = element("img");
-    			add_location(p, file$1, 176, 8, 7598);
+    			add_location(p, file$1, 179, 8, 7795);
     			set_style(img, "width", "100%");
     			if (!src_url_equal(img.src, img_src_value = "./assets/img/process/calibrateProcess.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "class", "noStyle svelte-nbqm0b");
-    			add_location(img, file$1, 185, 10, 7999);
+    			add_location(img, file$1, 188, 10, 8196);
     			attr_dev(div, "class", "img-holder small svelte-nbqm0b");
-    			add_location(div, file$1, 184, 8, 7957);
+    			add_location(div, file$1, 187, 8, 8154);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -38059,14 +38070,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(173:6) <AboutAccordion          questionText={'How does the whole eye tracking thing work?'}          chipText=\\\"Technical\\\"        >",
+    		source: "(176:6) <AboutAccordion          questionText={'How does the whole eye tracking thing work?'}          chipText=\\\"Technical\\\"        >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (194:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText="Technical"        >
+    // (197:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText="Technical"        >
     function create_default_slot_1(ctx) {
     	let p;
 
@@ -38074,7 +38085,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "This project was built using open-source web libraries. I used Svelte\r\n          as framework, d3.js for generating visualizations, Firebase to store\r\n          data in real-time, and webgazer.js for recording webcam viewing\r\n          sessions. I also used Observable to process data and explore\r\n          visualizations, and Figma to design the interface.";
-    			add_location(p, file$1, 197, 8, 8341);
+    			add_location(p, file$1, 200, 8, 8538);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -38088,7 +38099,7 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(194:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText=\\\"Technical\\\"        >",
+    		source: "(197:6) <AboutAccordion          questionText={'What sort of technology and tools did you use to make this?'}          chipText=\\\"Technical\\\"        >",
     		ctx
     	});
 
@@ -38147,7 +38158,7 @@ var app = (function () {
     	aboutaccordion2 = new AboutAccordion({
     			props: {
     				questionText: 'How did you create the blurry visuals for this project?',
-    				chipText: "Prcoess",
+    				chipText: "Process",
     				$$slots: { default: [create_default_slot_6] },
     				$$scope: { ctx }
     			},
@@ -38156,7 +38167,7 @@ var app = (function () {
 
     	aboutaccordion3 = new AboutAccordion({
     			props: {
-    				questionText: 'Can I add my artwork to the gallery?',
+    				questionText: 'Can I add artwork to the gallery?',
     				chipText: "Curation",
     				$$slots: { default: [create_default_slot_5] },
     				$$scope: { ctx }
