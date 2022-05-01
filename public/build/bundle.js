@@ -864,7 +864,7 @@ var app = (function () {
     let tooltipY = writable(null);
     let tooltipShow = writable(false);
 
-    let offlineMode = writable(true);
+    let offlineMode = writable(false);
     let offlineData = writable({});
 
     let activeAccordionIndex = writable(null);
