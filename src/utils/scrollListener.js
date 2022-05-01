@@ -1,4 +1,4 @@
-import { cardInView, scrollThresh } from '../stores/pageState';
+import { cardInView, cardInViewNext, scrollThresh } from '../stores/pageState';
 
 export function initScroll() {
   window.addEventListener('scroll', (e) => {
@@ -10,12 +10,15 @@ export function initScroll() {
 
     let ctrPt = window.innerHeight / 2;
     let cards = document.querySelectorAll('.card-outer');
-    cards.forEach((d) => {
+    cards.forEach((d, i) => {
       let boundingRect = d.getBoundingClientRect();
       if (
         ctrPt >= boundingRect.top &&
         ctrPt < boundingRect.height + boundingRect.top
       ) {
+        if (i < cards.length - 1) {
+          cardInViewNext.set(cards[i + 1].id);
+        }
         cardInView.set(d.id);
       }
     });

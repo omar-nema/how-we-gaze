@@ -165,6 +165,7 @@
     return await dbWrite('sessionData/' + $sessionID, $gazerRecordingArt);
   }
   if ($testMode == 0) {
+    console.log('writing now');
     storeSessionData();
     writeSessionToArtwork();
   }

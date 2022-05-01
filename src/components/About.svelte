@@ -77,85 +77,15 @@
       </AboutAccordion>
 
       <AboutAccordion
-        questionText={'Can I add my artwork to the gallery?'}
-        chipText="Curation"
+        questionText={'How did you create the blurry visuals for this project?'}
+        chipText="Prcoess"
       >
         <p>
-          Yes! Email me at omar.nema@newschool.edu if you're interested to host
-          your own work here.
-        </p>
-      </AboutAccordion>
-
-      <AboutAccordion
-        questionText={'Why did you select these particular images for the gallery?'}
-        chipText="Curation"
-      >
-        <p>
-          I sought to include a variety of artwork - both in style and time
-          period - in the gallery. Because I wanted to include high resolution
-          digital images, the works included are fairly modern (1400s or so).
-          Special shoutout to my friend Rayyan Mikati for helping me select the
-          works in this gallery.
-        </p>
-      </AboutAccordion>
-
-      <AboutAccordion
-        questionText={'How accurate are the gaze representations in your gallery?'}
-        chipText="Technical"
-      >
-        <p>
-          Gazes can submitted to the gallery only after a webcam is calibrated
-          with an accuracy rate of 75% or higher. Generally, accuracy for
-          submitted gazes ranges from 75% to 85%. This means that the margin of
-          error ranges from 12.5% to 7.5% of the container width used to
-          calibrate the eye tracker (pictured below).
-        </p>
-        <p>
-          Given the substantial margin of error, a single point is not very
-          accurate. However, each 20 second viewing session includes roughly
-          4000 points. A combination all of these points will shows clear
-          trends.
-        </p>
-        <div class="img-holder">
-          <img style="width: 100%" src="./assets/img/process/accuracy.png" />
-        </div>
-
-        <p>
-          Screen size, lighting, and webcam quality affect accuracy. Generally,
-          eye-tracking experiments in psychology research are done using
-          accurate, high-cost eye-tracking devices that resemble bulky goggles.
-          I prioritized accessibility rather than accuracy for this project, and
-          thus decided used the webcam.
-        </p>
-      </AboutAccordion>
-
-      <AboutAccordion
-        questionText={'How does the whole eye tracking thing work?'}
-        chipText="Technical"
-      >
-        <p>
-          I used an existing open-source library - webgazer.js - for
-          eye-tracking. Webgazer.js uses the webcam to detect the location of a
-          viewer's eyes as coordinates on a screen. In order to use incorporate
-          webgazer into my project, I built out a calibration 'wizard' (shown
-          below).
-        </p>
-
-        <div class="img-holder small">
-          <img
-            style="width: 100%"
-            src="./assets/img/process/calibrateProcess.png"
-            class="noStyle"
-          />
-        </div>
-      </AboutAccordion>
-
-      <AboutAccordion
-        questionText={'How did you create the visuals for this project?'}
-        chipText="Technical"
-      >
-        <p>
-          First, each gaze recording session is recorded as a series of points.
+          In order to create the 'aggregate' blur visual used to represent each
+          gaze, I mapped each gaze to a set of density contours, and translated
+          the contours to a blurred out portion of the image. Let's break this
+          down step by step. Each gaze recording session is recorded as a series
+          of points, so that was my starting point.
         </p>
 
         <div class="img-holder small" style="flex-direction: column">
@@ -185,6 +115,79 @@
 
         <div class="img-holder small" style="flex-direction: column">
           <img style="width: 100%" src="./assets/img/process/visExplain3.svg" />
+        </div>
+      </AboutAccordion>
+
+      <AboutAccordion
+        questionText={'Can I add my artwork to the gallery?'}
+        chipText="Curation"
+      >
+        <p>
+          Yes! Email me at omar.nema@newschool.edu if you're interested to host
+          your own work here.
+        </p>
+      </AboutAccordion>
+
+      <AboutAccordion
+        questionText={'Why did you select these particular images for the gallery?'}
+        chipText="Curation"
+      >
+        <p>
+          I sought to include a variety of artwork - both in style and time
+          period - in the gallery. Because I wanted to include high resolution
+          digital images, the works included are fairly modern (1400s or so).
+          Shoutout to my friend Rayyan Mikati for helping me select the works in
+          this gallery!
+        </p>
+      </AboutAccordion>
+
+      <AboutAccordion
+        questionText={'How accurate are the gaze representations in your gallery?'}
+        chipText="Technical"
+      >
+        <p>
+          Gazes can submitted to the gallery only after a webcam is calibrated
+          with an accuracy rate of 75% or higher. Generally, accuracy for
+          submitted gazes ranges from 75% to 85%. This means that the margin of
+          error ranges from 12.5% to 7.5% of the container width used to
+          calibrate the eye tracker (pictured below).
+        </p>
+        <p>
+          Given the substantial margin of error, a single point is not very
+          accurate. However, each 20 second viewing session includes roughly
+          4000 points. A combination all of these points will shows clear
+          trends.
+        </p>
+        <p>
+          Screen size, lighting, and webcam quality affect accuracy. Generally,
+          eye-tracking experiments in psychology research are done using
+          accurate, high-cost eye-tracking devices that resemble bulky goggles.
+          I prioritized accessibility rather than accuracy for this project, and
+          thus decided used the webcam.
+        </p>
+        <div class="img-holder">
+          <img style="width: 100%" src="./assets/img/process/accuracy.png" />
+        </div>
+      </AboutAccordion>
+
+      <AboutAccordion
+        questionText={'How does the whole eye tracking thing work?'}
+        chipText="Technical"
+      >
+        <p>
+          I used an existing open-source library - webgazer.js - for
+          eye-tracking. Webgazer.js uses the webcam to detect the location of a
+          viewer's eyes as coordinates on a screen. In order to use incorporate
+          webgazer into my project, I built out a calibration 'wizard' (shown
+          below).
+        </p>
+
+        <div class="img-holder small">
+          <img
+            style="width: 100%"
+            src="./assets/img/process/calibrateProcess.png"
+            class="noStyle"
+          />
         </div>
       </AboutAccordion>
 

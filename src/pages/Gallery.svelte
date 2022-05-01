@@ -27,6 +27,8 @@
         //don't show errthing in Db, just what i've toggled in local file
         if (worksObject.hasOwnProperty(d)) {
           filtered[d] = worksObject[d];
+        } else {
+          await dbWrite('works/' + d, $artworkMetadata[d]);
         }
       }
       worksArray = Object.values(filtered);
@@ -74,23 +76,15 @@
       gallery, or add your own.
     </p>
     <p>
-      All works are sourced from the Smithsonian Insitute's <a
-        href="https://www.si.edu/openaccess"
-        target="_blank"
-        >Open Access Collection
-        <span class="material-icons-round" style="font-size: 12px;">
-          open_in_new
-        </span>
-      </a>
-
-      .
+      All works are sourced from the Smithsonian and Met Institute Open
+      Collections.
     </p>
   </div>
   {#each worksArray as img, i}
     {#if i == 0}
       <GalleryCard data={img} visViewMode={'aggregate'} />
     {:else}
-      <GalleryCard data={img} visViewMode={'aggregate'} />
+      <GalleryCard data={img} visViewMode={'slice'} />
     {/if}
   {/each}
 </div>

@@ -11,6 +11,7 @@ export let screenModality = writable('desktop');
 
 //for scrolling and naviating between cards
 export let cardInView = writable(null);
+export let cardInViewNext = writable(null);
 export let jumpCard = writable(null);
 export let scrollThresh = writable(false);
 
@@ -20,7 +21,7 @@ export let tooltipY = writable(null);
 export let tooltipShow = writable(false);
 export let infoTipIndex = writable(-1); //for the explanatory pop-ups in gallery card
 
-export let offlineMode = writable(true);
+export let offlineMode = writable(false);
 export let offlineData = writable({});
 
 export let activeAccordionIndex = writable(null);

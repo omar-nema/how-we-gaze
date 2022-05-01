@@ -67,8 +67,9 @@
 <style>
   .container {
     padding-top: 0px;
-    width: 100%;
-    max-width: 1800px;
+
+    width: 85%;
+    max-width: 1300px;
   }
 
   .btn {
@@ -83,7 +84,6 @@
   .cont-header {
     height: 120px;
     align-items: center;
-    padding: 0 10%;
   }
 
   .artwork-container {
@@ -100,7 +100,7 @@
     margin: 50px;
   }
   .img-holder {
-    height: 315px;
+    height: 215px;
     display: flex;
     align-items: center;
     justify-content: center;

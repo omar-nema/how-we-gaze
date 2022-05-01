@@ -111,7 +111,6 @@ export async function gazerArtRecording() {
     let gazerArray = get(gazerRecordingArt); //this is prob not good
     gazerArray.push(recordingObj);
     gazerRecordingArt.set(gazerArray);
-    console.log(gazerArray);
   });
   let duration;
   if (get(testMode) == 1) {

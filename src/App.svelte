@@ -196,7 +196,7 @@
     color: #989090;
   }
   :global(.card-outer){
-    max-width: 1000px;
+    max-width: 1100px;
     width: 100%;
     background: var(--bg-contrast);
     padding: 25px 40px;

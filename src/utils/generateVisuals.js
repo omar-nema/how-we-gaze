@@ -70,8 +70,6 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
     .bandwidth(bandwidth)
     .thresholds(thresholds)(data);
 
-  console.log(url, data, contours);
-
   let minCoords = d3.min(contours, (d) => d.value);
   let maxCoords = d3.max(contours, (d) => d.value);
 

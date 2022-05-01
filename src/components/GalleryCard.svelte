@@ -5,6 +5,7 @@
     screenWidth,
     screenHeight,
     cardInView,
+    cardInViewNext,
     tooltipText,
     tooltipShow,
   } from '../stores/pageState';
@@ -26,10 +27,8 @@
   //LOCAL STATES
   let mount = false;
   let sessionLoaded = false;
-  let cardSessionsObj = data.sessionData;
-  let cardSessionsArr = Object.keys(data.sessionData);
-  let sessionIndex = cardSessionsArr.length - 2;
-  let sessionKey = cardSessionsArr[sessionIndex.length - 1];
+  let cardSessionsObj, cardSessionsArr, sessionIndex, sessionKey;
+
   let sessionData = null;
   let sessionReactions = null;
   let sessionSliderMax = 100;
@@ -47,12 +46,19 @@
 
   onMount(async () => {
     await getSessionData(sessionKey);
+    if (data.sessionData) {
+      cardSessionsObj = data.sessionData;
+      cardSessionsArr = Object.keys(data.sessionData);
+      sessionIndex = Math.max(cardSessionsArr.length - 2, 0);
+      sessionKey = cardSessionsArr[sessionIndex.length - 1];
+    }
+
     mount = true;
   });
 
   //SESSION STATE REACTIVITY
   $: {
-    if (mount) {
+    if (mount && data.sessionData) {
       sessionKey = cardSessionsArr[sessionIndex];
       getSessionData(sessionKey);
     }
@@ -141,7 +147,7 @@
   }
   $: {
     visCurrFrame;
-    if (mount && sessionLoaded) {
+    if (mount && sessionLoaded && sessionData) {
       if (visCurrFrame < sessionData.length - 1 && visViewMode == 'slice') {
         moveClips(
           domClips,
@@ -149,6 +155,17 @@
           sessionData[visCurrFrame].yPct
         );
       }
+    }
+  }
+
+  //we switch to aggregate once the card is scrolled to for the first time (for performance reasons)
+  let firstScroll = false;
+  //only want this to run once
+  $: {
+    if ($cardInViewNext == data.key && !firstScroll) {
+      visViewMode = 'aggregate';
+      firstScroll = true;
+      console.log('running');
     }
   }
   // $: clips;
@@ -238,32 +255,34 @@
       </div>
     </div>
 
-    <div class="center" bind:this={imgFrame}>
-      <GalleryCardImage
-        bind:clipHolder
-        bind:sessionIndex
-        bind:imgHolder
-        bind:svgHolder
-        personLength={cardSessionsArr.length}
-        {data}
-        {visViewMode}
-        {visViewReactions}
-        {sessionReactions}
-        {clips}
-        {imgFrame}
-      />
-      {#if $screenWidth > 800}
-        <GalleryCardPerson
-          bind:imgNav
-          bind:sessionKey
+    {#if mount && data.sessionData}
+      <div class="center" bind:this={imgFrame}>
+        <GalleryCardImage
+          bind:clipHolder
           bind:sessionIndex
-          {cardSessionsArr}
-          {cardSessionsObj}
+          bind:imgHolder
+          bind:svgHolder
+          personLength={cardSessionsArr.length}
+          {data}
           {visViewMode}
-          {infoTipIndex}
+          {visViewReactions}
+          {sessionReactions}
+          {clips}
+          {imgFrame}
         />
-      {/if}
-    </div>
+        {#if $screenWidth > 800}
+          <GalleryCardPerson
+            bind:imgNav
+            bind:sessionKey
+            bind:sessionIndex
+            {cardSessionsArr}
+            {cardSessionsObj}
+            {visViewMode}
+            {infoTipIndex}
+          />
+        {/if}
+      </div>
+    {/if}
   </div>
 {/if}
 
