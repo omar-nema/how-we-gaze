@@ -95,9 +95,9 @@
         <p>
           Using the marching squares algorithm (built into <a
             href="https://github.com/d3/d3-contour">d3 contour</a
-          >), all recorded points are grouped into contours. Note that points on
-          the bottom right are not dense enough to be grouped into a contour (so
-          anomalies are accounted for).
+          >), I grouped all recorded points into into contours. Note that points
+          on the bottom right are not dense enough to be grouped into a contour
+          - a minimum threshold of points needs to be met.
         </p>
 
         <div class="img-holder small" style="flex-direction: column">

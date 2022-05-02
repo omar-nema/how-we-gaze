@@ -5,6 +5,8 @@
     cardInView,
     screenWidth,
     scrollThresh,
+    tooltipText,
+    tooltipShow,
   } from '../stores/pageState';
   import { gazerInitDone, gazerInitVideoDone } from '../stores/gazerState';
 
@@ -12,6 +14,8 @@
   import { hideGazerForLater } from '../utils/gazerUtils';
   import { slide, fade } from 'svelte/transition';
   import jump from '../utils/jumpSection';
+  import Tooltip from './Tooltip.svelte';
+  import { updateTooltip, updateHelperTextPos } from '../utils/tooltipUtils';
 
   function jumpSection(diff) {
     let newSectionIndex = $loadedWorksKeys.indexOf($cardInView) + diff;
@@ -23,6 +27,12 @@
   //class:hide={$scrollThresh && !headerHover} on header-wrapper
 </script>
 
+{#if $tooltipShow}
+  <div transition:fade={{ duration: 100 }}>
+    <Tooltip />
+  </div>
+{/if}
+
 {#if $screenWidth >= 800}
   <nav class="vertical">
     <div
@@ -30,6 +40,15 @@
       class="btn clickable active "
       on:click={() => {
         $modalState = 'intro';
+      }}
+      on:mouseover={(e) => {
+        updateTooltip(e.x, e.y, 'Introduction');
+      }}
+      on:mousemove={(e) => {
+        updateTooltip(e.x, e.y);
+      }}
+      on:mouseleave={(e) => {
+        updateTooltip();
       }}
     >
       <span class="material-icons-round"> info </span>
@@ -39,6 +58,15 @@
       class="btn clickable active "
       on:click={() => {
         $modalState = 'about';
+      }}
+      on:mouseover={(e) => {
+        updateTooltip(e.x, e.y, 'Process & Methods');
+      }}
+      on:mousemove={(e) => {
+        updateTooltip(e.x, e.y);
+      }}
+      on:mouseleave={(e) => {
+        updateTooltip();
       }}
     >
       <span class="material-icons-round"> help </span>
@@ -165,13 +193,19 @@
     top: 50px;
   }
   nav.vertical .material-icons-round {
-    font-size: 22px;
+    font-size: 20px;
+    padding: 1px 2px;
   }
+
   nav.vertical .btn {
     margin: 0;
     background: white;
     margin-bottom: 10px;
     display: inherit;
+  }
+  nav.vertical .btn-group,
+  nav.vertical .btn {
+    box-shadow: 0 1px 2px 0px rgb(0 0 0 / 5%);
   }
   nav.vertical .btn:hover {
     background: #fef9f9;
@@ -179,7 +213,9 @@
   nav.vertical .btn-group .btn {
     margin-bottom: 0;
     border-radius: 0;
+    box-shadow: none;
   }
+
   .btn-group {
     flex-direction: column;
     display: flex;

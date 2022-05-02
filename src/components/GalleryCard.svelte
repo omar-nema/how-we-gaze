@@ -165,7 +165,6 @@
     if ($cardInViewNext == data.key && !firstScroll) {
       visViewMode = 'aggregate';
       firstScroll = true;
-      console.log('running');
     }
   }
   // $: clips;
