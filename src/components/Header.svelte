@@ -23,59 +23,86 @@
   //class:hide={$scrollThresh && !headerHover} on header-wrapper
 </script>
 
-<header
-  on:mouseover={() => {
-    headerHover = true;
-  }}
-  on:mouseleave={() => {
-    headerHover = false;
-  }}
->
-  <div class="header-wrapper">
-    <div class="header-content">
-      <div class="header-left">
-        <span>How We Gaze</span>
-        <span class="divider">-</span>
-        {#if $pageState == 'gallery'}
-          <span
-            class="header-sub accent"
-            class:active={$pageState === 'gallery'}
-          >
-            Gallery</span
-          >
-        {:else}
-          <span
-            class="header-sub accent"
-            class:active={$pageState === 'record'}
-          >
-            Gaze</span
-          >
-        {/if}
+{#if $screenWidth >= 800}
+  <nav class="vertical">
+    <div
+      transition:fade
+      class="btn clickable active "
+      on:click={() => {
+        $modalState = 'intro';
+      }}
+    >
+      <span class="material-icons-round"> info </span>
+    </div>
+    <div
+      transition:fade
+      class="btn clickable active "
+      on:click={() => {
+        $modalState = 'about';
+      }}
+    >
+      <span class="material-icons-round"> help </span>
+    </div>
+
+    <div class="btn-group">
+      <div
+        class="btn"
+        on:click={() => {
+          modalState.set('nav');
+        }}
+      >
+        <span class="material-icons-round"> view_module </span>
       </div>
-      <div class="header-right">
-        {#if $pageState == 'gallery'}
-          {#if $screenWidth > 950}
-            <div
-              transition:fade
-              class="btn clickable active btn-about"
-              on:click={() => {
-                $modalState = 'intro';
-              }}
+      <div class="btn">
+        <span
+          class="material-icons-round"
+          on:click={() => {
+            jumpSection(-1);
+          }}
+        >
+          keyboard_arrow_up
+        </span>
+      </div>
+      <div class="btn">
+        <span
+          class="material-icons-round"
+          on:click={() => {
+            jumpSection(1);
+          }}
+        >
+          keyboard_arrow_down
+        </span>
+      </div>
+    </div>
+  </nav>
+{/if}
+
+{#if $screenWidth < 800}
+  <header>
+    <div class="header-wrapper">
+      <div class="header-content">
+        <div class="header-left">
+          <span>How We Gaze</span>
+          <span class="divider">-</span>
+          {#if $pageState == 'gallery'}
+            <span
+              class="header-sub accent"
+              class:active={$pageState === 'gallery'}
             >
-              Intro
-            </div>
-            <div
-              transition:fade
-              class="btn clickable active btn-about"
-              on:click={() => {
-                $modalState = 'about';
-              }}
+              Gallery</span
             >
-              About
-            </div>
+          {:else}
+            <span
+              class="header-sub accent"
+              class:active={$pageState === 'record'}
+            >
+              Gaze</span
+            >
           {/if}
-          <nav>
-            {#if $screenWidth >= 800}
+        </div>
+        <div class="header-right">
+          {#if $pageState == 'gallery'}
+            <nav>
               <div>
                 <span
                   class="material-icons-round"
@@ -96,37 +123,72 @@
                   keyboard_arrow_down
                 </span>
               </div>
-            {/if}
-            <div
-              on:click={() => {
-                modalState.set('nav');
-              }}
-            >
-              <span class="material-icons-round"> view_module </span>
-            </div>
-          </nav>
-        {/if}
-        <div
-          transition:slide={{ duration: 500 }}
-          class="btn clickable"
-          on:click={() => {
-            if ($gazerInitDone && $gazerInitVideoDone) {
-              hideGazerForLater();
-            }
-            pageState.set('gallery');
-          }}
-          class:active={$pageState === 'record'}
-        >
-          <span class="material-icons-round"> arrow_back </span>
 
-          <span>Back to Gallery</span>
+              <div
+                on:click={() => {
+                  modalState.set('nav');
+                }}
+              >
+                <span class="material-icons-round"> view_module </span>
+              </div>
+            </nav>
+          {/if}
+          <div
+            transition:slide={{ duration: 500 }}
+            class="btn clickable"
+            on:click={() => {
+              if ($gazerInitDone && $gazerInitVideoDone) {
+                hideGazerForLater();
+              }
+              pageState.set('gallery');
+            }}
+            class:active={$pageState === 'record'}
+          >
+            <span class="material-icons-round"> arrow_back </span>
+
+            <span>Back to Gallery</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
+{/if}
 
 <style>
+  nav.vertical {
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    right: max(calc((100% - 1300px) / 2), 37.5px);
+    transform: translateX(50%);
+    top: 50px;
+  }
+  nav.vertical .material-icons-round {
+    font-size: 22px;
+  }
+  nav.vertical .btn {
+    margin: 0;
+    background: white;
+    margin-bottom: 10px;
+    display: inherit;
+  }
+  nav.vertical .btn:hover {
+    background: #fef9f9;
+  }
+  nav.vertical .btn-group .btn {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+  .btn-group {
+    flex-direction: column;
+    display: flex;
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    background: none;
+  }
+
   header {
     height: var(--header-ht);
     font-weight: 500;

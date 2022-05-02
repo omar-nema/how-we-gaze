@@ -130,7 +130,7 @@
     --bg-contrast: #fbfbfb;
     --bg-contrast-darker: #f5f5f5;
     --bg-contrast-darkest: #c3cbcc;
-    --content-width-pct: 90%;
+    --content-width-pct: calc(100% - 150px);
     --content-width-max: 1300px;
     --font-size-md: 18px;
     --font-size-lg: 26px;
