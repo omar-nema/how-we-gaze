@@ -39,7 +39,7 @@
   let dimWidthToHt = data.width / data.height;
   //cardwidth should be n
   let maxW = Math.min($screenWidth, 1050),
-    maxH = $screenHeight - 220;
+    maxH = $screenHeight - 180;
   let width = 'auto',
     ht = 'auto',
     styleSubstring = '';
@@ -63,6 +63,9 @@
     <Tooltip />
   </div>
 {/if}
+<div class="full-screen btn">
+  <span class="material-icons-round"> open_in_full </span>
+</div>
 <div
   class="img-holder swipe-holder"
   bind:this={imgHolder}
@@ -223,6 +226,23 @@
     margin: auto;
     opacity: 1;
     transition: all 0.1s ease-in-out;
+  }
+
+  .full-screen {
+    position: absolute;
+    top: 10px;
+    z-index: 10;
+    right: 40px;
+    background: #ffffff26;
+    padding: 5px 7px;
+    transition: background 0.1s linear;
+  }
+  .full-screen:hover {
+    background: #ffffff50;
+  }
+  .full-screen .material-icons-round {
+    font-size: 20px;
+    color: gray;
   }
 
   .contour {

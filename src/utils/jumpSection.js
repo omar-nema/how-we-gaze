@@ -1,7 +1,7 @@
 import * as animateScroll from 'svelte-scrollto';
 
 animateScroll.setGlobalOptions({
-  offset: -10,
+  offset: -5,
 });
 
 export default (section) => {

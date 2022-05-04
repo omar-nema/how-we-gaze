@@ -31,9 +31,15 @@ export function updateHelperTextPos(
   );
 
   if (index == 0) {
-    y = clientRect.y - cardRect.y - 150;
+    y = clientRect.y - cardRect.y;
+
+    // left: 50%;
+    // transform: translate(-50%);
+    // top: calc(100% - 220px);
   } else {
-    y = clientRect.y - cardRect.y + 50;
+    y = clientRect.y + 50;
   }
   helperTextPositions[index] = [x, y];
 }
+
+//hint-holder

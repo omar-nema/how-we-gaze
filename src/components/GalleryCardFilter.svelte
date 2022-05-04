@@ -100,17 +100,19 @@
       <span>Original</span>
     </div>
   </div>
-  <div
-    class="filter clickable"
-    style="margin-left: 25px; border-radius: 5px"
-    on:click={() => {
-      visViewReactions = !visViewReactions;
-    }}
-    class:selected={visViewReactions}
-    class:disabled={!sessionReactions}
-  >
-    <span>Show Reactions</span>
-  </div>
+  {#if $screenWidth >= 800}
+    <div
+      class="filter clickable"
+      style="margin-left: 25px; border-radius: 5px"
+      on:click={() => {
+        visViewReactions = !visViewReactions;
+      }}
+      class:selected={visViewReactions}
+      class:disabled={!sessionReactions}
+    >
+      <span>Show Reactions</span>
+    </div>
+  {/if}
 </div>
 {#if $screenWidth > 950}
   <div
@@ -277,7 +279,7 @@
   .play-toggle {
     width: 50px;
   }
-  .disabled {
+  :global(.disabled) {
     pointer-events: none;
     opacity: 0.3;
   }

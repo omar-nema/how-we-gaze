@@ -33,44 +33,39 @@
   </div>
 {/if}
 
-{#if $screenWidth >= 800}
-  <nav class="vertical">
-    <div
-      transition:fade
-      class="btn clickable active "
-      on:click={() => {
-        $modalState = 'intro';
-      }}
-      on:mouseover={(e) => {
-        updateTooltip(e.x, e.y, 'Introduction');
-      }}
-      on:mousemove={(e) => {
-        updateTooltip(e.x, e.y);
-      }}
-      on:mouseleave={(e) => {
-        updateTooltip();
-      }}
-    >
-      <span class="material-icons-round"> info </span>
+{#if $screenWidth >= 800 && $pageState == 'gallery'}
+  <nav class="vertical" transition:fade={{ duration: 100 }}>
+    <div class="btn-group">
+      <div
+        transition:fade
+        class="btn clickable active "
+        on:click={() => {
+          $modalState = 'intro';
+        }}
+      >
+        <span class="material-icons-round"> info_outline </span>
+      </div>
+      <div
+        transition:fade
+        class="btn clickable active "
+        on:click={() => {
+          $modalState = 'about';
+        }}
+      >
+        <span class="material-icons-round"> help_outline </span>
+      </div>
     </div>
-    <div
-      transition:fade
-      class="btn clickable active "
-      on:click={() => {
-        $modalState = 'about';
-      }}
-      on:mouseover={(e) => {
-        updateTooltip(e.x, e.y, 'Process & Methods');
-      }}
-      on:mousemove={(e) => {
-        updateTooltip(e.x, e.y);
-      }}
-      on:mouseleave={(e) => {
-        updateTooltip();
-      }}
-    >
-      <span class="material-icons-round"> help </span>
-    </div>
+
+    <!-- <div class="btn">
+      <span
+        class="material-icons-round"
+        on:click={() => {
+          jump($cardInView);
+        }}
+      >
+        lock
+      </span>
+    </div> -->
 
     <div class="btn-group">
       <div
@@ -81,6 +76,7 @@
       >
         <span class="material-icons-round"> view_module </span>
       </div>
+
       <div class="btn">
         <span
           class="material-icons-round"
@@ -103,6 +99,56 @@
       </div>
     </div>
   </nav>
+{/if}
+
+{#if $pageState !== 'gallery'}
+  <header transition:fade={{ duration: 200 }}>
+    <div class="header-wrapper">
+      <div class="header-content">
+        <div class="header-left">
+          <span>How We Gaze</span>
+          <span class="divider">-</span>
+          {#if $pageState == 'gallery'}
+            <span
+              class="header-sub accent"
+              class:active={$pageState === 'gallery'}
+            >
+              Gallery</span
+            >
+          {:else}
+            <span
+              class="header-sub accent"
+              class:active={$pageState === 'record'}
+            >
+              Gaze</span
+            >
+          {/if}
+        </div>
+        <div class="header-right">
+          <div
+            transition:slide={{ duration: 500 }}
+            class="btn clickable"
+            on:click={() => {
+              if ($gazerInitDone && $gazerInitVideoDone) {
+                hideGazerForLater();
+              }
+              pageState.set('gallery');
+            }}
+            class:active={$pageState === 'record'}
+          >
+            <span
+              class="material-icons-round"
+              style="color:var(--color-accent)"
+            >
+              arrow_back
+            </span>
+
+            <span>Back to Gallery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 {/if}
 
 {#if $screenWidth < 800}
@@ -161,21 +207,6 @@
               </div>
             </nav>
           {/if}
-          <div
-            transition:slide={{ duration: 500 }}
-            class="btn clickable"
-            on:click={() => {
-              if ($gazerInitDone && $gazerInitVideoDone) {
-                hideGazerForLater();
-              }
-              pageState.set('gallery');
-            }}
-            class:active={$pageState === 'record'}
-          >
-            <span class="material-icons-round"> arrow_back </span>
-
-            <span>Back to Gallery</span>
-          </div>
         </div>
       </div>
     </div>
@@ -200,8 +231,9 @@
   nav.vertical .btn {
     margin: 0;
     background: white;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     display: inherit;
+    padding: 4px;
   }
   nav.vertical .btn-group,
   nav.vertical .btn {
@@ -223,6 +255,7 @@
     border-radius: 5px;
     overflow: hidden;
     background: none;
+    margin-bottom: 13px;
   }
 
   header {
@@ -326,5 +359,16 @@
   nav div:hover,
   .btn-about:hover {
     background: white;
+  }
+
+  @media screen and (max-width: 800px) {
+    .header-content {
+      max-width: 95%;
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease-in-out;
+    }
   }
 </style>
