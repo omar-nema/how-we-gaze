@@ -1,8 +1,8 @@
 export async function createClips(url, sessionData) {
   let clips = [];
-  let numClips = 18;
-  let clipMaxSize = 33;
-  let clipMinR = 19;
+  let numClips = 20;
+  let clipMaxSize = 30;
+  let clipMinR = 10; //these are pct values
   let clipInc = (clipMaxSize - clipMinR) / numClips;
   let blurMax = 10;
   let blurInc = blurMax / numClips;

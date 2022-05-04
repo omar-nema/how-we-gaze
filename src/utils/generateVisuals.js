@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import { get } from 'svelte/store';
 import { screenWidth } from '../stores/pageState';
 
+//not actually used - displays points
 export async function pointVis(data, containerAll, containerSvg, url) {
   let bbox = d3.select(containerAll).node().getBoundingClientRect();
   let width = bbox.width;
@@ -53,14 +54,8 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
     .range([margin, height - margin]);
 
   let bandwidth, thresholds;
-  if (get(screenWidth) <= 800) {
-    //if we want mobile
-    bandwidth = 30;
-    thresholds = 30;
-  } else {
-    bandwidth = 70;
-    thresholds = 30;
-  }
+  bandwidth = parseInt(Math.min(width, height) * 0.07);
+  thresholds = parseInt(bandwidth * 1.5);
 
   let contours = d3
     .contourDensity()
@@ -75,8 +70,8 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
 
   let blurScale = d3
     .scaleLinear()
-    .domain([maxCoords, maxCoords * 0.75, minCoords])
-    .range([0, 0.25, 4]);
+    .domain([maxCoords, maxCoords * 0.5, minCoords])
+    .range([0, 1, 4]);
 
   let opacityScale = d3
     .scaleLinear()

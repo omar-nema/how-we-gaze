@@ -60,9 +60,6 @@
 
   async function init() {
     await getOfflineData();
-    // if ($offlineMode) {
-
-    // }
     await getAllWorks();
     initScroll();
   }
@@ -83,11 +80,7 @@
     </p>
   </div>
   {#each worksArray as img, i}
-    {#if i == 0}
-      <GalleryCard data={img} visViewMode={'aggregate'} />
-    {:else}
-      <GalleryCard data={img} visViewMode={'slice'} />
-    {/if}
+    <GalleryCard data={img} visViewMode={'slice'} />
   {/each}
 </div>
 

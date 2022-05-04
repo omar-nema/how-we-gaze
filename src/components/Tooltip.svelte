@@ -13,7 +13,7 @@
     color: white;
     max-width: 250px;
     padding: 8px 15px;
-    z-index: 10000;
+    z-index: 100000;
     pointer-events: none;
     font-size: 12px;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);

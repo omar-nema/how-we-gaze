@@ -13,6 +13,7 @@
 
 <div
   class="hint-holder"
+  class:initPos={infoTipIndex == 0}
   style="top: {helperTextPositions[
     infoTipIndex
   ][1]}px; left: {helperTextPositions[infoTipIndex][0]}px"
@@ -66,7 +67,7 @@
     backdrop-filter: blur(5px);
     color: white;
     border-radius: 5px;
-    z-index: 100;
+    z-index: 300;
     transition: all 0.1s ease-in-out;
     width: 400px;
     font-size: 14px;
@@ -91,5 +92,10 @@
   .disabled {
     pointer-events: none;
     opacity: 0.3;
+  }
+  .hint-holder.initPos {
+    left: 50% !important;
+    transform: translate(-50%);
+    top: calc(100% - 220px) !important;
   }
 </style>

@@ -12,7 +12,7 @@
   console.log('i aint there');
 </script>
 
-<div class="overlay" transition:fade>
+<div class="overlay" transition:fade={{ duration: 100 }}>
   <div
     class="minimize clickable btn"
     on:click={() => {
@@ -21,6 +21,7 @@
   >
     <span class="material-icons-round"> close </span>
   </div>
+
   {#if imgHolder && classAdjustment}
     {@html imgHolder.outerHTML}
   {/if}

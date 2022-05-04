@@ -24,6 +24,8 @@
   import { createClips, moveClips } from '../utils/galleryCardAnimate';
   export let data;
 
+  let imgLoaded = false;
+
   //LOCAL STATES
   let mount = false;
   let sessionLoaded = false;
@@ -37,12 +39,15 @@
   //slice
   let visPlayStatus = 'pause';
   let visCurrFrame = 0;
+  let timePerFrame = 50;
   let infoTipIndex = -1;
   let clips = [];
   //
   let imgFrame;
   let imgHolder = null,
     svgHolder = null;
+
+  let width, height;
 
   onMount(async () => {
     await getSessionData(sessionKey);
@@ -122,6 +127,7 @@
   async function getSessionData(key) {
     sessionData = await dbGet('sessionData/' + key);
     if (sessionData) {
+      timePerFrame = 20000 / sessionData.length;
       sessionSliderMax = sessionData.length;
       sessionLoaded = true;
       clips = await createClips(data.url, sessionData);
@@ -145,7 +151,7 @@
       if (visPlayStatus == 'play' && visCurrFrame < sessionData.length - 1) {
         setTimeout(() => {
           visCurrFrame++;
-        }, 50);
+        }, timePerFrame);
       } else if (
         visPlayStatus == 'play' &&
         visCurrFrame == sessionData.length - 1
@@ -167,15 +173,20 @@
     }
   }
 
-  //we switch to aggregate once the card is scrolled to for the first time (for performance reasons)
-  let firstScroll = false;
-  //only want this to run once
+  //set default to aggregate, but only after image loads
+  let firstScroll = false; //only want this to run once
   $: {
     if ($cardInViewNext == data.key && !firstScroll) {
       visViewMode = 'aggregate';
       firstScroll = true;
     }
+
+    if ($cardInView == data.key && !firstScroll && imgLoaded) {
+      visViewMode = 'aggregate';
+      firstScroll = true;
+    }
   }
+
   // $: clips;
 </script>
 
@@ -284,6 +295,7 @@
           {sessionReactions}
           {clips}
           {imgFrame}
+          bind:imgLoaded
         />
         {#if $screenWidth > 800}
           <GalleryCardPerson
@@ -305,9 +317,9 @@
   .card-outer {
     padding: 0px;
     padding-bottom: 10px;
-    opacity: 0.2;
+    opacity: 1;
     position: relative;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
     overflow: hidden;
   }
   .card-outer.active {

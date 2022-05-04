@@ -16,6 +16,7 @@
   export let sessionReactions;
   export let imgHolder;
   export let svgHolder;
+  export let imgLoaded = false;
   import { fade } from 'svelte/transition';
   import GalleryCardImageOverlay from '../components/GalleryCardImageOverlay.svelte';
   let fullScreen = false;
@@ -42,9 +43,10 @@
   //cardwidth should be n
   let maxW = Math.min($screenWidth, 1050),
     maxH = $screenHeight - 180;
-  let width = 'auto',
-    ht = 'auto',
-    styleSubstring = '';
+  let width = 'auto';
+  let ht = 'auto';
+
+  let styleSubstring = '';
 
   $: {
     if (imgFrame) {
@@ -152,6 +154,9 @@
     src={data.url}
     style={styleSubstring}
     class="main"
+    on:load={() => {
+      imgLoaded = true;
+    }}
   />
   <svg
     class="contour"

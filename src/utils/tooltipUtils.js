@@ -29,16 +29,8 @@ export function updateHelperTextPos(
     clientRect.x + clientRect.width / 4 - cardRect.x,
     cardRect.width - 450
   );
+  y = clientRect.y - cardRect.y + 50;
 
-  if (index == 0) {
-    y = clientRect.y - cardRect.y;
-
-    // left: 50%;
-    // transform: translate(-50%);
-    // top: calc(100% - 220px);
-  } else {
-    y = clientRect.y + 50;
-  }
   helperTextPositions[index] = [x, y];
 }
 
