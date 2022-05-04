@@ -59,9 +59,10 @@
   });
 
   async function init() {
-    if ($offlineMode) {
-      await getOfflineData();
-    }
+    await getOfflineData();
+    // if ($offlineMode) {
+
+    // }
     await getAllWorks();
     initScroll();
   }

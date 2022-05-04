@@ -52,7 +52,6 @@
       sessionIndex = Math.max(cardSessionsArr.length - 2, 0);
       sessionKey = cardSessionsArr[sessionIndex.length - 1];
     }
-
     mount = true;
   });
 
@@ -89,13 +88,22 @@
   }
 
   //HELPER TEXT MOVEMENT
-  let helperTextPositions = [[], [0, 0], [0, 0]];
+  let helperTextPositions = [
+    [0, 0],
+    [0, 0],
+    [0, 0],
+  ];
   let imgNav = null,
     visFilter = null,
     gazeBtn = null,
     card = null;
   $: {
-    if (imgNav && visFilter && gazeBtn) {
+    if (
+      imgNav &&
+      visFilter &&
+      gazeBtn
+      //do it when the image loaded
+    ) {
       let textObjects = [imgNav, visFilter, gazeBtn];
       textObjects.forEach((obj, index) => {
         if (obj) {
@@ -110,6 +118,7 @@
     }
   }
 
+  //first try to get sessionData locally
   async function getSessionData(key) {
     sessionData = await dbGet('sessionData/' + key);
     if (sessionData) {
@@ -186,7 +195,14 @@
     {#if infoTipIndex >= 0}
       <GalleryCardTip {helperTextPositions} bind:infoTipIndex />
     {/if}
-    <div class="card-top">
+    <div
+      class="card-top"
+      on:click={() => {
+        if (data.key == $cardInView) {
+          jump(data.key);
+        }
+      }}
+    >
       <div class="card-header">
         <h2 style="display: flex; align-items: center;">
           {#if $screenWidth >= 900}
@@ -215,7 +231,7 @@
           <div
             class="clickable"
             on:click={() => {
-              jump(data.key);
+              // jump(data.key);
               infoTipIndex = 0;
             }}
           >
@@ -230,7 +246,7 @@
         {#if $screenWidth <= 800}
           <GalleryCardPerson
             bind:imgNav
-            bind:sessionKey
+            {sessionKey}
             bind:sessionIndex
             {cardSessionsArr}
             {cardSessionsObj}
@@ -272,7 +288,7 @@
         {#if $screenWidth > 800}
           <GalleryCardPerson
             bind:imgNav
-            bind:sessionKey
+            {sessionKey}
             bind:sessionIndex
             {cardSessionsArr}
             {cardSessionsObj}
@@ -288,10 +304,11 @@
 <style>
   .card-outer {
     padding: 0px;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     opacity: 0.2;
     position: relative;
     transition: opacity 0.3s ease-in-out;
+    overflow: hidden;
   }
   .card-outer.active {
     opacity: 1;
@@ -303,7 +320,6 @@
     padding: 0 40px;
     padding-top: 20px;
     box-shadow: 0 1px 2px 0px rgb(0 0 0 / 5%);
-    margin-bottom: 10px;
   }
   #contour-overlay {
     background: black;
@@ -343,11 +359,12 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    position: relative;
   }
   .card-filters {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     padding-bottom: 15px;
   }
 

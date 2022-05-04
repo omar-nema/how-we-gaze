@@ -19,8 +19,8 @@
     </div>
     <div class="cont-body">
       <AboutAccordion
-        questionText={'How did you come up with the idea to visualize gazes?'}
-        chipText="Process"
+        questionText={'How did you come up with the idea for this project?'}
+        chipText="Inspiration"
       >
         <p>
           Broadly, my work as both a practioner and educator focuses on using
@@ -34,19 +34,20 @@
           help me understand and connect with it. Viewing art is a visceral
           experience - it is difficult to put into words. I wondered - could I
           create a tool that enables me to see how others are looking at
-          artwork? A series of explorations related to this anchor question led
-          me to develop the concept of using eye-tracking to visualize gazes.
+          artwork? With this question in mind, I underwent a series of
+          explorations that led me to develop the concept of using eye-tracking
+          to visualize gazes.
         </p>
         <p />
       </AboutAccordion>
 
       <AboutAccordion
         questionText={'How did you come up with the visual form used to represent gazes?'}
-        chipText="Process"
+        chipText="Inspiration"
       >
         <p>
           Each gaze session is recorded as a series of points, so a series of x
-          and y coordinates was my starting point for the visualization.
+          and y coordinates was my starting point for creating visualization.
         </p>
         <p>
           I first experimented with abstract visualizations of these points -
@@ -63,11 +64,11 @@
           <img style="width: 45%" src="./assets/img/process/contourmap.png" />
         </div>
         <p>
-          The goal of this project is to have the viewer empathize and imagine
-          how someone else might look at a given artwork. In order to so, I
-          needed to tie the gaze to the original artwork, and make it feel like
-          a cohesive work that can be examined. I experimented with a number of
-          different forms that blend in with the original artwork. The
+          I wanted to create a visual that would guide the viewer empathize and
+          imagine how someone else might look at a given artwork. In order to
+          so, I needed to tie the gaze to the original artwork, and make it feel
+          like a cohesive work that can be examined. I experimented with a
+          number of different forms that blend in with the original artwork. The
           'aggregate blur' was most effective to me - it retained the integrity
           of the artwork, but also clearly delineated the viewer's gaze.
         </p>
@@ -77,8 +78,34 @@
       </AboutAccordion>
 
       <AboutAccordion
-        questionText={'How did you create the blurry visuals for this project?'}
-        chipText="Process"
+        questionText={'Can I add artwork to the gallery?'}
+        chipText="Curation"
+      >
+        <p>
+          I would love to take suggestions on what to include in the gallery!
+          Please fill out this <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSd8ALICBzpHRIgFI8BHoQekxhPbEPxabOzPr3H_DS8y_VT56Q/viewform"
+            >form</a
+          > if you're interested in suggesting a work!
+        </p>
+      </AboutAccordion>
+
+      <AboutAccordion
+        questionText={'Why did you select these particular images for the gallery?'}
+        chipText="Curation"
+      >
+        <p>
+          I sought to include a variety of artwork - both in style and time
+          period - in the gallery. Because I wanted to include high resolution
+          digital images, the works included are fairly modern (1400s or so).
+          Shoutout to my friend Rayyan Mikati for helping me select the works in
+          this gallery!
+        </p>
+      </AboutAccordion>
+
+      <AboutAccordion
+        questionText={"How did you make the 'aggregate' visuals for this project?"}
+        chipText="Technical"
       >
         <p>
           In order to create the 'aggregate' blur visual used to represent each
@@ -119,32 +146,6 @@
       </AboutAccordion>
 
       <AboutAccordion
-        questionText={'Can I add artwork to the gallery?'}
-        chipText="Curation"
-      >
-        <p>
-          I would love to take suggestions on what to include in the gallery!
-          Please fill out this <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSd8ALICBzpHRIgFI8BHoQekxhPbEPxabOzPr3H_DS8y_VT56Q/viewform"
-            >form</a
-          > if you're interested in suggesting a work!
-        </p>
-      </AboutAccordion>
-
-      <AboutAccordion
-        questionText={'Why did you select these particular images for the gallery?'}
-        chipText="Curation"
-      >
-        <p>
-          I sought to include a variety of artwork - both in style and time
-          period - in the gallery. Because I wanted to include high resolution
-          digital images, the works included are fairly modern (1400s or so).
-          Shoutout to my friend Rayyan Mikati for helping me select the works in
-          this gallery!
-        </p>
-      </AboutAccordion>
-
-      <AboutAccordion
         questionText={'How accurate are the gaze representations in your gallery?'}
         chipText="Technical"
       >
@@ -179,10 +180,13 @@
       >
         <p>
           I used an existing open-source library - webgazer.js - for
-          eye-tracking. Webgazer.js uses the webcam to detect the location of a
-          viewer's eyes as coordinates on a screen. In order to use incorporate
-          webgazer into my project, I built out a calibration 'wizard' (shown
-          below).
+          eye-tracking. Out of the box, webgazer allows you to use the webcam to
+          detect the location of a viewer's eyes as coordinates on a screen. In
+          order to incorporate eye-tracking into my project, I added the ability
+          to calibrate webgazer's eye-tracker to ensure accuracy (pictured
+          below). I also built out a method to retain calibration across
+          sessions so that users don't have to re-calibrate each time they add a
+          gaze (using localStorage).
         </p>
 
         <div class="img-holder small">
@@ -203,7 +207,9 @@
           as framework, d3.js for generating visualizations, Firebase to store
           data in real-time, and webgazer.js for recording webcam viewing
           sessions. I also used Observable to process data and explore
-          visualizations, and Figma to design the interface.
+          visualizations, and Figma to design the interface. See my <a
+            href="https://github.com/omar-nema/how-we-gaze/">code here</a
+          >.
         </p>
       </AboutAccordion>
     </div>

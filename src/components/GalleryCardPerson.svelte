@@ -1,6 +1,6 @@
 <script>
   export let cardSessionsArr, cardSessionsObj;
-  export let sessionKey, sessionIndex;
+  export let sessionIndex, sessionKey;
   export let visViewMode;
   export let infoTipIndex;
   export let imgNav;
@@ -11,6 +11,10 @@
     if ($screenWidth <= 800) {
       mobile = true;
     }
+  }
+
+  $: {
+    sessionIndex = cardSessionsArr.indexOf(sessionKey);
   }
 </script>
 

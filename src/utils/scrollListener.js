@@ -24,3 +24,5 @@ export function initScroll() {
     });
   });
 }
+
+//if within 50

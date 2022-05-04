@@ -106,6 +106,7 @@ export async function gazerArtRecording() {
       yMin: bbox.top,
       yMax: bbox.bottom,
       sessionID: get(sessionID),
+      work: get(selectedImage).key,
       calibrationPct: get(calibrationPct),
     };
     let gazerArray = get(gazerRecordingArt); //this is prob not good
