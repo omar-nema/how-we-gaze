@@ -17,6 +17,8 @@
   export let imgHolder;
   export let svgHolder;
   import { fade } from 'svelte/transition';
+  import GalleryCardImageOverlay from '../components/GalleryCardImageOverlay.svelte';
+  let fullScreen = false;
 
   let mobile = false;
   $: {
@@ -63,14 +65,27 @@
     <Tooltip />
   </div>
 {/if}
-<div class="full-screen btn">
-  <span class="material-icons-round"> open_in_full </span>
-</div>
+
+{#if fullScreen}
+  <GalleryCardImageOverlay bind:fullScreen {width} {imgHolder} />
+{/if}
+
 <div
   class="img-holder swipe-holder"
   bind:this={imgHolder}
   style="width: {width}; height: {ht}; max-width: {data.width}px; max-height: {data.height}px"
 >
+  {#if visViewMode == 'aggregate'}
+    <div
+      transition:fade
+      class="full-screen clickable btn"
+      on:click={() => {
+        fullScreen = true;
+      }}
+    >
+      <span class="material-icons-round"> open_in_full </span>
+    </div>
+  {/if}
   {#if sessionReactions && visViewReactions}
     {#each sessionReactions as reaction}
       <div
@@ -109,13 +124,14 @@
     {/each}
   {/if}
 
-  {#if !mobile}
+  {#if !mobile && visViewMode !== 'original'}
     <div
       class="personToggle prev clickable"
       class:disabled={sessionIndex == 0}
       on:click={() => {
         sessionIndex--;
       }}
+      transition:fade
     >
       <span class="material-icons-round"> arrow_left </span>
     </div>
@@ -125,6 +141,7 @@
       on:click={() => {
         sessionIndex++;
       }}
+      transition:fade
     >
       <span class="material-icons-round"> arrow_right </span>
     </div>
@@ -231,18 +248,14 @@
   .full-screen {
     position: absolute;
     top: 10px;
-    z-index: 10;
-    right: 40px;
-    background: #ffffff26;
-    padding: 5px 7px;
-    transition: background 0.1s linear;
+    z-index: 100;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 5px 6px;
   }
-  .full-screen:hover {
-    background: #ffffff50;
-  }
+
   .full-screen .material-icons-round {
-    font-size: 20px;
-    color: gray;
+    font-size: 18px;
   }
 
   .contour {
