@@ -47,32 +47,40 @@ export async function getOfflineData() {
   return dataJson;
 }
 
-//build into here bbgirl
+async function getDataOnline(itemPath) {
+  try {
+    let response = await get(child(ref(db), itemPath));
+    if (response.exists()) {
+      return response.val();
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function dbGet(itemPath) {
-  if (getSvelte(offlineMode) && itemPath == 'works') {
-    return getSvelte(offlineData).works;
-  } else if (getSvelte(offlineMode) && itemPath.includes('sessionData')) {
+  let offline = getSvelte(offlineMode);
+  if (itemPath == 'works') {
+    if (offline) {
+      return getSvelte(offlineData).works;
+    } else {
+      return getDataOnline(itemPath);
+    }
+  } else if (itemPath.includes('sessionData')) {
     let key = itemPath.split('sessionData/')[1];
     if (key) {
       return getSvelte(offlineData).sessionData[key];
+    } else {
+      return getDataOnline(itemPath);
     }
-  } else if (getSvelte(offlineMode) && itemPath.includes('reactions')) {
+  } else if (itemPath.includes('reactions')) {
     let key = itemPath.split('reactions/')[1];
     if (key) {
       return getSvelte(offlineData).reactions[key];
     } else {
       return null;
-    }
-  } else if (!getSvelte(offlineMode)) {
-    try {
-      let response = await get(child(ref(db), itemPath));
-      if (response.exists()) {
-        return response.val();
-      } else {
-        return null;
-      }
-    } catch (error) {
-      console.error(error);
     }
   }
 }

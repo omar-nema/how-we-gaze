@@ -118,6 +118,7 @@
     }
   }
 
+  //first try to get sessionData locally
   async function getSessionData(key) {
     sessionData = await dbGet('sessionData/' + key);
     if (sessionData) {

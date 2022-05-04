@@ -39,6 +39,9 @@
     justify-content: center;
     align-items: center;
   }
+  :global(.overlay .img-holder) {
+    border: none;
+  }
   :global(.overlay .img-holder.htAugment) {
     height: 95vh !important;
   }
