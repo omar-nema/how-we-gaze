@@ -120,6 +120,7 @@
 
 <style>
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
+    @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
   @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
   /* @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500&display=swap');
    */

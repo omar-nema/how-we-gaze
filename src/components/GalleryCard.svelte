@@ -5,9 +5,9 @@
     screenWidth,
     screenHeight,
     cardInView,
-    cardInViewNext,
     tooltipText,
     tooltipShow,
+    imagesLoaded,
   } from '../stores/pageState';
   import { dbGet } from '../utils/firebaseUtils.js';
   import { onMount } from 'svelte';
@@ -23,8 +23,6 @@
   import jump from '../utils/jumpSection';
   import { createClips, moveClips } from '../utils/galleryCardAnimate';
   export let data;
-
-  let imgLoaded = false;
 
   //LOCAL STATES
   let mount = false;
@@ -176,12 +174,7 @@
   //set default to aggregate, but only after image loads
   let firstScroll = false; //only want this to run once
   $: {
-    if ($cardInViewNext == data.key && !firstScroll) {
-      visViewMode = 'aggregate';
-      firstScroll = true;
-    }
-
-    if ($cardInView == data.key && !firstScroll && imgLoaded) {
+    if (data.key in $imagesLoaded && !firstScroll) {
       visViewMode = 'aggregate';
       firstScroll = true;
     }
@@ -209,9 +202,7 @@
     <div
       class="card-top"
       on:click={() => {
-        if (data.key == $cardInView) {
-          jump(data.key);
-        }
+        jump(data.key);
       }}
     >
       <div class="card-header">
@@ -295,7 +286,6 @@
           {sessionReactions}
           {clips}
           {imgFrame}
-          bind:imgLoaded
         />
         {#if $screenWidth > 800}
           <GalleryCardPerson
@@ -388,12 +378,11 @@
     padding: 20px;
   }
   :global(.reaction-pin-inner) {
-    background: #0000008c;
-    background: #000000;
+    background: rgba(255, 255, 255, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 6px;
     border-radius: 100%;
     filter: drop-shadow(rgba(0, 0, 0, 0.2) 1px 1px 6px);
     transition: background 0.2s ease-in-out, filter 0.2s ease-in-out;

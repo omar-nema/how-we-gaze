@@ -21,7 +21,9 @@ export let tooltipY = writable(null);
 export let tooltipShow = writable(false);
 export let infoTipIndex = writable(-1); //for the explanatory pop-ups in gallery card
 
-export let offlineMode = writable(false);
+export let offlineMode = writable(true);
 export let offlineData = writable({});
 
 export let activeAccordionIndex = writable(null);
+
+export let imagesLoaded = writable({});

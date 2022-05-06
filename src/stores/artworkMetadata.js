@@ -104,6 +104,8 @@ export let artworkMetadata = writable(artworkData);
 export let loadedWorksKeys = writable(null);
 export let loadedWorksArray = writable(null);
 
+//removed
+
 // kahlo: {
 //   key: 'kahlo',
 //   artist: 'Magda Pach',
@@ -114,7 +116,7 @@ export let loadedWorksArray = writable(null);
 //   height: 4000,
 //   origLink: 'https://www.si.edu/object/frida-kahlo:npg_NPG.2015.136',
 // },
-//removed
+
 // albers: {
 //   key: 'albers',
 //   artist: 'Josef Albers',

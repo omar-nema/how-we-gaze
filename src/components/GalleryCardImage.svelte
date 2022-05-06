@@ -4,6 +4,7 @@
     screenHeight,
     tooltipText,
     tooltipShow,
+    imagesLoaded,
   } from '../stores/pageState';
   import Tooltip from '../components/Tooltip.svelte';
   import { updateTooltip } from '../utils/tooltipUtils';
@@ -16,9 +17,9 @@
   export let sessionReactions;
   export let imgHolder;
   export let svgHolder;
-  export let imgLoaded = false;
   import { fade } from 'svelte/transition';
   import GalleryCardImageOverlay from '../components/GalleryCardImageOverlay.svelte';
+  import { getContext } from 'svelte';
   let fullScreen = false;
 
   let mobile = false;
@@ -60,10 +61,20 @@
       }
     }
   }
+
+  function getText(reaction) {
+    let text = '';
+    if (reaction.text) {
+      text = reaction.text;
+    } else {
+      text = reaction.emoji.toString().replace(',', ' ');
+    }
+    return text;
+  }
 </script>
 
 {#if $tooltipShow}
-  <div transition:fade={{ duration: 50 }}>
+  <div>
     <Tooltip />
   </div>
 {/if}
@@ -94,14 +105,9 @@
         transition:fade={{ duration: 300 }}
         class="reaction-pin"
         style="left: {100 * reaction.xPct}%; top: {100 * reaction.yPct}%"
+        data-text={getText(reaction)}
         on:mouseover={(e) => {
-          let text = '';
-          if (reaction.text) {
-            text = reaction.text;
-          } else {
-            text = reaction.emoji.toString().replace(',', ' ');
-          }
-          updateTooltip(e.x, e.y, text);
+          updateTooltip(e.x, e.y, e.target.dataset.text);
         }}
         on:mousemove={(e) => {
           updateTooltip(e.x, e.y);
@@ -113,7 +119,7 @@
         <div class="reaction-pin-inner">
           <span
             class="material-icons-round md-18 nav"
-            style="font-size: 20px; color: white"
+            style="font-size: 18px; color: black"
           >
             {#if reaction.emoji}
               emoji_emotions
@@ -155,7 +161,7 @@
     style={styleSubstring}
     class="main"
     on:load={() => {
-      imgLoaded = true;
+      $imagesLoaded[data.key] = true;
     }}
   />
   <svg
@@ -190,6 +196,7 @@
     display: inline-block;
     margin: auto;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1;
   }
 
   .personToggle {

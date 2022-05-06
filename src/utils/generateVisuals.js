@@ -54,8 +54,11 @@ export async function contourMapBlur(data, containerAll, containerSvg, url) {
     .range([margin, height - margin]);
 
   let bandwidth, thresholds;
-  bandwidth = parseInt(Math.min(width, height) * 0.07);
-  thresholds = parseInt(bandwidth * 1.5);
+  // bandwidth = parseInt(Math.min(width, height) * 0.07);
+  // thresholds = parseInt(bandwidth * 1.5);
+
+  bandwidth = parseInt(Math.min(width, height) * 0.15);
+  thresholds = parseInt(bandwidth * 0.9);
 
   let contours = d3
     .contourDensity()

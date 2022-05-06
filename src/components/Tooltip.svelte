@@ -16,6 +16,7 @@
     z-index: 100000;
     pointer-events: none;
     font-size: 12px;
+    z-index: 100000;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
     transform: translateX(-50%);
   }

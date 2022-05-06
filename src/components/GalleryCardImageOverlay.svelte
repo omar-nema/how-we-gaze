@@ -1,5 +1,8 @@
 <script>
+  //full screen gallery card view
   import { fade } from 'svelte/transition';
+  import { onMount } from 'svelte';
+  import { updateTooltip } from '../utils/tooltipUtils';
   export let imgHolder, width, fullScreen;
   let classAdjustment = false;
   if (width.includes('px')) {
@@ -9,7 +12,24 @@
     imgHolder.classList.add('htAugment');
     classAdjustment = true;
   }
-  console.log('i aint there');
+
+  //we have to re-bind event listeners when cloning node
+  let clone = imgHolder.cloneNode(true);
+  clone.querySelectorAll('.reaction-pin').forEach((d) => {
+    d.addEventListener('mouseover', (e) => {
+      updateTooltip(e.x, e.y, e.target.dataset.text);
+    });
+    d.addEventListener('mousemove', (e) => {
+      updateTooltip(e.x, e.y);
+    });
+    d.addEventListener('mouseleave', (e) => {
+      updateTooltip();
+    });
+  });
+
+  onMount(() => {
+    document.querySelector('.overlay').appendChild(clone);
+  });
 </script>
 
 <div class="overlay" transition:fade={{ duration: 100 }}>
@@ -21,10 +41,6 @@
   >
     <span class="material-icons-round"> close </span>
   </div>
-
-  {#if imgHolder && classAdjustment}
-    {@html imgHolder.outerHTML}
-  {/if}
 </div>
 
 <style>

@@ -14,6 +14,7 @@
     jumpCard,
     offlineMode,
     offlineData,
+    imagesLoaded,
   } from '../stores/pageState';
   import jump from '../utils/jumpSection';
 
@@ -66,6 +67,14 @@
   init();
 </script>
 
+<div
+  class="loading-overlay"
+  class:hidden={worksArray.length > 1 &&
+    worksArray.length == Object.keys($imagesLoaded).length}
+>
+  <p>Loading...</p>
+</div>
+
 <div class="card-holder">
   <div class="card-outer intro" style="font-size: 16px; font-weight: 400;">
     <h2>How We Gaze: Gallery</h2>
@@ -80,11 +89,31 @@
     </p>
   </div>
   {#each worksArray as img, i}
-    <GalleryCard data={img} visViewMode={'slice'} />
+    <GalleryCard data={img} visViewMode="original" />
   {/each}
 </div>
 
 <style>
+  .loading-overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #e7f4f8;
+    color: black;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    font-size: 40px;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   a {
     color: black;
     transition: all 0.15s linear;
