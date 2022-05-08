@@ -89,7 +89,7 @@
     </p>
   </div>
   {#each worksArray as img, i}
-    <GalleryCard data={img} visViewMode="original" />
+    <GalleryCard data={img} visViewMode="slice" />
   {/each}
 </div>
 

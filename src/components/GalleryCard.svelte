@@ -140,7 +140,9 @@
     domClips = null;
   $: {
     if (clipHolder) {
+      console.log('yea');
       domClips = clipHolder.childNodes;
+      console.log(domClips);
     }
   }
   //ANIMATION REACTIVITY
