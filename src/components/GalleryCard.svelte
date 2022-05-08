@@ -132,6 +132,7 @@
       visCurrFrame = 0;
     }
     sessionReactions = await dbGet('reactions/' + key);
+    console.log(sessionData);
     return;
   }
 
@@ -140,9 +141,7 @@
     domClips = null;
   $: {
     if (clipHolder) {
-      console.log('yea');
       domClips = clipHolder.childNodes;
-      console.log(domClips);
     }
   }
   //ANIMATION REACTIVITY

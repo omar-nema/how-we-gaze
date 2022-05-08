@@ -62,7 +62,7 @@ async function getDataOnline(itemPath) {
 
 export async function dbGet(itemPath) {
   let offline = getSvelte(offlineMode);
-  if (itemPath == 'works') {
+  if (itemPath.includes('works')) {
     if (offline) {
       return getSvelte(offlineData).works;
     } else {
@@ -71,9 +71,12 @@ export async function dbGet(itemPath) {
   } else if (itemPath.includes('sessionData')) {
     let key = itemPath.split('sessionData/')[1];
     if (key) {
-      return getSvelte(offlineData).sessionData[key];
-    } else {
-      return getDataOnline(itemPath);
+      let localData = getSvelte(offlineData).sessionData[key];
+      if (localData) {
+        return localData;
+      } else {
+        return getDataOnline(itemPath);
+      }
     }
   } else if (itemPath.includes('reactions')) {
     let key = itemPath.split('reactions/')[1];
