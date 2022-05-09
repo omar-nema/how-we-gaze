@@ -1,9 +1,9 @@
 # Project Details
 
-Title: How We Gaze
-Subtitle: Visualizing how we look at artwork
-URL: (http://omarnema.com/how-we-gaze/public/index.html)
-By Omar Nema
+- Title: How We Gaze
+- Subtitle: Visualizing how we look at artwork
+- URL: http://omarnema.com/how-we-gaze/public/index.html
+- By Omar Nema
 
 ### Description
 
@@ -19,7 +19,7 @@ We cannot see how others see. And as a result, we may not understand how others 
 
 How We Gaze is a project that visualizes how individuals study art through the use of eye-tracking and web-based data visualization. Within its interface, individuals are invited to view pieces of artwork, and see their gaze visualized alongside others’ in real-time. In visualizing how we look at art, How We Gaze attempts to connect viewers both to a curated set artwork and to the individuals who gazed at it.
 
-[![gif](thesis-preview.gif)](https://auchers.github.io/data-visualization-thesis/)
+[intro image]('./public/assets/img/preview1.png')
 
 ### Acknowledgements
 

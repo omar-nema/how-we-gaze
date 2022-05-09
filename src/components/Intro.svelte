@@ -107,7 +107,7 @@
 
       <span
         class="material-icons-round"
-        style="font-size: 40px;margin-left: 10px"
+        style="font-size: 40px;margin-left: 10px; color: var(--color-accent);"
       >
         auto_awesome
       </span>
