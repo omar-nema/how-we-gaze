@@ -18128,9 +18128,12 @@ var app = (function () {
       } else if (itemPath.includes('reactions')) {
         let key = itemPath.split('reactions/')[1];
         if (key) {
-          return get_store_value(offlineData).reactions[key];
-        } else {
-          return null;
+          let localData = get_store_value(offlineData).reactions[key];
+          if (localData) {
+            return localData;
+          } else {
+            return getDataOnline(itemPath);
+          }
         }
       }
     }
@@ -29559,32 +29562,32 @@ var app = (function () {
     			t11 = space();
     			if (if_block5) if_block5.c();
     			attr_dev(i, "class", "svelte-25hr9j");
-    			add_location(i, file$i, 222, 29, 5690);
-    			add_location(span0, file$i, 221, 12, 5653);
+    			add_location(i, file$i, 222, 29, 5695);
+    			add_location(span0, file$i, 221, 12, 5658);
     			attr_dev(span1, "class", "material-icons-round svelte-25hr9j");
     			set_style(span1, "font-size", "12px");
     			set_style(span1, "margin-left", "6px");
-    			add_location(span1, file$i, 224, 12, 5744);
+    			add_location(span1, file$i, 224, 12, 5749);
     			attr_dev(a, "class", "clickable svelte-25hr9j");
     			set_style(a, "display", "flex");
     			set_style(a, "align-items", "center");
     			attr_dev(a, "href", a_href_value = /*data*/ ctx[1].origLink);
     			attr_dev(a, "target", "_blank");
-    			add_location(a, file$i, 215, 10, 5473);
+    			add_location(a, file$i, 215, 10, 5478);
     			set_style(h2, "display", "flex");
     			set_style(h2, "align-items", "center");
     			attr_dev(h2, "class", "svelte-25hr9j");
-    			add_location(h2, file$i, 209, 8, 5237);
+    			add_location(h2, file$i, 209, 8, 5242);
     			attr_dev(div0, "class", "card-header svelte-25hr9j");
-    			add_location(div0, file$i, 208, 6, 5202);
+    			add_location(div0, file$i, 208, 6, 5207);
     			attr_dev(div1, "class", "card-filters svelte-25hr9j");
-    			add_location(div1, file$i, 247, 6, 6329);
+    			add_location(div1, file$i, 247, 6, 6334);
     			attr_dev(div2, "class", "card-top svelte-25hr9j");
-    			add_location(div2, file$i, 202, 4, 5099);
+    			add_location(div2, file$i, 202, 4, 5104);
     			attr_dev(div3, "class", "card-outer svelte-25hr9j");
     			attr_dev(div3, "id", div3_id_value = /*data*/ ctx[1].key);
     			toggle_class(div3, "active", /*data*/ ctx[1].key == /*$cardInView*/ ctx[24]);
-    			add_location(div3, file$i, 193, 2, 4869);
+    			add_location(div3, file$i, 193, 2, 4874);
     		},
     		m: function mount(target, anchor) {
     			if (if_block0) if_block0.m(target, anchor);
@@ -29858,7 +29861,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			create_component(tooltip.$$.fragment);
-    			add_location(div, file$i, 188, 4, 4782);
+    			add_location(div, file$i, 188, 4, 4787);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -29979,7 +29982,7 @@ var app = (function () {
     			div.textContent = "Gaze Collection";
     			set_style(div, "color", "rgb(126 123 123)");
     			set_style(div, "margin-right", "15px");
-    			add_location(div, file$i, 211, 12, 5336);
+    			add_location(div, file$i, 211, 12, 5341);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30014,9 +30017,9 @@ var app = (function () {
     			span.textContent = "info";
     			attr_dev(span, "class", "material-icons-round md-14 svelte-25hr9j");
     			set_style(span, "color", "#bfb9b9");
-    			add_location(span, file$i, 240, 12, 6167);
+    			add_location(span, file$i, 240, 12, 6172);
     			attr_dev(div, "class", "clickable svelte-25hr9j");
-    			add_location(div, file$i, 233, 10, 5991);
+    			add_location(div, file$i, 233, 10, 5996);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30211,7 +30214,7 @@ var app = (function () {
     			t = space();
     			if (if_block) if_block.c();
     			attr_dev(div, "class", "center svelte-25hr9j");
-    			add_location(div, file$i, 276, 6, 7063);
+    			add_location(div, file$i, 276, 6, 7068);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -30545,7 +30548,7 @@ var app = (function () {
     		}
 
     		$$invalidate(17, sessionReactions = await dbGet('reactions/' + key));
-    		console.log(sessionData);
+    		console.log(sessionReactions);
     		return;
     	}
 

@@ -132,7 +132,7 @@
       visCurrFrame = 0;
     }
     sessionReactions = await dbGet('reactions/' + key);
-    console.log(sessionData);
+    console.log(sessionReactions);
     return;
   }
 

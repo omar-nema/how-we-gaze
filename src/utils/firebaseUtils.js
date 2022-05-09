@@ -81,9 +81,12 @@ export async function dbGet(itemPath) {
   } else if (itemPath.includes('reactions')) {
     let key = itemPath.split('reactions/')[1];
     if (key) {
-      return getSvelte(offlineData).reactions[key];
-    } else {
-      return null;
+      let localData = getSvelte(offlineData).reactions[key];
+      if (localData) {
+        return localData;
+      } else {
+        return getDataOnline(itemPath);
+      }
     }
   }
 }
