@@ -23,7 +23,7 @@ How We Gaze is a project that visualizes how individuals study art through the u
 
 ### Preview Video
 
-[See demo on Drive](https://drive.google.com/file/d/1av3ns3tGsEs0VcCYWhjmWkIaRCCIP6MA/view?usp=sharing)
+[See demo](demo.mp4)
 
 ### Acknowledgements
 
