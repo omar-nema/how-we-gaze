@@ -257,6 +257,8 @@
     transition: all 0.1s ease-in-out;
   }
 
+  /* change this */
+
   .full-screen {
     position: absolute;
     top: 10px;

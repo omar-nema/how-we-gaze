@@ -23142,9 +23142,9 @@ var app = (function () {
     			div = element("div");
     			span = element("span");
     			span.textContent = "open_in_full";
-    			attr_dev(span, "class", "material-icons-round svelte-ty8tif");
+    			attr_dev(span, "class", "material-icons-round svelte-1285twf");
     			add_location(span, file$m, 98, 6, 2389);
-    			attr_dev(div, "class", "full-screen clickable btn svelte-ty8tif");
+    			attr_dev(div, "class", "full-screen clickable btn svelte-1285twf");
     			add_location(div, file$m, 91, 4, 2243);
     		},
     		m: function mount(target, anchor) {
@@ -23375,7 +23375,7 @@ var app = (function () {
     			add_location(span, file$m, 119, 10, 3074);
     			attr_dev(div0, "class", "reaction-pin-inner");
     			add_location(div0, file$m, 118, 8, 3030);
-    			attr_dev(div1, "class", "reaction-pin svelte-ty8tif");
+    			attr_dev(div1, "class", "reaction-pin svelte-1285twf");
     			set_style(div1, "left", 100 * /*reaction*/ ctx[38].xPct + "%");
     			set_style(div1, "top", 100 * /*reaction*/ ctx[38].yPct + "%");
     			attr_dev(div1, "data-text", div1_data_text_value = getText(/*reaction*/ ctx[38]));
@@ -23483,14 +23483,14 @@ var app = (function () {
     			div1 = element("div");
     			span1 = element("span");
     			span1.textContent = "arrow_right";
-    			attr_dev(span0, "class", "material-icons-round svelte-ty8tif");
+    			attr_dev(span0, "class", "material-icons-round svelte-1285twf");
     			add_location(span0, file$m, 143, 6, 3652);
-    			attr_dev(div0, "class", "personToggle prev clickable svelte-ty8tif");
+    			attr_dev(div0, "class", "personToggle prev clickable svelte-1285twf");
     			toggle_class(div0, "disabled", /*sessionIndex*/ ctx[1] == 0);
     			add_location(div0, file$m, 135, 4, 3465);
-    			attr_dev(span1, "class", "material-icons-round svelte-ty8tif");
+    			attr_dev(span1, "class", "material-icons-round svelte-1285twf");
     			add_location(span1, file$m, 153, 6, 3926);
-    			attr_dev(div1, "class", "personToggle next clickable svelte-ty8tif");
+    			attr_dev(div1, "class", "personToggle next clickable svelte-1285twf");
     			toggle_class(div1, "disabled", /*sessionIndex*/ ctx[1] == /*personLength*/ ctx[7] - 1);
     			add_location(div1, file$m, 145, 4, 3724);
     		},
@@ -23645,7 +23645,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			img = element("img");
-    			attr_dev(img, "class", "clip svelte-ty8tif");
+    			attr_dev(img, "class", "clip svelte-1285twf");
     			set_style(img, "clip-path", "circle(" + /*clip*/ ctx[35].r + "% at " + /*clip*/ ctx[35].ctrx + "% " + /*clip*/ ctx[35].ctry + "%)");
     			set_style(img, "filter", "blur(" + /*clip*/ ctx[35].blur + "px)");
     			set_style(img, "opacity", "$" + /*clip*/ ctx[35].opacity);
@@ -23731,11 +23731,11 @@ var app = (function () {
     			if (if_block5) if_block5.c();
     			if (!src_url_equal(img.src, img_src_value = /*data*/ ctx[4].url)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "style", /*styleSubstring*/ ctx[14]);
-    			attr_dev(img, "class", "main svelte-ty8tif");
+    			attr_dev(img, "class", "main svelte-1285twf");
     			toggle_class(img, "slice", /*visViewMode*/ ctx[5] == 'slice');
     			toggle_class(img, "agg", /*visViewMode*/ ctx[5] == 'aggregate');
     			add_location(img, file$m, 156, 2, 4006);
-    			attr_dev(svg, "class", "contour svelte-ty8tif");
+    			attr_dev(svg, "class", "contour svelte-1285twf");
     			attr_dev(svg, "id", svg_id_value = "" + (/*data*/ ctx[4].key + "-contour"));
     			set_style(svg, "width", "100%");
     			set_style(svg, "height", "100%");
@@ -23745,7 +23745,7 @@ var app = (function () {
     			set_style(svg, "z-index", "10");
     			toggle_class(svg, "active", /*visViewMode*/ ctx[5] == 'aggregate' || /*visViewMode*/ ctx[5] == 'point');
     			add_location(svg, file$m, 166, 2, 4241);
-    			attr_dev(div, "class", "img-holder swipe-holder svelte-ty8tif");
+    			attr_dev(div, "class", "img-holder swipe-holder svelte-1285twf");
     			set_style(div, "width", /*width*/ ctx[12]);
     			set_style(div, "height", /*ht*/ ctx[13]);
     			set_style(div, "max-width", /*data*/ ctx[4].width + "px");
